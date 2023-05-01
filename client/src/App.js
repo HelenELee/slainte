@@ -2,10 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink, } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import SearchBooks from './pages/SearchBooks';
-import SavedBooks from './pages/SavedBooks';
-//import LoginForm from './components/LoginForm';
-//import SignupForm from './components/LoginForm';
+//import SearchBooks from './pages/SearchBooks';
+//import SavedBooks from './pages/SavedBooks';
+import Home from './pages/Home';
+import LoginForm from './components/LoginForm.js';
+import DayForm from './components/DayForm';
 import Navbar from './components/Navbar';
 
 // Construct our main GraphQL API endpoint
@@ -35,38 +36,36 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-
-    
-    <Router>
       <>
-        <Navbar />
+      <Router>
+        <Navbar></Navbar>
         <Routes>
-          <Route 
-            path='/' 
-            element={<SearchBooks />} 
-          />
           {/* 
-          <Route 
-                path="/login" 
-                element={<LoginForm />}
-              />
-          <Route 
-                path="/signup" 
-                element={<SignupForm />}
-          />
+            <Route 
+                path='/' 
+                element={<Home />} 
+            />
+            <Route 
+                path='/login-signup' 
+                element={<LoginForm />} 
+            />
           */}
-          
-          <Route 
-            path='/saved' 
-            element={<SavedBooks />} 
-          />
-          <Route 
-            path='*'
-            element={<h1 className='display-2'>Wrong page!</h1>}
-          />
+            <Route 
+                path='/login-signup' 
+                element={<LoginForm />} 
+            />
+            <Route 
+                path='/add-day' 
+                element={<DayForm />} 
+            />
         </Routes>
+        
+      </Router>
+      
+       Hello!!!
       </>
-    </Router>
+    
+   
     </ApolloProvider>
   );
 }
