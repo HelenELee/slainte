@@ -33,12 +33,11 @@ export const CREATE_DAY = gql`
       days {
           _id
           date
-          mindActivities
           mindCount
           rating
           sleep
           notes
-          score
+          mindActivities
         }
     }
   }
