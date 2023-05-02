@@ -39,12 +39,12 @@ const resolvers = {
             
           if (context.user) {
                
-              const newDay = await Day.create({input});
-               
+            //  const newDay = await Day.create({input});
+            console.log(input);
               const updatedUser = await User.findOneAndUpdate(
                   {_id: context.user._id},
                   {
-                      $addToSet: {days: input},
+                      $addToSet: {days: input },
                   },
                   {
                       new: true,

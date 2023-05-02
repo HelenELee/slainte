@@ -9,26 +9,28 @@ const typeDefs = gql`
   }
 
   type Day {
-    _id: ID!
+    _id: ID
     date: String!
-    foodActivities: [Activity]
-    mindActivities: [Activity]
-    exerciseActivities: [Activity]
-    commsActivities: [Activity]
+    foodActivities: [String]
+    mindActivities: [String]
+    exerciseActivities: [String]
+    commsActivities: [String]
     foodCount: Int
     mindCount: Int
     exerciseCount: Int
     commsCount: Int
+    score: Int
     rating: String
     sleep: Int
     notes: String
   }
 
   type User {
-    _id: ID!
-    username: String!
-    email: String!
-    days: [ID]
+    _id: ID
+    username: String
+    email: String
+    password: String
+    days: [Day]
   }
 
   type Auth {
