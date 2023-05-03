@@ -1,40 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
 import { StyledForm, StyledInput, StyledButton, StyledLabel } from './FormComponents';
-import FlipCard from './FlipCard';
-
 import Auth from '../utils/auth';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { CREATE_DAY } from '../utils/mutations';
-import { QUERY_ACTIVITIES } from '../utils/queries';
 
 const ActivityForm = () => {
   const [userFormData, setUserFormData] = useState({ date: '', mindActivities: [], sleep: '' });
 
-  const [createDay, { error}] = useMutation(CREATE_DAY);
-  //get all activitie to use in checkboxes in form
-  const { loading, data } = useQuery(QUERY_ACTIVITIES);
+  const [createDay, { error, data }] = useMutation(CREATE_DAY);
+  const [todaysDate, setTodaysDate] = useState('');
 
-  const activities = data?.activities || [];
-
-  console.log("****Activities****")
-  
-  console.log(activities);
-
-  const today = new Date();
-    const yyyy = today.getFullYear();
-    let mm = today.getMonth() + 1; // Months start at 0!
-    let dd = today.getDate();
-
-    if (dd < 10) dd = '0' + dd;
-    if (mm < 10) mm = '0' + mm;
-
-   const todaysDate = dd + '/' + mm + '/' + yyyy;
-
-
-  //const [todaysDate, setTodaysDate] = useState('');
-
-  /*
   useEffect(() => {
     console.log("USE EFFECT!!!!");
     const today = new Date();
@@ -45,13 +21,10 @@ const ActivityForm = () => {
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;
 
-   const formattedToday = dd + '/' + mm + '/' + yyyy;
-   //const formattedToday = yyyy + '-' + mm + '-' + dd;
+    const formattedToday = dd + '/' + mm + '/' + yyyy;
     console.log(formattedToday);
     setTodaysDate(formattedToday);
   }, []);
-  */
-  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -60,7 +33,8 @@ const ActivityForm = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        
+        //const form = event.currentTarget;
+        //const today = 
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
         if (!token) {
@@ -93,17 +67,14 @@ const ActivityForm = () => {
         <>
         Daily Update
           <StyledForm onSubmit={handleFormSubmit}>
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            activities.map((act) => {return act.category})
-          )}
                 <StyledLabel>Date:</StyledLabel>
-                <StyledInput type="text" value={todaysDate} onChange={handleInputChange} name="date" placeholder="" ></StyledInput>
-                <StyledLabel>What did you do today? </StyledLabel>
-                <FlipCard></FlipCard>
-                <FlipCard></FlipCard>
-                <FlipCard></FlipCard>
+                <StyledInput type="date" value={todaysDate} onChange={handleInputChange} name="date" placeholder="" ></StyledInput>
+                <StyledLabel>What did you do today?</StyledLabel>
+                <select id="mindActivities">
+                    <option value="Meditate">Meditate</option>
+                    <option value="Journaling">Journaling</option>
+                    <option value="Gratitude Journal">Gratitude Journal</option>
+                 </select>
                 <StyledLabel >How much sleep did you get?</StyledLabel>
                 <StyledInput type="text" value="7" onChange={handleInputChange} name="sleep" placeholder="" ></StyledInput>
                 
