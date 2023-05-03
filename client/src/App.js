@@ -2,9 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink, } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-//import SearchBooks from './pages/SearchBooks';
-//import SavedBooks from './pages/SavedBooks';
-import Home from './pages/Home';
+
+//import Home from './pages/Home';
 import LoginForm from './components/LoginForm.js';
 import DayForm from './components/DayForm';
 import Navbar from './components/Navbar';
@@ -58,11 +57,13 @@ function App() {
                 path='/add-day' 
                 element={<DayForm />} 
             />
+            {/* <Route 
+            path='*'
+            element={<h1 className='display-2'>Wrong page!</h1>}
+          /> */}
         </Routes>
         
       </Router>
-      
-       Hello!!!
       </>
     
    
