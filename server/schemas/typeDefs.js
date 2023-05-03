@@ -40,6 +40,7 @@ const typeDefs = gql`
 
   type Query {
     me: User
+    activities: [Activity]
   }
 
   input SaveDayInput {
