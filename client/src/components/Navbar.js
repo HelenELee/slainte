@@ -62,7 +62,7 @@ const AppNavbar = () => {
   return (
     <>
       <Wrapper>
-          <Title>Me Time</Title>
+          <Title>Slainte!</Title>
             <UnorderedList>
               
                   {Auth.loggedIn() ? (
