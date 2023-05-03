@@ -1,0 +1,20 @@
+[
+    {
+      "category": "Mind",
+      "title": "Meditation",
+      "description": "meditation is..."
+      
+    },
+    {
+        "category": "Mind",
+        "title": "Journaling",
+        "description": "journaling is..."
+        
+      },
+      {
+        "category": "Food",
+        "title": "Eat Bluberries",
+        "description": ""
+        
+      }
+]
