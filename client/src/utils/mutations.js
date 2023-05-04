@@ -34,10 +34,17 @@ export const CREATE_DAY = gql`
           _id
           date
           mindCount
+          foodCount
+          exerciseCount
+          commsCount
+          score
           rating
           sleep
           notes
           mindActivities
+          foodActivities
+          commsActivities
+          exerciseActivities
         }
     }
   }
