@@ -1,5 +1,6 @@
 const { Schema } = require('mongoose');
 const { enAULocale } = require('date-fns/locale/en-AU');
+const { format } = require('date-fns');
 
 const Activity = require('./Activity');
 // This is a subdocument schema, it won't become its own model but we'll use it as the schema for the Activity arrays
@@ -15,14 +16,16 @@ const daySchema = new Schema(
         type: Date,
         default: Date.now,
         //convert date to specified format
-        get: ((date) => format(date, "PPPp", { locale: enAULocale }))
+        //get: ((date) => format(date, "PPPp", { locale: enAULocale }))
+        get: ((date) => format(date, "dd/LL/yyyy", { locale: enAULocale }))
+        //dd/LL/yyyy
       },
       foodActivities: [String],
       mindActivities: [String],
       exerciseActivities: [String],
       commsActivities: [String],
       rating: {
-        type: Number,
+        type: String,
       },
       sleep: {
         type: Number,
