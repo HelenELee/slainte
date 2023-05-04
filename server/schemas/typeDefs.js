@@ -41,12 +41,19 @@ const typeDefs = gql`
   type Query {
     me: User
     activities: [Activity]
+    getChartData: User
   }
 
   input SaveDayInput {
     date: String
     mindActivities: [String]
-    
+    foodActivities: [String]
+    exerciseActivities: [String]
+    commsActivities: [String]
+    rating: String
+    sleep: String
+    notes: String
+
   }
 
   type Mutation {
