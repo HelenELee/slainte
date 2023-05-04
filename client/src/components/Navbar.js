@@ -62,13 +62,13 @@ const AppNavbar = () => {
   return (
     <>
       <Wrapper>
-          <Title>Slainte!</Title>
+          <Title><NavLink to="/">Slainte!</NavLink></Title>
             <UnorderedList>
               
                   {Auth.loggedIn() ? (
                           <>
                               <li><NavLink to="/add-day">Add Todays Activity</NavLink></li>
-                              <li><NavLink to="/all-activities">View All Activities</NavLink></li>
+                              <li><NavLink to="/calendar">All Activities</NavLink></li>
                               <li><NavLink>View My Profile</NavLink></li>
                               <li><NavLink onClick={Auth.logout}>Logout</NavLink></li>
                           </>
