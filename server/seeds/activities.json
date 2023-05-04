@@ -16,5 +16,66 @@
         "title": "Eat Bluberries",
         "description": ""
         
+      },
+      {
+        "category": "Food",
+        "title": "Oily Fish",
+        "description": ""
+        
+      },
+      {
+        "category": "Food",
+        "title": "Dark Chocolate",
+        "description": ""
+        
+      },
+      {
+        "category": "Food",
+        "title": "Fermented Food",
+        "description": ""
+        
+      },
+      {
+        "category": "Exercise",
+        "title": "Yoga",
+        "description": ""
+        
+      },
+      {
+        "category": "Exercise",
+        "title": "Jogging",
+        "description": ""
+        
+      },
+      {
+        "category": "Exercise",
+        "title": "Weight Training",
+        "description": ""
+        
+      },
+      {
+        "category": "Exercise",
+        "title": "Zumba",
+        "description": ""
+        
+      },
+      {
+        "category": "Communication",
+        "title": "Coffee with friends",
+        "description": ""
+        
+      },
+      {
+        "category": "Communication",
+        "title": "Helping others",
+        "description": ""
+        
+      },
+      {
+        "category": "Communication",
+        "title": "Family meal",
+        "description": ""
+        
       }
+    
 ]
