@@ -22,16 +22,27 @@ const CardSelect = styled.div`
 
 
 const FlipCard = (props) => {
+  const currentActivities = props.activities.filter((act) => {return act.category === props.category});
 
     return (
         <>
         <Wrapper>
-        <span>Description for meditiaton</span>
-        <CardSelect>
-            <input type="checkbox" id="meditate" name="meditate" value="Meditate" />
-            <label htmlFor="meditate">Meditate</label><br></br>
-            <input type="checkbox" id="journal" name="journal" value="Journal" />
-            <label htmlFor="journal">journal</label><br></br>
+        <span>{props.category}</span>
+       
+        <CardSelect key={props.category}>
+          {
+            currentActivities.length > 0 ? (
+              currentActivities.map((act) => (
+                <>
+                <input type="checkbox" id={act._id} name={"category~" + act.category} value={act.title} key={act._id} onClick={props.onClick} 
+                />
+                <label htmlFor={act.title}>{act.title}</label><br></br>
+                
+                </>
+                ))
+            ) : ("")
+          }
+            
         </CardSelect>
         
         </Wrapper>

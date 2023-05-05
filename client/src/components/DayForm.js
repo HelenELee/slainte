@@ -1,61 +1,88 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
 
-import { StyledForm, StyledInput, StyledButton, StyledLabel } from './FormComponents';
+import { StyledForm, StyledInput, StyledButton, StyledLabel, Item, RadioButtonLabel, RadioButton } from './FormComponents';
 import FlipCard from './FlipCard';
 
 import Auth from '../utils/auth';
 import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_DAY } from '../utils/mutations';
-import { QUERY_ACTIVITIES } from '../utils/queries';
+import { QUERY_ACTIVITIES, GET_DAY } from '../utils/queries';
 
-const ActivityForm = () => {
-  const [userFormData, setUserFormData] = useState({ date: '', mindActivities: [], sleep: '' });
+const DayForm = (props) => {
+
+  const { dayId } = useParams();
+  console.log("dayId = " + dayId);
+  //let dayQuery;
+
+//   const dayQuery = useQuery(GET_DAY,  {
+//     variables: { dayID: dayId },
+//     //enabled: !!dayId,
+//     enabled: false
+//    });
+
+
+
+  const [userFormData, setUserFormData] = useState({ 
+    //date: (dayId && !dayQuery.loading ? dayQuery.data.getDay.date : '2023-05-01'), 
+    date:'',
+    mindActivities: [], 
+    foodActivities: [], 
+    exerciseActivities: [], 
+    commsActivities: [], 
+    sleep: '', 
+    notes: ''
+  });
 
   const [createDay, { error}] = useMutation(CREATE_DAY);
+
   //get all activitie to use in checkboxes in form
-  const { loading, data } = useQuery(QUERY_ACTIVITIES);
-
-  const activities = data?.activities || [];
-
-  console.log("****Activities****")
+  const activitiesQuery = useQuery(QUERY_ACTIVITIES);
+  const activities = activitiesQuery.data?.activities || [];
   
-  console.log(activities);
 
-  const today = new Date();
-    const yyyy = today.getFullYear();
-    let mm = today.getMonth() + 1; // Months start at 0!
-    let dd = today.getDate();
-
-    if (dd < 10) dd = '0' + dd;
-    if (mm < 10) mm = '0' + mm;
-
-   const todaysDate = dd + '/' + mm + '/' + yyyy;
-
-
-  //const [todaysDate, setTodaysDate] = useState('');
-
-  /*
-  useEffect(() => {
-    console.log("USE EFFECT!!!!");
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    let mm = today.getMonth() + 1; // Months start at 0!
-    let dd = today.getDate();
-
-    if (dd < 10) dd = '0' + dd;
-    if (mm < 10) mm = '0' + mm;
-
-   const formattedToday = dd + '/' + mm + '/' + yyyy;
-   //const formattedToday = yyyy + '-' + mm + '-' + dd;
-    console.log(formattedToday);
-    setTodaysDate(formattedToday);
-  }, []);
-  */
+  
+  const updateArray = (checkValue, arrayValue, theValue) => {
+    if (checkValue){
+      //console.log("checked");
+      return arrayValue.concat(theValue);            
+    } else {
+      //console.log("not checked");
+      return arrayValue.filter((elem) => {return elem !== theValue}) 
+    }
+  }
   
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
+    let newArray;
+   // console.log(name, value);
+    if (event.target.name.startsWith("category~")) {
+      let catName = event.target.name.split("~")[1];
+      //console.log(value);
+      switch(catName) {
+        case "Food":       
+          newArray = updateArray(event.target.checked, userFormData.foodActivities, value);
+          setUserFormData({ ...userFormData, "foodActivities": newArray})
+          break;
+        case "Mind":
+          newArray = updateArray(event.target.checked, userFormData.mindActivities, value);
+          setUserFormData({ ...userFormData, "mindActivities": newArray})
+          break;
+        case "Exercise":
+          newArray = updateArray(event.target.checked, userFormData.exerciseActivities, value);
+          setUserFormData({ ...userFormData, "exerciseActivities": newArray})
+          break;
+        default:
+          newArray = updateArray(event.target.checked, userFormData.commsActivities, value);
+          setUserFormData({ ...userFormData, "commsActivities": newArray})
+         
+      } 
+    } else {
+      setUserFormData({ ...userFormData, [name]: value });
+    }
+    
+   
   };
 
     const handleFormSubmit = async (event) => {
@@ -67,10 +94,10 @@ const ActivityForm = () => {
             return false;
         }
 
-        const newDay = {
-          "date": "02/05/2023",
-          "mindActivities": ["Meditate", "Journal"]
-        };
+       const newDay = {
+        ...userFormData
+       }
+
 
         try {
             const response = await createDay({
@@ -87,28 +114,52 @@ const ActivityForm = () => {
           } catch (err) {
             console.error(err);
           }
+          window.location.assign('/calendar');
     };
 
     return (
         <>
         Daily Update
           <StyledForm onSubmit={handleFormSubmit}>
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            activities.map((act) => {return act.category})
-          )}
+         
                 <StyledLabel>Date:</StyledLabel>
-                <StyledInput type="text" value={todaysDate} onChange={handleInputChange} name="date" placeholder="" ></StyledInput>
-                <StyledLabel>What did you do today? </StyledLabel>
-                <FlipCard></FlipCard>
-                <FlipCard></FlipCard>
-                <FlipCard></FlipCard>
-                <StyledLabel >How much sleep did you get?</StyledLabel>
-                <StyledInput type="text" value="7" onChange={handleInputChange} name="sleep" placeholder="" ></StyledInput>
+                <input type="text" name="date" placeholder="" onChange={handleInputChange} value={userFormData.date}/>
+                 <StyledLabel>What did you do today? </StyledLabel>
+                {activitiesQuery.loading ? (
+                  <div>Loading...</div>
+                ) : (
+                  activities &&
+                  <>
+                      <FlipCard category="Food" activities={activities} key="Food" onClick={handleInputChange} selections={userFormData.foodActivities}></FlipCard>
+                      <FlipCard category="Mind" activities={activities} key="Mind" onClick={handleInputChange}></FlipCard>
+                      <FlipCard category="Exercise" activities={activities} key="Exercise" onClick={handleInputChange}></FlipCard>
+                      <FlipCard category="Communication" activities={activities} key="Communication" onClick={handleInputChange} selections={userFormData.commsActivities}></FlipCard>
+                  </>
+                     
+                   )}
+                <div>
+                  <input type="radio"
+                      name="rating"
+                      value="1"
+                      onChange={handleInputChange}
+                    />Not Great
+                    <input type="radio"
+                      name="rating"
+                      value="2"
+                      onChange={handleInputChange}/>Good
+                    <input type="radio"
+                      name="rating"
+                      value="3"
+                      onChange={handleInputChange}/>Fantastic
+                </div>
+
                 
+                <StyledLabel >How much sleep did you get?</StyledLabel>
+                <StyledInput type="text" onChange={handleInputChange} name="sleep" placeholder="" ></StyledInput>
+                                
                 <StyledButton type="submit" disabled={false}>Submit</StyledButton>
-          
+                <StyledButton type="submit" disabled={false} >Update </StyledButton>
+                
             </StyledForm>
           
             
@@ -119,4 +170,4 @@ const ActivityForm = () => {
       
 };
 
-export default ActivityForm;
+export default DayForm;
