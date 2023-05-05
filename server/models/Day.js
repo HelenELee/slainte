@@ -17,7 +17,8 @@ const daySchema = new Schema(
         default: Date.now,
         //convert date to specified format
         //get: ((date) => format(date, "PPPp", { locale: enAULocale }))
-        get: ((date) => format(date, "dd/LL/yyyy", { locale: enAULocale }))
+        get: ((date) => format(date, "yyyy-MM-dd", { locale: enAULocale })),
+        //set: ((date) => format(date, "yyyy-MM-dd", { locale: enAULocale }))
         //dd/LL/yyyy
       },
       foodActivities: [String],
@@ -73,6 +74,17 @@ daySchema
     return this.commsActivities.length  + this.mindActivities.length + this.exerciseActivities.length + this.foodActivities.length;
   });
 
-
+daySchema.post('save', function(next) {
+  const err = new Error('something went wrong');
+  console.log("PRESAVE");
+  /*
+  const daysSorted = this.days.sort(function(a,b){
+     return new Date(b.date) - new Date(a.date);
+  });
+  this.days = daysSorted;
+  */
+  this.notes = "note 1";
+  next(err);
+})
   
 module.exports = daySchema;
