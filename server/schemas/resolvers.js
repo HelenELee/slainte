@@ -19,10 +19,25 @@ const resolvers = {
         },
         getChartData: async (parent, args, context) => {
            if (context.user) {
-            return User.findOne({ _id: context.user._id });
+            //return User.findOne({ _id: context.user._id });
+            return User.findOne({ _id: context.user._id }, {days : true});
            }
            throw new AuthenticationError('You need to be logged in!');
          },
+         getDay: async (parent, args, context) => {
+          if (context.user) {
+            //const userData = await User.findOne({ _id: context.user._id }, {days : true});
+           const userData = await User.findOne({ _id: context.user._id }, 'days');
+           //console.log("resolvers", userData);
+           //const theDay = userData.filter((obj) => {return obj._id === args.dayID})
+           const theDay = userData.days.find(day => day._id === args.dayID);
+
+           //return theDay;
+           return userData.days[0]
+           //return User.findOne({ _id: context.user._id }, {days : true});
+          }
+          throw new AuthenticationError('You need to be logged in!');
+        },
     },
     Mutation: {
         login: async (parent, { email, password }) => {
@@ -68,7 +83,34 @@ const resolvers = {
            // If user attempts to execute this mutation and isn't logged in, throw an error
           throw new AuthenticationError('You need to be logged in!');
       },
+      updateDay: async (parent, { dayID, input }, context) => {
+        console.log("RESOLVERS - updateDay");
+        if (context.user) {
 
+          const updatedUser = User.findOneAndUpdate({_id: context.user._id, days: {$elemMatch: {id: dayID}}},
+            {$set: {'days.$.foodActivities': input.foodActivities,
+                    'days.$.mindActivities': input.mindActivities,
+                    'days.$.exerciseActivities': input.exerciseActivities,
+                    'days.$.commsActivities': input.commsActivities,
+                    'days.$.sleep': input.sleep,
+                    'days.$.notes': input.notes,
+                    'days.$.rating': input.rating,}}, // list fields you like to change
+            {'new': true, 'safe': true});
+          return updatedUser;
+        }
+        throw new AuthenticationError('You need to be logged in!');
+      },
+      deleteDay: async (parent, { dayID }, context) => {
+        if (context.user) {
+          //  const book = await Book.findOneAndDelete({bookId: bookId});
+            return User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { days: {_id: dayID} } },
+                { new: true }
+            );
+        }
+        throw new AuthenticationError('You need to be logged in!');
+    },
     }
 }
 

@@ -57,3 +57,55 @@ export const QUERY_MAIN_CHART = gql`
     }
   }
 `;
+
+export const GET_DAY = gql`
+  query getDay($dayID: ID!) {
+    getDay(dayID: $dayID) {
+      _id
+      date
+      foodActivities
+      mindActivities
+      commsActivities
+      exerciseActivities
+      mindCount
+      foodCount
+      exerciseCount
+      commsCount
+      score
+      rating
+      sleep         
+    }
+  }
+`;
+export const QUERY_MAIN_CHART1 = gql`
+  query getChartData {
+      days {
+          _id
+          date
+          mindCount
+          foodCount
+          exerciseCount
+          commsCount
+          score
+          rating
+          sleep         
+        }
+  }
+`;
+
+export const QUERY_MAIN_CHART2 = gql`
+  query getChartData {
+      days {
+          _id
+          date
+          mindCount
+          foodCount
+          exerciseCount
+          commsCount
+          score
+          rating
+          sleep         
+        }
+  }
+`;
+

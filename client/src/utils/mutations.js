@@ -48,6 +48,57 @@ export const CREATE_DAY = gql`
         }
     }
   }
-  
+`;
+
+export const UPDATE_DAY = gql`
+ mutation updateDay($dayID: ID!, $input:SaveDayInput) {
+    updateDay(dayID: $dayID, input: $input) {
+      _id
+      username
+      email
+      days {
+          _id
+          date
+          mindCount
+          foodCount
+          exerciseCount
+          commsCount
+          score
+          rating
+          sleep
+          notes
+          mindActivities
+          foodActivities
+          commsActivities
+          exerciseActivities
+        }
+    }
+  }
+`;
+
+export const DELETE_DAY = gql`
+ mutation deleteDay($dayID: ID!) {
+    deleteDay(dayID: $dayID) {
+      _id
+      username
+      email
+      days {
+          _id
+          date
+          mindCount
+          foodCount
+          exerciseCount
+          commsCount
+          score
+          rating
+          sleep
+          notes
+          mindActivities
+          foodActivities
+          commsActivities
+          exerciseActivities
+        }
+    }
+  }
 `;
 

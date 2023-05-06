@@ -41,7 +41,8 @@ const typeDefs = gql`
   type Query {
     me: User
     activities: [Activity]
-    getChartData: User
+    getChartData: [User]
+    getDay(dayID: ID!): Day
   }
 
   input SaveDayInput {
@@ -60,6 +61,8 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     createDay(input: SaveDayInput): User
+    updateDay(dayID: ID!, input: SaveDayInput): User
+    deleteDay(dayID: ID!): User
   }
 
   
