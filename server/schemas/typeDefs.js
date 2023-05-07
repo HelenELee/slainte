@@ -36,6 +36,7 @@ const typeDefs = gql`
     totalMindCount: Int
     totalExerciseCount: Int
     totalCommsCount: Int
+    totalDayCount: Int
     days: [Day]
     
   }

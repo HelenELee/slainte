@@ -86,7 +86,6 @@ userSchema.virtual('totalMindCount').get(function () {
 });
 
 userSchema.virtual('totalExerciseCount').get(function () {
-  
   let initialScore = 0;
   let sum = this.days.reduce(function (accumulator, curValue) {
       return accumulator + curValue.exerciseCount
@@ -94,13 +93,17 @@ userSchema.virtual('totalExerciseCount').get(function () {
     return sum;
 });
 
-userSchema.virtual('totalCommsCount').get(function () {
-  console.log("TOTALCOMMSCount");
+userSchema.virtual('totalCommsCount').get(function () { 
   let initialScore = 0;
   let sum = this.days.reduce(function (accumulator, curValue) {
       return accumulator + curValue.commsCount
     }, initialScore);
     return sum;
+});
+
+userSchema.virtual('totalDayCount').get(function () {
+  let sum = (this.days ? this.days.length: 0);
+  return sum;
 });
 
 const User = model('User', userSchema);

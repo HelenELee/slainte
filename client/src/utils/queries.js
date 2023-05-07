@@ -12,6 +12,7 @@ export const GET_ME = gql`
       totalMindCount
       totalExerciseCount
       totalCommsCount
+      totalDayCount
       days {
           _id
           date
