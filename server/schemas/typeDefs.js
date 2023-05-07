@@ -31,6 +31,11 @@ const typeDefs = gql`
     email: String
     password: String
     totalScore: Int
+    totalSleep: Int
+    totalFoodCount: Int
+    totalMindCount: Int
+    totalExerciseCount: Int
+    totalCommsCount: Int
     days: [Day]
     
   }

@@ -1,5 +1,6 @@
 import QuoteAPI from "../components/QuoteAPI"
 import Chart from "../components/Chart";
+import Suggestions from "../components/Suggestions";
 //import ListQuotes from "../components/ListQuotes";
 //import QuoteContainer from "../components/AxiosAPI";
 import MainLineChart from "../components/MainLineChart";
@@ -28,7 +29,7 @@ export default function App() {
           <Chart data={days.days} />
           <MainLineChart data={days.days}/>
           <QuoteAPI />
-                  
+          <Suggestions />      
           </>
           
 )}

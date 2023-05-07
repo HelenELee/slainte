@@ -7,6 +7,11 @@ export const GET_ME = gql`
       username
       email
       totalScore
+      totalSleep
+      totalFoodCount
+      totalMindCount
+      totalExerciseCount
+      totalCommsCount
       days {
           _id
           date

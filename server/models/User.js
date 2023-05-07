@@ -50,10 +50,55 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
 // when we query a user, we'll also get another field called `totalScore'
 userSchema.virtual('totalScore').get(function () {
-  console.log("TOTALSCORE");
+  //console.log("TOTALSCORE");
   let initialScore = 0;
   let sum = this.days.reduce(function (accumulator, curValue) {
       return accumulator + curValue.score
+    }, initialScore);
+    return sum;
+});
+
+userSchema.virtual('totalSleep').get(function () {
+ 
+  let initialScore = 0;
+  let sum = this.days.reduce(function (accumulator, curValue) {
+      return accumulator + curValue.sleep
+    }, initialScore);
+    return sum;
+});
+
+userSchema.virtual('totalFoodCount').get(function () {
+  
+  let initialScore = 0;
+  let sum = this.days.reduce(function (accumulator, curValue) {
+      return accumulator + curValue.foodCount
+    }, initialScore);
+    return sum;
+});
+
+userSchema.virtual('totalMindCount').get(function () {
+  
+  let initialScore = 0;
+  let sum = this.days.reduce(function (accumulator, curValue) {
+      return accumulator + curValue.mindCount
+    }, initialScore);
+    return sum;
+});
+
+userSchema.virtual('totalExerciseCount').get(function () {
+  
+  let initialScore = 0;
+  let sum = this.days.reduce(function (accumulator, curValue) {
+      return accumulator + curValue.exerciseCount
+    }, initialScore);
+    return sum;
+});
+
+userSchema.virtual('totalCommsCount').get(function () {
+  console.log("TOTALCOMMSCount");
+  let initialScore = 0;
+  let sum = this.days.reduce(function (accumulator, curValue) {
+      return accumulator + curValue.commsCount
     }, initialScore);
     return sum;
 });
