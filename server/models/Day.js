@@ -35,6 +35,11 @@ const daySchema = new Schema(
       notes: {
         type: String,
       },
+  },
+  {
+    toJSON: {
+      virtuals: true,
+    },
   }
 );
 

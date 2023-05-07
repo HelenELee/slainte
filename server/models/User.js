@@ -21,7 +21,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    // set savedBooks to be an array of data that adheres to the bookSchema
+    // set days to be an array of data that adheres to the daySchema
     days: [daySchema],
     
   },
@@ -48,9 +48,14 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-// when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
-userSchema.virtual('bookCount').get(function () {
-  return this.savedBooks.length;
+// when we query a user, we'll also get another field called `totalScore'
+userSchema.virtual('totalScore').get(function () {
+  console.log("TOTALSCORE");
+  let initialScore = 0;
+  let sum = this.days.reduce(function (accumulator, curValue) {
+      return accumulator + curValue.score
+    }, initialScore);
+    return sum;
 });
 
 const User = model('User', userSchema);

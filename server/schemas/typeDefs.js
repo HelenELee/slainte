@@ -30,7 +30,9 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
+    totalScore: Int
     days: [Day]
+    
   }
 
   type Auth {

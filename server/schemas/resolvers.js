@@ -24,17 +24,18 @@ const resolvers = {
            }
            throw new AuthenticationError('You need to be logged in!');
          },
-         getDay: async (parent, args, context) => {
+         getDay: async (parent, { dayID }, context) => {
           if (context.user) {
-            //const userData = await User.findOne({ _id: context.user._id }, {days : true});
+                     
            const userData = await User.findOne({ _id: context.user._id }, 'days');
-           //console.log("resolvers", userData);
-           //const theDay = userData.filter((obj) => {return obj._id === args.dayID})
-           const theDay = userData.days.find(day => day._id === args.dayID);
-
-           //return theDay;
-           return userData.days[0]
-           //return User.findOne({ _id: context.user._id }, {days : true});
+           //console.log("RESOLVERS", dayID);
+           //console.log("USERDATA", userData.days);
+           //const theDay = userData.days.find((day) => {day.id === dayID});
+           var theDay = userData.days.filter(item => item.id === dayID);
+          //console.log("THEDAY", theDay);
+           return theDay[0];
+           //return userData.days[0]
+           
           }
           throw new AuthenticationError('You need to be logged in!');
         },
@@ -86,8 +87,9 @@ const resolvers = {
       updateDay: async (parent, { dayID, input }, context) => {
         console.log("RESOLVERS - updateDay");
         if (context.user) {
-
-          const updatedUser = User.findOneAndUpdate({_id: context.user._id, days: {$elemMatch: {id: dayID}}},
+          console.log("FOOD", input.foodActivities);
+          console.log("ID", dayID);
+          const updatedUser = User.findOneAndUpdate({_id: context.user._id, days: {$elemMatch: {_id: dayID}}},
             {$set: {'days.$.foodActivities': input.foodActivities,
                     'days.$.mindActivities': input.mindActivities,
                     'days.$.exerciseActivities': input.exerciseActivities,
@@ -95,7 +97,8 @@ const resolvers = {
                     'days.$.sleep': input.sleep,
                     'days.$.notes': input.notes,
                     'days.$.rating': input.rating,}}, // list fields you like to change
-            {'new': true, 'safe': true});
+            {'new': true, 'upsert': true, 'safe': true});
+            //console.log("UPDATEDDAY", updatedUser);
           return updatedUser;
         }
         throw new AuthenticationError('You need to be logged in!');
