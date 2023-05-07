@@ -25,6 +25,7 @@ export const StyledButton = styled.button`
   color: white;
   padding: 10px;
   margin-top: 10px;
+  margin-right: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
