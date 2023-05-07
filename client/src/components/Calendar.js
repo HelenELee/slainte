@@ -43,7 +43,7 @@ let newData;
 
 function FullCalendarApp() {
     
-    const [showModal, setShowModal] = useState(false);
+    //const [showModal, setShowModal] = useState(false);
     
 
     //const { loading, data } = useQuery(QUERY_MAIN_CHART);
@@ -87,6 +87,7 @@ function FullCalendarApp() {
           }
         
         //setShowModal(true);
+        console.log("OPENING DAY ", e.event.id);
         window.location.assign(`/add-day/${e.event.id}`);
     }
     
@@ -95,7 +96,7 @@ function FullCalendarApp() {
     if (!mainQuery.loading){
         //console.log("newData - before", mainQuery.data.me.days);
         newData = mainQuery.data.me.days.map(o => ({"id": o._id, "title": "score: " + o.score.toString() + "/rating: " + o.rating, "start": formatDate(o.date), "end": formatDate(o.date)  })) 
-       console.log("newData", newData);
+       //console.log("newData", newData);
         newData = newData.sort(function compare(a, b) {
             var dateA = new Date(a.start);
             var dateB = new Date(b.start);
