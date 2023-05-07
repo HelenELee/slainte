@@ -6,6 +6,7 @@ import { setContext } from '@apollo/client/link/context';
 //import Home from './pages/Home';
 import LoginForm from './components/LoginForm.js';
 import DayForm from './components/DayForm';
+import FormContainer from './components/FormContainer';
 import Navbar from './components/Navbar';
 import Calendar from './components/Calendar';
 import Home from './pages/Home';
@@ -61,8 +62,12 @@ function App() {
                 element={<DayForm />} 
             />
             <Route 
-                path='/add-day/:dayId' 
+                path='/add-dayOLD/:dayId' 
                 element={<DayForm />} 
+            />
+            <Route 
+                path='/add-day/:dayId' 
+                element={<FormContainer />} 
             />
             <Route 
                 path='/calendar' 
