@@ -1,51 +1,99 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
 
-import { StyledForm, StyledInput, StyledButton, StyledLabel, Item, RadioButtonLabel, RadioButton } from './FormComponents';
+import { StyledForm, StyledInput, StyledButton, StyledLabel } from './FormComponents';
 import FlipCard from './FlipCard';
 
 import Auth from '../utils/auth';
-import { useMutation, useQuery } from '@apollo/client';
-import { CREATE_DAY } from '../utils/mutations';
+import { useMutation, useQuery, useLazyQuery } from '@apollo/client';
+import { CREATE_DAY, UPDATE_DAY, DELETE_DAY } from '../utils/mutations';
 import { QUERY_ACTIVITIES, GET_DAY } from '../utils/queries';
 
 const DayForm = (props) => {
+  // const foodActivities = [];
+  // const mindActivities = [];
 
-  const { dayId } = useParams();
-  console.log("dayId = " + dayId);
-  //let dayQuery;
+  // const dayId = undefined;
+  // if (props.dayData) {
+  //   const {
+  //     foodActivities, 
+  //     moodActivities,
+  //     commsActivities,
+  //     mindActivities,
+  //     date,
+  //     rating,
+  //     sleep,
+  //     _id} = props.dayData;
 
-//   const dayQuery = useQuery(GET_DAY,  {
-//     variables: { dayID: dayId },
-//     //enabled: !!dayId,
-//     enabled: false
-//    });
+  //     dayId = _id;
+  // } else {
 
+  // }
+  
 
+  //const { dayId } = useParams();
+  //const dayId = "645722b9c513b6a41622d138";
+  const dayId = (props.dayData ? props.dayData._id : undefined);
+ // dayId = _id;
+  // console.log("DAY DATA", props.dayData);
+  // //const foodActivities = props.dayData.foodActivities
+  // console.log("FOODACTIVITIES", foodActivities)
+  // console.log("FOODCOUNT", props.dayData.foodCount);
+
+//console.log("ID", _id);
+
+//   const dayDetails =  {
+//     "_id": "645611d9b31ff587045df76f",
+//     "date": "2023-05-01",
+//     "foodActivities": [],
+//     "mindActivities": [],
+//     "commsActivities": [],
+//     "exerciseActivities": [
+//         "Yoga",
+//         "Zumba",
+//         "Jogging",
+//         "Weight Training"
+//     ],
+//     "mindCount": 0,
+//     "foodCount": 0,
+//     "exerciseCount": 4,
+//     "commsCount": 0,
+//     "score": 4,
+//     "rating": "2",
+//     "sleep": 7,
+//     "__typename": "Day"
+// };
+
+  //console.log("dayId initially= " + dayId);
+  
 
   const [userFormData, setUserFormData] = useState({ 
-    //date: (dayId && !dayQuery.loading ? dayQuery.data.getDay.date : '2023-05-01'), 
-    date:'',
+    date: (props.dayData ? props.dayData.date : ''), 
+    //date:'',
     mindActivities: [], 
-    foodActivities: [], 
+    foodActivities: (props.dayData ? props.dayData.foodActivities : []), 
     exerciseActivities: [], 
     commsActivities: [], 
     sleep: '', 
     notes: ''
   });
 
-  const [createDay, { error}] = useMutation(CREATE_DAY);
+  const [createDay ] = useMutation(CREATE_DAY);
+  const [updateDay] = useMutation(UPDATE_DAY);
+  const [deleteDay] = useMutation(DELETE_DAY);
 
   //get all activitie to use in checkboxes in form
   const activitiesQuery = useQuery(QUERY_ACTIVITIES);
   const activities = activitiesQuery.data?.activities || [];
-  
+ 
+  const onlyUnique = (value, index, array) =>{
+    return array.indexOf(value) === index;
+  }
 
-  
   const updateArray = (checkValue, arrayValue, theValue) => {
     if (checkValue){
       //console.log("checked");
-      return arrayValue.concat(theValue);            
+      return arrayValue.concat(theValue).filter(onlyUnique);            
     } else {
       //console.log("not checked");
       return arrayValue.filter((elem) => {return elem !== theValue}) 
@@ -85,6 +133,28 @@ const DayForm = (props) => {
    
   };
 
+  const handleDeleteDay = async (event) => {
+    event.preventDefault();
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    if (!token) {
+        return false;
+    }
+    console.log("ABOUT TO CALL DELETEDAY");
+    try {
+      const responseUpdate = await deleteDay({
+        variables: {
+          dayID: dayId
+        }
+      });
+
+      if (!responseUpdate) {
+        throw new Error('something went wrong!');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         
@@ -94,27 +164,47 @@ const DayForm = (props) => {
             return false;
         }
 
-       const newDay = {
-        ...userFormData
-       }
+        const newDay = {
+          ...userFormData
+        }
 
 
-        try {
-            const response = await createDay({
-              variables: {
-                input: newDay
-              }
-            });
-      
-            if (!response) {
-              throw new Error('something went wrong!');
-            }
-      
-            
+        if (!dayId) {
+          try {
+                const response = await createDay({
+                  variables: {
+                    input: newDay
+                  }
+                });
+        
+                if (!response) {
+                  throw new Error('something went wrong!');
+                }
           } catch (err) {
             console.error(err);
           }
-          window.location.assign('/calendar');
+          
+        } else {
+              try {
+                console.log("newDay before updated", newDay);
+                console.log("TRYING UPDATE", dayId);
+                const responseUpdate = await updateDay({
+                  variables: {
+                    //dayID: '6454fe966fe4b91da2866cf7',
+                    dayID: dayId,
+                    input: newDay
+                  }
+                });
+          
+                if (!responseUpdate) {
+                  throw new Error('something went wrong!');
+                }
+              } catch (err) {
+                console.error(err);
+              }
+          
+        }
+         // window.location.assign('/calendar');
     };
 
     return (
@@ -131,8 +221,8 @@ const DayForm = (props) => {
                   activities &&
                   <>
                       <FlipCard category="Food" activities={activities} key="Food" onClick={handleInputChange} selections={userFormData.foodActivities}></FlipCard>
-                      <FlipCard category="Mind" activities={activities} key="Mind" onClick={handleInputChange}></FlipCard>
-                      <FlipCard category="Exercise" activities={activities} key="Exercise" onClick={handleInputChange}></FlipCard>
+                      <FlipCard category="Mind" activities={activities} key="Mind" onClick={handleInputChange} selections={userFormData.mindActivities}></FlipCard>
+                      <FlipCard category="Exercise" activities={activities} key="Exercise" onClick={handleInputChange} selections={userFormData.exerciseActivities}></FlipCard>
                       <FlipCard category="Communication" activities={activities} key="Communication" onClick={handleInputChange} selections={userFormData.commsActivities}></FlipCard>
                   </>
                      
@@ -158,7 +248,10 @@ const DayForm = (props) => {
                 <StyledInput type="text" onChange={handleInputChange} name="sleep" placeholder="" ></StyledInput>
                                 
                 <StyledButton type="submit" disabled={false}>Submit</StyledButton>
-                <StyledButton type="submit" disabled={false} >Update </StyledButton>
+                {dayId ?
+                 <StyledButton type="button" onClick={handleDeleteDay}>Delete</StyledButton>
+                  : ""}
+                
                 
             </StyledForm>
           
