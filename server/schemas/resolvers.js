@@ -68,7 +68,7 @@ const resolvers = {
           if (context.user) {
                
             //  const newDay = await Day.create({input});
-            console.log(input);
+           //ole.log(input);
               const updatedUser = await User.findOneAndUpdate(
                   {_id: context.user._id},
                   {
@@ -79,16 +79,20 @@ const resolvers = {
                       runValidators: true,
                   }
               );
-              return updatedUser;
+                     
+           return await updatedUser.save();
           }
            // If user attempts to execute this mutation and isn't logged in, throw an error
           throw new AuthenticationError('You need to be logged in!');
       },
       updateDay: async (parent, { dayID, input }, context) => {
-        console.log("RESOLVERS - updateDay");
+        //console.log("RESOLVERS - updateDay");
         if (context.user) {
-          console.log("FOOD", input.foodActivities);
-          console.log("ID", dayID);
+          // console.log("FOOD", input.foodActivities);
+          // console.log("MIND", input.mindActivities);
+          // console.log("EXERCISE", input.exerciseActivities);
+          // console.log("COMMS", input.commsActivities);
+         // console.log("ID", dayID);
           const updatedUser = User.findOneAndUpdate({_id: context.user._id, days: {$elemMatch: {_id: dayID}}},
             {$set: {'days.$.foodActivities': input.foodActivities,
                     'days.$.mindActivities': input.mindActivities,
