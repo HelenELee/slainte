@@ -10,6 +10,8 @@ import FormContainer from './components/FormContainer';
 import Navbar from './components/Navbar';
 import Calendar from './components/Calendar';
 import Home from './pages/Home';
+import GlobalStyle from './GlobalStyle';
+import ComingSoon from './components/ComingSoon';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -39,6 +41,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <>
+      <GlobalStyle />
       <Router>
         <Navbar></Navbar>
         <Routes>
@@ -72,6 +75,10 @@ function App() {
             <Route 
                 path='/calendar' 
                 element={<Calendar />} 
+            />
+            <Route 
+                path='/coming-soon' 
+                element={<ComingSoon />} 
             />
             {/* <Route 
             path='*'
