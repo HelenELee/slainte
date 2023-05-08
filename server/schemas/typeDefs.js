@@ -21,7 +21,7 @@ const typeDefs = gql`
     commsCount: Int
     score: Int
     rating: String
-    sleep: Int
+    sleep: String
     notes: String
   }
 
