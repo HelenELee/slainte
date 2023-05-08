@@ -32,6 +32,27 @@ body {
   /*flex-direction: column; */
 }
 
+.nav-link-active {
+  color: black;
+  padding: 10px;
+  background-color: yellow;
+  border-radius: 25px;
+ /* box-shadow: 5px 5px 1px #d6d6d6;
+  z-index: 10;*/
+  display: inline-block; 
+  /*transform:scale(1.5);*/
+ /* transform: skew(10deg, 10deg);*/ /* Equal to skewX(10deg) */
+
+}
+ul li {
+  transition:0.5s;
+}
+
+.nav-link:hover {
+  transform:scale(1.5);
+}
+
+
 /* body {
   font-family: 'Rubik', sans-serif;
 }
