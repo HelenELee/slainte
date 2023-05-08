@@ -51,28 +51,38 @@ const Tab = styled.button`
 `;
 
 const NavLinkStyled = styled(NavLink)`
+  // font-size: 20px;
+  // padding: 10px 60px;
+  // cursor: pointer;
+  // opacity: 0.6;
   background: white;
   border: 0;
   outline: 0;
-  &.active {
-    border-bottom: 2px solid var(--orange);
-    padding: 10px;
+  ${({ isActive }) =>
+    isActive &&
+    `
+    border-bottom: 2px solid black;
     opacity: 1;
     font-size: 20px;
-    text-decoration: none;
-    color: var(--orange);
-  }
-  .logout {
-    colour: 'black';
-    text-decoration: none;
-  }
+  `}
 `;
 
 const ButtonGroup = styled.div`
   display: flex;
 `;
 
+const navlinkactive = `
+backgroundColor: isActive ? 'var(--dark-pink)': 'var(--dusty-pink)',
+padding: '20 px',
+color: isActive ? "white" : "black",
+textDecoration: 'none',
+borderRadius: '25 px',
+display: 'inline-block',
+`;
 
+const navLink = `
+  color: #ffffff;
+`
 
 const NavUnlisted = styled.ul`
   display: flex;
@@ -87,10 +97,6 @@ const NavUnlisted = styled.ul`
     list-style: none;
   }
 
-  &.active  {
-    backgroundColor: 'var(--dark-pink)',
-    
-  }
   .current {
     li {
       border-bottom: 2px solid black;
@@ -113,17 +119,25 @@ const AppNavbar = () => {
               
                   {Auth.loggedIn() ? (
                           <>
-                          <NavUnlisted>
+                              <li><NavLink to="/add-day">Add Activity</NavLink></li>
+                              <li><NavLink to="/calendar" style={({isActive})=>({
+                    backgroundColor: isActive ? 'var(--dark-pink)': 'var(--dusty-pink)',
+                    padding: '20 px',
+                    color: isActive ? "white" : "black",
+                    textDecoration: 'none',
+                    borderRadius: '25%',
+                    display: 'inline-block',
+                    height: '40 px'
+                })} >All Activities</NavLink></li>
 
-                              <li><NavLinkStyled to="/">Home</NavLinkStyled></li>
-                              <li><NavLinkStyled to="/add-day">Add Activity</NavLinkStyled></li>
-                              <li><NavLinkStyled to="/calendar"  >All Activities</NavLinkStyled></li>
-                              <li><NavLinkStyled to="/coming-soon">View My Profile</NavLinkStyled></li>
-                              <li><NavLink to="" onClick={Auth.logout} className="logout">Logout</NavLink></li>
-                              </NavUnlisted>
+                               <li><NavLink to="/calendarx" style={({isActive})=>({navlinkActive : navLink
+                })} >All Activities Style</NavLink></li>
+
+                              <li><NavLink>View My Profile</NavLink></li>
+                              <li><NavLink onClick={Auth.logout}>Logout</NavLink></li>
                           </>
                               
-                        ) : (<li><NavLinkStyled to="#" onClick={() => setShowModal(true)}>Login/Sign Up</NavLinkStyled></li>)
+                        ) : (<li><NavLink onClick={() => setShowModal(true)}>Login/Sign Up</NavLink></li>)
                   }
              
             </UnorderedList>

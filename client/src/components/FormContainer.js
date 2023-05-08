@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router';
 import DayForm from './DayForm';
 
 import Auth from '../utils/auth';
-import { useMutation, useQuery, useLazyQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { GET_DAY } from '../utils/queries';
 
 const FormContainer = (props) => {
   //get id of day if passed in i.e. opening an existing day from calendar
   //if no day if then new day
   const { dayId } = useParams();
-  console.log("dayId initially= " + dayId);
+  //console.log("dayId initially= " + dayId);
   
 
   //only call query if you have a day id - get details of that day
