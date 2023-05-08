@@ -106,6 +106,19 @@ userSchema.virtual('totalDayCount').get(function () {
   return sum;
 });
 
+userSchema.post('save', function(next) {
+  const err = new Error('something went wrong');
+  
+  console.log("POST SAVE BEFORE", this.days)
+  const daysSorted = this.days.sort(function(a,b){
+     return new Date(a.date) - new Date(b.date);
+  });
+  this.days = daysSorted;
+  
+  console.log("AFTER", this.days)
+  next(err);
+})
+
 const User = model('User', userSchema);
 
 module.exports = User;
