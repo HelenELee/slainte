@@ -24,7 +24,7 @@ const CardSelect = styled.div`
 const FlipCard = (props) => {
   const currentActivities = props.activities.filter((act) => {return act.category === props.category});
   const selections = props.selections;
-  console.log("SELECTIONS", props.category + " / " + selections);
+  //console.log("SELECTIONS", props.category + " / " + selections);
 
     return (
         <>
@@ -35,12 +35,23 @@ const FlipCard = (props) => {
           {
             currentActivities.length > 0 ? (
               currentActivities.map((act) => {
-                //let isChecked = selections.includes(act.title) ? 'checked' : '';
-                //console.log("ISCHECKED", isChecked);
+                let isChecked = selections.includes(act.title) ? true : false;
+                //let isChecked = selections.includes(act.title) ? 'defaultChecked' : '';
+              //  console.log("ISCHECKED for " + act.title , isChecked);
                 return (<>
-                    <input type="checkbox" id={act._id} name={"category~" + act.category} value={act.title} key={act._id} onClick={props.onClick} 
+                    <input 
+                    type="checkbox" 
+                    id={act._id} 
+                    name={"category~" + act.category} 
+                    value={act.title} 
+                    key={act._id} 
+                    onChange={props.onClick} 
+                    checked={isChecked}
                      />
-                     <label key={"label_"+act._id} htmlFor={act.title}>{act.title}</label><br></br>
+                     <label 
+                     key={"label_"+act._id} 
+                     htmlFor={act.title}>{act.title}
+                     </label><br></br>
                     
                      </>)
             })

@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router';
+import React, { useState } from 'react';
+//import { useParams } from 'react-router';
 
 import { StyledForm, StyledInput, StyledButton, StyledLabel } from './FormComponents';
 import FlipCard from './FlipCard';
 
 import Auth from '../utils/auth';
-import { useMutation, useQuery, useLazyQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_DAY, UPDATE_DAY, DELETE_DAY } from '../utils/mutations';
-import { QUERY_ACTIVITIES, GET_DAY } from '../utils/queries';
+import { QUERY_ACTIVITIES } from '../utils/queries';
 
 const DayForm = (props) => {
   // const foodActivities = [];
@@ -40,7 +40,7 @@ const DayForm = (props) => {
   // console.log("FOODACTIVITIES", foodActivities)
   // console.log("FOODCOUNT", props.dayData.foodCount);
 
-//console.log("ID", _id);
+console.log("ID", dayId);
 
 //   const dayDetails =  {
 //     "_id": "645611d9b31ff587045df76f",
@@ -70,11 +70,12 @@ const DayForm = (props) => {
   const [userFormData, setUserFormData] = useState({ 
     date: (props.dayData ? props.dayData.date : ''), 
     //date:'',
-    mindActivities: [], 
+    mindActivities: (props.dayData ? props.dayData.mindActivities : []),  
     foodActivities: (props.dayData ? props.dayData.foodActivities : []), 
-    exerciseActivities: [], 
-    commsActivities: [], 
-    sleep: '', 
+    exerciseActivities: (props.dayData ? props.dayData.exerciseActivities : []), 
+    commsActivities: (props.dayData ? props.dayData.commsActivities : []),  
+    sleep: (props.dayData ? props.dayData.sleep : ''),
+    rating: (props.dayData ? props.dayData.rating : ''), 
     notes: ''
   });
 
@@ -139,7 +140,7 @@ const DayForm = (props) => {
     if (!token) {
         return false;
     }
-    console.log("ABOUT TO CALL DELETEDAY");
+    //console.log("ABOUT TO CALL DELETEDAY");
     try {
       const responseUpdate = await deleteDay({
         variables: {
@@ -153,6 +154,7 @@ const DayForm = (props) => {
     } catch (err) {
       console.error(err);
     }
+    window.location.assign('/calendar');
   }
 
     const handleFormSubmit = async (event) => {
@@ -186,8 +188,8 @@ const DayForm = (props) => {
           
         } else {
               try {
-                console.log("newDay before updated", newDay);
-                console.log("TRYING UPDATE", dayId);
+                //console.log("newDay before updated", newDay);
+               // console.log("TRYING UPDATE", dayId);
                 const responseUpdate = await updateDay({
                   variables: {
                     //dayID: '6454fe966fe4b91da2866cf7',
@@ -204,7 +206,7 @@ const DayForm = (props) => {
               }
           
         }
-         // window.location.assign('/calendar');
+         window.location.assign('/calendar');
     };
 
     return (
@@ -232,20 +234,25 @@ const DayForm = (props) => {
                       name="rating"
                       value="1"
                       onChange={handleInputChange}
+                      checked={userFormData.rating === '1' ? true : false}
                     />Not Great
                     <input type="radio"
                       name="rating"
                       value="2"
-                      onChange={handleInputChange}/>Good
+                      onChange={handleInputChange}
+                      checked={userFormData.rating === '2' ? true : false}
+                    />Good
                     <input type="radio"
                       name="rating"
                       value="3"
-                      onChange={handleInputChange}/>Fantastic
+                      onChange={handleInputChange}
+                      checked={userFormData.rating === '3' ? true : false}
+                    />Fantastic
                 </div>
 
                 
                 <StyledLabel >How much sleep did you get?</StyledLabel>
-                <StyledInput type="text" onChange={handleInputChange} name="sleep" placeholder="" ></StyledInput>
+                <StyledInput type="text" onChange={handleInputChange} name="sleep" placeholder="" value={userFormData.sleep} ></StyledInput>
                                 
                 <StyledButton type="submit" disabled={false}>Submit</StyledButton>
                 {dayId ?
