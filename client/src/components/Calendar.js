@@ -26,44 +26,30 @@ function FullCalendarApp() {
     
 
     //const { loading, data } = useQuery(QUERY_MAIN_CHART);
-    const mainQuery = useQuery(QUERY_MAIN_CHART);
-    //const getDay = useQuery(GET_DAY, {variables: { dayID: "64539004493bd370555679d7" }});
-  //const days = data?.me || [];
-  
- // const result = days.map(o => ({"id": o._id, "title": o.score, "start": o.date, "end": o.date  }));
-//  console.log(getDay({
-//     variables: {
-//       dayID: "64539004493bd370555679d7"
-//     }
-//   }));
-
-//   const { loading, error, data } = useQuery(GET_DAY, {
-//     variables: { dayID: "64539004493bd370555679d7" },
-//   });
-
-  //data.getDay
+  const mainQuery = useQuery(QUERY_MAIN_CHART);
+   
  const handleClickEvent = async (e) => {
     //const { name, value } = event.target;
     //const getDay = useQuery(GET_DAY);
     
     console.log(e.event.id);
     if (e.event.id) {
-        try {
-            console.log(e.event.id);
-           // const response = await getDay({
-            //   variables: {
-            //     dayID: e.event.id
-            //   }
-           // });
+      //   try {
+      //       console.log(e.event.id);
+      //      // const response = await getDay({
+      //       //   variables: {
+      //       //     dayID: e.event.id
+      //       //   }
+      //      // });
       
-            ////if (!response) {
-              throw new Error('something went wrong!');
-           // }
-      //console.log(response);
+      //       ////if (!response) {
+      //         //throw new Error('something went wrong!');
+      //      // }
+      // //console.log(response);
             
-          } catch (err) {
-            console.error(err);
-          }
+      //     } catch (err) {
+      //       console.error(err);
+      //     }
         
         //setShowModal(true);
         console.log("OPENING DAY ", e.event.id);
@@ -73,14 +59,18 @@ function FullCalendarApp() {
   };
 
     if (!mainQuery.loading){
-        //console.log("newData - before", mainQuery.data.me.days);
-        newData = mainQuery.data.me.days.map(o => ({"id": o._id, "title": "score: " + o.score.toString() + "/rating: " + o.rating, "start": formatDate(o.date), "end": formatDate(o.date)  })) 
+        console.log("not loading anymore");
+        if (mainQuery.data ) {
+          newData = mainQuery.data.me.days.map(o => ({"id": o._id, "title": "score: " + o.score.toString() + "/rating: " + o.rating, "start": formatDate(o.date), "end": formatDate(o.date)  })) 
        //console.log("newData", newData);
         newData = newData.sort(function compare(a, b) {
             var dateA = new Date(a.start);
             var dateB = new Date(b.start);
             return dateA - dateB;
           });
+
+        }
+        
     }
   return (
     <div className="App">

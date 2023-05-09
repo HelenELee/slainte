@@ -93,10 +93,10 @@ userSchema.virtual('totalExerciseCount').get(function () {
     return sum;
 });
 
-userSchema.virtual('totalCommsCount').get(function () { 
+userSchema.virtual('totalConnCount').get(function () { 
   let initialScore = 0;
   let sum = this.days.reduce(function (accumulator, curValue) {
-      return accumulator + curValue.commsCount
+      return accumulator + curValue.connCount
     }, initialScore);
     return sum;
 });
@@ -106,18 +106,18 @@ userSchema.virtual('totalDayCount').get(function () {
   return sum;
 });
 
-userSchema.post('save', function(next) {
-  const err = new Error('something went wrong');
+// userSchema.post('save', function(next) {
+//   const err = new Error('something went wrong');
   
-  console.log("POST SAVE BEFORE", this.days)
-  const daysSorted = this.days.sort(function(a,b){
-     return new Date(a.date) - new Date(b.date);
-  });
-  this.days = daysSorted;
+//   console.log("POST SAVE BEFORE", this.days)
+//   const daysSorted = this.days.sort(function(a,b){
+//      return new Date(a.date) - new Date(b.date);
+//   });
+//   this.days = daysSorted;
   
-  console.log("AFTER", this.days)
-  next(err);
-})
+//   console.log("AFTER", this.days)
+//   next(err);
+// })
 
 const User = model('User', userSchema);
 

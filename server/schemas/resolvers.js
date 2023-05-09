@@ -61,7 +61,7 @@ const resolvers = {
          
             const user = await User.create({ username, email, password });
             const token = signToken(user);
-           
+            return { token, user };
         },
         createDay: async (parent, { input }, context) => {
             
@@ -91,13 +91,13 @@ const resolvers = {
           // console.log("FOOD", input.foodActivities);
           // console.log("MIND", input.mindActivities);
           // console.log("EXERCISE", input.exerciseActivities);
-          // console.log("COMMS", input.commsActivities);
+          // console.log("CONN", input.connActivities);
          // console.log("ID", dayID);
           const updatedUser = User.findOneAndUpdate({_id: context.user._id, days: {$elemMatch: {_id: dayID}}},
             {$set: {'days.$.foodActivities': input.foodActivities,
                     'days.$.mindActivities': input.mindActivities,
                     'days.$.exerciseActivities': input.exerciseActivities,
-                    'days.$.commsActivities': input.commsActivities,
+                    'days.$.connActivities': input.connActivities,
                     'days.$.sleep': input.sleep,
                     'days.$.notes': input.notes,
                     'days.$.rating': input.rating,}}, // list fields you like to change

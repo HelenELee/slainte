@@ -24,9 +24,9 @@ const Suggestions = () => {
             bestActivityCount = userData.totalMindCount;
             bestActivity = "Mind";
         }
-        if (userData.totalCommsCount > bestActivityCount) {
-            bestActivityCount = userData.totalCommsCount;
-            bestActivity = "Communication";
+        if (userData.totalConnCount > bestActivityCount) {
+            bestActivityCount = userData.totalConnCount;
+            bestActivity = "Connection";
         }
         console.log("bestactivity", bestActivity);
         return bestActivity;

@@ -12,9 +12,9 @@ const SignupForm = (props) => {
   // set initial form state
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
   // set state for form validation
-  const [validated] = useState(false);
+ // const [validated] = useState(false);
   // set state for alert
-  const [showAlert, setShowAlert] = useState(false);
+  //const [showAlert, setShowAlert] = useState(false);
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
@@ -26,18 +26,19 @@ const SignupForm = (props) => {
     event.preventDefault();
 
     // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    //const form = event.currentTarget;
+    // if (form.checkValidity() === false) {
+    //   event.preventDefault();
+    //   event.stopPropagation();
+    // }
    
     
     try {
+      console.log("USER DATA", userFormData);
       const { data } = await addUser({
         variables: { ...userFormData },
       });
-     
+      console.log("ABOUT TO DO AUTH");
       Auth.login(data.addUser.token);
       console.log("****TOKEN********")
       console.log(data.addUser.token);
@@ -66,7 +67,7 @@ const SignupForm = (props) => {
             <StyledLabel >Password:</StyledLabel>
             <StyledInput type="password" value={userFormData.password} onChange={handleInputChange} name="password" placeholder="Your password" />
             
-            <StyledButton type="submit" disabled={!userFormData.username || !userFormData.password}>Login</StyledButton>
+            <StyledButton type="submit" disabled={!userFormData.username || !userFormData.password}>Sign up</StyledButton>
       
         </StyledForm>
     </>

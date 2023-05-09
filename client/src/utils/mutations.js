@@ -36,14 +36,14 @@ export const CREATE_DAY = gql`
           mindCount
           foodCount
           exerciseCount
-          commsCount
+          connCount
           score
           rating
           sleep
           notes
           mindActivities
           foodActivities
-          commsActivities
+          connActivities
           exerciseActivities
         }
     }
@@ -62,14 +62,14 @@ export const UPDATE_DAY = gql`
           mindCount
           foodCount
           exerciseCount
-          commsCount
+          connCount
           score
           rating
           sleep
           notes
           mindActivities
           foodActivities
-          commsActivities
+          connActivities
           exerciseActivities
         }
     }
@@ -88,14 +88,14 @@ export const DELETE_DAY = gql`
           mindCount
           foodCount
           exerciseCount
-          commsCount
+          connCount
           score
           rating
           sleep
           notes
           mindActivities
           foodActivities
-          commsActivities
+          connActivities
           exerciseActivities
         }
     }

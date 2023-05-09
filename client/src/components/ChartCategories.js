@@ -34,7 +34,7 @@ import {
           <Bar dataKey="mindCount" fill="var(--orange)" />
           <Bar dataKey="foodCount" fill="var(--dusty-pink)" />
           <Bar dataKey="exerciseCount" fill="var(--pale-green)" />
-          <Bar dataKey="commsCount" fill="var(--dark-pink)" />
+          <Bar dataKey="connCount" fill="var(--dark-pink)" />
         </BarChart>
       </ResponsiveContainer>
     );

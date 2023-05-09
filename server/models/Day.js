@@ -24,7 +24,7 @@ const daySchema = new Schema(
       foodActivities: [String],
       mindActivities: [String],
       exerciseActivities: [String],
-      commsActivities: [String],
+      connActivities: [String],
       rating: {
         type: String,
       },
@@ -66,17 +66,17 @@ daySchema
   });
 
 daySchema
-  .virtual('commsCount')
+  .virtual('connCount')
   // Getter
   .get(function () {
-    return this.commsActivities.length;
+    return this.connActivities.length;
   });
   
 daySchema
   .virtual('score')
   // Getter
   .get(function () {
-    return this.commsActivities.length  + this.mindActivities.length + this.exerciseActivities.length + this.foodActivities.length;
+    return this.connActivities.length  + this.mindActivities.length + this.exerciseActivities.length + this.foodActivities.length;
   });
 
 // daySchema.post('save', function(next) {

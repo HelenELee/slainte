@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 //import { useParams } from 'react-router';
-import {food_description, mind_description, comms_description, exercise_description} from '../data/categories.js';
+import {food_description, mind_description, conn_description, exercise_description} from '../data/categories.js';
 import { StyledForm, StyledInput, StyledButton, StyledLabel } from './FormComponents';
 import FlipCard from './FlipCard';
 //import { FlexContainer, FlexChild } from './FlexComponents';
@@ -21,7 +21,7 @@ const DayForm = (props) => {
     mindActivities: (props.dayData ? props.dayData.mindActivities : []),  
     foodActivities: (props.dayData ? props.dayData.foodActivities : []), 
     exerciseActivities: (props.dayData ? props.dayData.exerciseActivities : []), 
-    commsActivities: (props.dayData ? props.dayData.commsActivities : []),  
+    connActivities: (props.dayData ? props.dayData.connActivities : []),  
     sleep: (props.dayData ? props.dayData.sleep : ''),
     rating: (props.dayData ? props.dayData.rating : ''), 
     notes: ''
@@ -71,8 +71,8 @@ const DayForm = (props) => {
           setUserFormData({ ...userFormData, "exerciseActivities": newArray})
           break;
         default:
-          newArray = updateArray(event.target.checked, userFormData.commsActivities, value);
-          setUserFormData({ ...userFormData, "commsActivities": newArray})
+          newArray = updateArray(event.target.checked, userFormData.connActivities, value);
+          setUserFormData({ ...userFormData, "connActivities": newArray})
          
       } 
     } else {
@@ -183,7 +183,7 @@ const DayForm = (props) => {
                       <StyledFlipCard category="Exercise" desc={exercise_description} activities={activities} key="Exercise" onClick={handleInputChange} selections={userFormData.exerciseActivities}></StyledFlipCard>
                       </FlexChild>
                       <FlexChild>
-                      <StyledFlipCard category="Connection" desc={comms_description} activities={activities} key="Communication" onClick={handleInputChange} selections={userFormData.commsActivities}></StyledFlipCard> 
+                      <StyledFlipCard category="Connection" desc={conn_description} activities={activities} key="Connection" onClick={handleInputChange} selections={userFormData.connActivities}></StyledFlipCard> 
                       </FlexChild>
                     
                     
@@ -193,7 +193,7 @@ const DayForm = (props) => {
                       {/* <FlipCard category="Food" activities={activities} key="Food" onClick={handleInputChange} selections={userFormData.foodActivities}></FlipCard>
                       <FlipCard category="Mind" activities={activities} key="Mind" onClick={handleInputChange} selections={userFormData.mindActivities}></FlipCard>
                       <FlipCard category="Exercise" activities={activities} key="Exercise" onClick={handleInputChange} selections={userFormData.exerciseActivities}></FlipCard>
-                      <FlipCard category="Communication" activities={activities} key="Communication" onClick={handleInputChange} selections={userFormData.commsActivities}></FlipCard> */}
+                      <FlipCard category="Communication" activities={activities} key="Communication" onClick={handleInputChange} selections={userFormData.connActivities}></FlipCard> */}
                   </>
                      
                    )}

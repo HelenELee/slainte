@@ -11,7 +11,7 @@ export const GET_ME = gql`
       totalFoodCount
       totalMindCount
       totalExerciseCount
-      totalCommsCount
+      totalConnCount
       totalDayCount
       days {
           _id
@@ -19,14 +19,14 @@ export const GET_ME = gql`
           mindCount
           foodCount
           exerciseCount
-          commsCount
+          connCount
           score
           rating
           sleep
           notes
           mindActivities
           foodActivities
-          commsActivities
+          connActivities
           exerciseActivities
         }
     }
@@ -56,7 +56,7 @@ export const QUERY_MAIN_CHART = gql`
           mindCount
           foodCount
           exerciseCount
-          commsCount
+          connCount
           score
           rating
           sleep         
@@ -72,12 +72,12 @@ export const GET_DAY = gql`
       date
       foodActivities
       mindActivities
-      commsActivities
+      connActivities
       exerciseActivities
       mindCount
       foodCount
       exerciseCount
-      commsCount
+      connCount
       score
       rating
       sleep         
@@ -92,7 +92,7 @@ export const QUERY_MAIN_CHART1 = gql`
           mindCount
           foodCount
           exerciseCount
-          commsCount
+          connCount
           score
           rating
           sleep         
@@ -108,7 +108,7 @@ export const QUERY_MAIN_CHART2 = gql`
           mindCount
           foodCount
           exerciseCount
-          commsCount
+          connCount
           score
           rating
           sleep         

@@ -1,4 +1,4 @@
 export const food_description = "Research also tells us that a diverse, nutrient-rich diet can be protective of your brain and mood. We know that eating well can reduce the risk of some mental disorders";
 export const mind_description = "mindfulness practices may help people manage stress, cope better with serious illness and reduce anxiety and depression. ";
 export const exercise_description = "People who exercise regularly have better mental health and emotional wellbeing, and lower rates of mental illness. It not only boosts our mood, concentration and alertness, but improves our cardiovascular and overall physical health.";
-export const comms_description = "Social connection can lower anxiety and depression, help us regulate our emotions, lead to higher self-esteem and empathy, and actually improve our immune systems. ";
+export const conn_description = "Social connection can lower anxiety and depression, help us regulate our emotions, lead to higher self-esteem and empathy, and actually improve our immune systems. ";

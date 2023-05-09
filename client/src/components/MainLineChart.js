@@ -16,10 +16,11 @@ import {
 const MainLineChart = ({ data }) => {
  
   let newArray = [...data];
-  const daysSorted = newArray.sort(function(a,b){
+  console.log("NEWARRAY", newArray);
+  let daysSorted = newArray.sort(function(a,b){
     return new Date(a.date) - new Date(b.date);
   });
-
+  console.log("DAYSSORTED", daysSorted);
   return (
     <ResponsiveContainer width="100%" height={400} debounce={300}>
         <LineChart

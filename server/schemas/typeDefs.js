@@ -14,11 +14,11 @@ const typeDefs = gql`
     foodActivities: [String]
     mindActivities: [String]
     exerciseActivities: [String]
-    commsActivities: [String]
+    connActivities: [String]
     foodCount: Int
     mindCount: Int
     exerciseCount: Int
-    commsCount: Int
+    connCount: Int
     score: Int
     rating: String
     sleep: String
@@ -35,7 +35,7 @@ const typeDefs = gql`
     totalFoodCount: Int
     totalMindCount: Int
     totalExerciseCount: Int
-    totalCommsCount: Int
+    totalConnCount: Int
     totalDayCount: Int
     days: [Day]
     
@@ -58,7 +58,7 @@ const typeDefs = gql`
     mindActivities: [String]
     foodActivities: [String]
     exerciseActivities: [String]
-    commsActivities: [String]
+    connActivities: [String]
     rating: String
     sleep: String
     notes: String
