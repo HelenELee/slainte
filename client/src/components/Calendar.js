@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -24,7 +25,7 @@ function FullCalendarApp() {
     
     //const [showModal, setShowModal] = useState(false);
     
-
+    const navigate = useNavigate();
     //const { loading, data } = useQuery(QUERY_MAIN_CHART);
   const mainQuery = useQuery(QUERY_MAIN_CHART);
    
@@ -34,26 +35,11 @@ function FullCalendarApp() {
     
     console.log(e.event.id);
     if (e.event.id) {
-      //   try {
-      //       console.log(e.event.id);
-      //      // const response = await getDay({
-      //       //   variables: {
-      //       //     dayID: e.event.id
-      //       //   }
-      //      // });
       
-      //       ////if (!response) {
-      //         //throw new Error('something went wrong!');
-      //      // }
-      // //console.log(response);
-            
-      //     } catch (err) {
-      //       console.error(err);
-      //     }
-        
         //setShowModal(true);
         console.log("OPENING DAY ", e.event.id);
-        window.location.assign(`/add-day/${e.event.id}`);
+        //window.location.assign(`/add-day/${e.event.id}`);
+        navigate(`/add-day/${e.event.id}`);
     }
     
   };
