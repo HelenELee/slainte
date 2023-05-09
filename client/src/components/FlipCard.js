@@ -6,9 +6,9 @@ const Wrapper = styled.section`
     height: 100px;
     padding:10;
     margin: 0;
-    width: 50%;
+    width: auto;
     border-radius: 25%;
-    border: 1px solid #ccc;
+   // border: 1px solid #ccc;
     border-radius: 5px;
   `
 const CardSelect = styled.div`
@@ -16,8 +16,14 @@ const CardSelect = styled.div`
   padding:10;
   margin: 0;
   border-radius: 25%;
-  border: 1px solid #ccc;
+ // border: 1px solid #ccc;
   border-radius: 5px;
+  color: black;
+  text-align: left;
+  width: auto;
+`
+const Title = styled.h1`
+  color: black;
 `
 
 
@@ -29,8 +35,10 @@ const FlipCard = (props) => {
     return (
         <>
         <Wrapper key={"wrapper_"+props.category}>
-        <span>{props.category}</span>
-       
+        <Title>{props.category}</Title>
+        
+
+        
         <CardSelect key={"card_"+props.category}>
           {
             currentActivities.length > 0 ? (
@@ -56,14 +64,7 @@ const FlipCard = (props) => {
                      </>)
             })
               
-              // currentActivities.map((act) => (
-              //   <>
-              //   <input type="checkbox" id={act._id} name={"category~" + act.category} value={act.title} key={act._id} onClick={props.onClick} 
-              //   />
-              //   <label key={"label_"+act._id} htmlFor={act.title}>{act.title}</label><br></br>
-                
-              //   </>
-              //   ))
+              
             ) : ("")
           }
             

@@ -1,75 +1,23 @@
 import React, { useState } from 'react';
 //import { useParams } from 'react-router';
-
+import {food_description, mind_description, comms_description, exercise_description} from '../data/categories.js';
 import { StyledForm, StyledInput, StyledButton, StyledLabel } from './FormComponents';
 import FlipCard from './FlipCard';
-
+//import { FlexContainer, FlexChild } from './FlexComponents';
+import { FlexContainer, FlexChild } from './FlexComponents';
+import StyledFlipCard from './StyledFlipCard';
+//import StyledFlipCard from "./StyledFlipCard";
 import Auth from '../utils/auth';
 import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_DAY, UPDATE_DAY, DELETE_DAY } from '../utils/mutations';
 import { QUERY_ACTIVITIES } from '../utils/queries';
 
 const DayForm = (props) => {
-  // const foodActivities = [];
-  // const mindActivities = [];
-
-  // const dayId = undefined;
-  // if (props.dayData) {
-  //   const {
-  //     foodActivities, 
-  //     moodActivities,
-  //     commsActivities,
-  //     mindActivities,
-  //     date,
-  //     rating,
-  //     sleep,
-  //     _id} = props.dayData;
-
-  //     dayId = _id;
-  // } else {
-
-  // }
   
-
-  //const { dayId } = useParams();
-  //const dayId = "645722b9c513b6a41622d138";
-  const dayId = (props.dayData ? props.dayData._id : undefined);
- // dayId = _id;
-  // console.log("DAY DATA", props.dayData);
-  // //const foodActivities = props.dayData.foodActivities
-  // console.log("FOODACTIVITIES", foodActivities)
-  // console.log("FOODCOUNT", props.dayData.foodCount);
-
-console.log("ID", dayId);
-
-//   const dayDetails =  {
-//     "_id": "645611d9b31ff587045df76f",
-//     "date": "2023-05-01",
-//     "foodActivities": [],
-//     "mindActivities": [],
-//     "commsActivities": [],
-//     "exerciseActivities": [
-//         "Yoga",
-//         "Zumba",
-//         "Jogging",
-//         "Weight Training"
-//     ],
-//     "mindCount": 0,
-//     "foodCount": 0,
-//     "exerciseCount": 4,
-//     "commsCount": 0,
-//     "score": 4,
-//     "rating": "2",
-//     "sleep": 7,
-//     "__typename": "Day"
-// };
-
-  //console.log("dayId initially= " + dayId);
-  
+  const dayId = (props.dayData ? props.dayData._id : undefined); 
 
   const [userFormData, setUserFormData] = useState({ 
     date: (props.dayData ? props.dayData.date : ''), 
-    //date:'',
     mindActivities: (props.dayData ? props.dayData.mindActivities : []),  
     foodActivities: (props.dayData ? props.dayData.foodActivities : []), 
     exerciseActivities: (props.dayData ? props.dayData.exerciseActivities : []), 
@@ -211,9 +159,11 @@ console.log("ID", dayId);
 
     return (
         <>
-        Daily Update
+        
           <StyledForm onSubmit={handleFormSubmit}>
-         
+          
+          
+          
                 <StyledLabel>Date:</StyledLabel>
                 <input type="text" name="date" placeholder="" onChange={handleInputChange} value={userFormData.date}/>
                  <StyledLabel>What did you do today? </StyledLabel>
@@ -222,10 +172,28 @@ console.log("ID", dayId);
                 ) : (
                   activities &&
                   <>
-                      <FlipCard category="Food" activities={activities} key="Food" onClick={handleInputChange} selections={userFormData.foodActivities}></FlipCard>
+                    <FlexContainer>
+                      <FlexChild>
+                      <StyledFlipCard category="Food" desc={food_description} activities={activities} key="Food" onClick={handleInputChange} selections={userFormData.foodActivities}></StyledFlipCard>
+                      </FlexChild>
+                      <FlexChild>
+                      <StyledFlipCard category="Mind" desc={mind_description} activities={activities} key="Mind" onClick={handleInputChange} selections={userFormData.mindActivities}></StyledFlipCard>
+                      </FlexChild>
+                      <FlexChild>
+                      <StyledFlipCard category="Exercise" desc={exercise_description} activities={activities} key="Exercise" onClick={handleInputChange} selections={userFormData.exerciseActivities}></StyledFlipCard>
+                      </FlexChild>
+                      <FlexChild>
+                      <StyledFlipCard category="Connection" desc={comms_description} activities={activities} key="Communication" onClick={handleInputChange} selections={userFormData.commsActivities}></StyledFlipCard> 
+                      </FlexChild>
+                    
+                    
+                    
+                    </FlexContainer>
+                    
+                      {/* <FlipCard category="Food" activities={activities} key="Food" onClick={handleInputChange} selections={userFormData.foodActivities}></FlipCard>
                       <FlipCard category="Mind" activities={activities} key="Mind" onClick={handleInputChange} selections={userFormData.mindActivities}></FlipCard>
                       <FlipCard category="Exercise" activities={activities} key="Exercise" onClick={handleInputChange} selections={userFormData.exerciseActivities}></FlipCard>
-                      <FlipCard category="Communication" activities={activities} key="Communication" onClick={handleInputChange} selections={userFormData.commsActivities}></FlipCard>
+                      <FlipCard category="Communication" activities={activities} key="Communication" onClick={handleInputChange} selections={userFormData.commsActivities}></FlipCard> */}
                   </>
                      
                    )}
