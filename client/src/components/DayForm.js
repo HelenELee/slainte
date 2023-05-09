@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { redirect } from "react-router-dom";
 //import { useParams } from 'react-router';
 import {food_description, mind_description, conn_description, exercise_description} from '../data/categories.js';
 import { StyledForm, StyledInput, StyledButton, StyledLabel } from './FormComponents';
@@ -154,7 +155,8 @@ const DayForm = (props) => {
               }
           
         }
-         window.location.assign('/calendar');
+         //window.location.assign('/calendar');
+         return redirect('/calendar');
     };
 
     return (
