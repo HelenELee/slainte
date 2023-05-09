@@ -12,6 +12,7 @@ import Calendar from './components/Calendar';
 import Home from './pages/Home';
 import GlobalStyle from './GlobalStyle';
 import ComingSoon from './components/ComingSoon';
+import Dashboard from './components/Dashboard';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -79,6 +80,10 @@ function App() {
             <Route 
                 path='/coming-soon' 
                 element={<ComingSoon />} 
+            />
+            <Route 
+                path='/dashboard' 
+                element={<Dashboard />} 
             />
             {/* <Route 
             path='*'

@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
-import { Link , NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
 //import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 import Auth from '../utils/auth';
 import { StyledModal } from "./StyledModal"
+import Logo from'../images/Logo.jpg';
+
+
+const Box = styled.div`
+  display: flex;
+  align-items:center;
+  border: solid 1;
+`
 
 const Title = styled.h1`
   font-size: 1.5em;
-  text-align: left;
-  color: palevioletred;
+  //text-align: left;
+  
 `;
 const Wrapper = styled.section`
   height: 200;
@@ -56,8 +64,7 @@ const NavLinkStyled = styled(NavLink)`
   outline: 0;
   &.active {
     border-bottom: 2px solid var(--orange);
-    padding: 10px;
-    opacity: 1;
+    
     font-size: 20px;
     text-decoration: none;
     color: var(--orange);
@@ -108,14 +115,20 @@ const AppNavbar = () => {
   return (
     <>
       <Wrapper>
-          <Title><NavLink to="/">Slainte!</NavLink></Title>
+      
+          <Box>
+            <Link to="/"><img src={Logo} alt="logo" /></Link>
+            <Link>Slainte!</Link>
+          </Box>
+            
+            
             <UnorderedList>
               
                   {Auth.loggedIn() ? (
                           <>
                           <NavUnlisted>
-
                               <li><NavLinkStyled to="/">Home</NavLinkStyled></li>
+                              <li><NavLinkStyled to="/dashboard">Dashboard</NavLinkStyled></li>
                               <li><NavLinkStyled to="/add-day">Add Activity</NavLinkStyled></li>
                               <li><NavLinkStyled to="/calendar"  >All Activities</NavLinkStyled></li>
                               <li><NavLinkStyled to="/coming-soon">View My Profile</NavLinkStyled></li>
