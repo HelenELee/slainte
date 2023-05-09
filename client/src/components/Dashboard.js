@@ -45,10 +45,10 @@ export default function Dashboard() {
             <FlexContainer direction ="column">
                 <FlexContainer direction ="row">
                     <FlexChild> 
-                      {/* <Suggestions />  */}
+                      <Suggestions /> 
                     </FlexChild>
                     <FlexChild> 
-                      {/* <QuoteContainer /> */}
+                      <QuoteContainer />
                     </FlexChild>
                 </FlexContainer> 
                 <FlexContainer direction="row"> 

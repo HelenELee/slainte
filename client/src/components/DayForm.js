@@ -170,7 +170,7 @@ const DayForm = (props) => {
           
           
                 <StyledLabel>Date:</StyledLabel>
-                <input type="text" name="date" placeholder="" onChange={handleInputChange} value={userFormData.date}/>
+                <input type="date" name="date" placeholder="" onChange={handleInputChange} value={userFormData.date}/>
                  <StyledLabel>What did you do today? </StyledLabel>
                 {activitiesQuery.loading ? (
                   <div>Loading...</div>
