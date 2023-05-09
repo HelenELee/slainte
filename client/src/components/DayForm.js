@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //import { useParams } from 'react-router';
 import {food_description, mind_description, conn_description, exercise_description} from '../data/categories.js';
 import { StyledForm, StyledInput, StyledButton, StyledLabel } from './FormComponents';
@@ -15,6 +16,7 @@ import { QUERY_ACTIVITIES } from '../utils/queries';
 
 const DayForm = (props) => {
   
+  const navigate = useNavigate();
   const dayId = (props.dayData ? props.dayData._id : undefined); 
 
   const [userFormData, setUserFormData] = useState({ 
@@ -156,7 +158,7 @@ const DayForm = (props) => {
           
         }
          //window.location.assign('/calendar');
-         return redirect('/calendar');
+         return navigate('/calendar');
     };
 
     return (
