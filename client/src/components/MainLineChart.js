@@ -7,24 +7,31 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend
+  Legend,
+  ResponsiveContainer,
 } from "recharts";
 
 
 
 const MainLineChart = ({ data }) => {
-  console.log("DATA", data)
+ 
+  let newArray = [...data];
+  const daysSorted = newArray.sort(function(a,b){
+    return new Date(a.date) - new Date(b.date);
+  });
+
   return (
-    <LineChart
-      width={800}
-      height={300}
-      data={data}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5
-      }}
+    <ResponsiveContainer width="100%" height={400} debounce={300}>
+        <LineChart
+            width={100}
+            height={300}
+            data={daysSorted}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5
+            }}
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="date" />
@@ -36,6 +43,10 @@ const MainLineChart = ({ data }) => {
       <Line type="monotone" dataKey="sleep" stroke="var(--pale-green)" activeDot={{ r: 8 }}/>
       
     </LineChart>
+
+
+    </ResponsiveContainer>
+    
   );
 }
 

@@ -12,12 +12,18 @@ import {
   export default function Chart({ data }) {
 
 //const result = data.map(o => ({ date: o.date }))
-// const daysSorted = data.sort(function(a,b){
-//   return new Date(a.date) - new Date(b.date);
-// });
-const daysSorted = data;
 
-console.log("DATA PASSED TO CHART", daysSorted);
+// 
+let newArray = [...data];
+// newArray.sort(function(a,b){
+//      return new Date(a.date) - new Date(b.date);
+//    });
+
+const daysSorted = newArray.sort(function(a,b){
+  return new Date(a.date) - new Date(b.date);
+});
+
+console.log("DATA PASSED TO CHART", newArray);
     return (
       <ResponsiveContainer width="100%" height={400}>
         <BarChart
