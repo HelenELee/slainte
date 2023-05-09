@@ -105,7 +105,8 @@ const DayForm = (props) => {
     } catch (err) {
       console.error(err);
     }
-    window.location.assign('/calendar');
+    //window.location.assign('/calendar');
+    return navigate('/calendar');
   }
 
     const handleFormSubmit = async (event) => {
