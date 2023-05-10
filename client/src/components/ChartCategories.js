@@ -32,7 +32,7 @@ import {
           <Tooltip />
           <Legend />
           <Bar dataKey="mindCount" fill="var(--orange)" />
-          <Bar dataKey="foodCount" fill="var(--dusty-pink)" />
+          <Bar dataKey="foodCount" fill="var(--pale-blue)" />
           <Bar dataKey="exerciseCount" fill="var(--pale-green)" />
           <Bar dataKey="connCount" fill="var(--dark-pink)" />
         </BarChart>
