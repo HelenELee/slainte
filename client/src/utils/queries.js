@@ -50,6 +50,7 @@ export const QUERY_MAIN_CHART = gql`
       _id
       username
       email
+      totalScore
       days {
           _id
           date
