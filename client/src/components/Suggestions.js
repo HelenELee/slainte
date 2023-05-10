@@ -3,17 +3,28 @@ import Auth from '../utils/auth';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
-const Suggestions = () => {
-
-    const { loading, error, data } = useQuery(GET_ME);
+const Suggestions = (props) => {
+    
+    const { loading, error, data, refetch } = useQuery(GET_ME);
     const userData = data?.me || [];
+    //setRender(true);
+    
+    console.log("RENDERING SUGGESTIONS", props.data);
+
+    useEffect(() => {
+       
+        if(!loading){
+            refetch();
+        }
+        
+    },[] );
 
     if (loading) {
-        return <h2>LOADING...</h2>;
+    return <h2>LOADING...</h2>;
     }
-
+    
     const getBestActivity = () => {
-        console.log("Inside getBestActivity");
+        //console.log("Inside getBestActivity");
         let bestActivityCount = userData.totalFoodCount;
         let bestActivity = "Food";
         if (userData.totalExerciseCount > bestActivityCount) {
@@ -35,9 +46,11 @@ const Suggestions = () => {
     console.log("USERDATA" , userData);
     const populateSuggestions = () => {
         let suggestionArray = []
-        
-        if (userData.totalScore >= userData.totalDayCount) {
+        console.log(userData.totalScore, userData.totalDayCount);
+        if (userData.totalDayCount && userData.totalScore >= userData.totalDayCount) {
             suggestionArray.push("Great job! You seem to be averaging at least one activity per recorded day.")
+        } else {
+            suggestionArray.push("Lets get started tracking your activities!")
         }
         if (userData.totalScore > 0) {
             suggestionArray.push(`You have recorded a total of ${userData.totalScore} activities.`)
@@ -50,15 +63,15 @@ const Suggestions = () => {
         }
         return suggestionArray;
     }
-    const suggestions = populateSuggestions();
-    console.log("SUGGESTIONS", suggestions);
+    // suggestions = populateSuggestions();
+    //console.log("SUGGESTIONS", suggestions);
     return (
         <>
         "Suggestions"
         
         <ul>
                  {
-                    suggestions.map((suggest) => (
+                    populateSuggestions().map((suggest) => (
                     <li>{suggest}</li>
                     ))
                 }
