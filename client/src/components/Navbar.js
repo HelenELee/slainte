@@ -53,7 +53,8 @@ const Tab = styled.button`
   ${({ active }) =>
     active &&
     `
-    border-bottom: 2px solid black;
+    color: var(--orange);
+    border-bottom: 2px solid var(--orange);
     opacity: 1;
   `}
 `;
@@ -95,7 +96,7 @@ const NavUnlisted = styled.ul`
   }
 
   &.active  {
-    backgroundColor: 'var(--dark-pink)',
+    backgroundColor: 'var(--dusty-pink)',
     
   }
   .current {
@@ -126,7 +127,7 @@ const AppNavbar = () => {
               
                   {Auth.loggedIn() ? (
                           <>
-                          <NavUnlisted>
+                            <NavUnlisted>
                               <li><NavLinkStyled to="/">Home</NavLinkStyled></li>
                               <li><NavLinkStyled to="/dashboard">Dashboard</NavLinkStyled></li>
                               <li><NavLinkStyled to="/add-day">Add Activity</NavLinkStyled></li>

@@ -22,10 +22,20 @@ const CardSelect = styled.div`
   text-align: left;
   width: auto;
 `
-const Title = styled.h1`
-  color: black;
-`
 
+const Title = styled.h1`
+  color: ${props => props.category === 'Food' ? 'var(--strong-blue)' 
+  : props.category === 'Mind' ? 'var(--orange)'
+  : props.category === 'Exercise' ? 'var(--pale-green)'
+  : 'var(--dark-pink)'};
+`;
+
+const StyledCheckBoxLabel = styled.label`
+  color: var(--slate-grey);
+  font-family: 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+`;
 
 const FlipCard = (props) => {
   const currentActivities = props.activities.filter((act) => {return act.category === props.category});
@@ -56,10 +66,10 @@ const FlipCard = (props) => {
                     onChange={props.onClick} 
                     checked={isChecked}
                      />
-                     <label 
+                     <StyledCheckBoxLabel 
                      key={"label_"+act._id} 
                      htmlFor={act.title}>{act.title}
-                     </label><br></br>
+                     </StyledCheckBoxLabel><br></br>
                     
                      </>)
             })

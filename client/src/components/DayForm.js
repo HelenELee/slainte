@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSmile, faFaceMeh, faFaceFrown} from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core'
+
 import { redirect } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 //import { useParams } from 'react-router';
@@ -10,6 +14,7 @@ import { FlexContainer, FlexChild } from './FlexComponents';
 import StyledFlipCard from './StyledFlipCard';
 //import StyledFlipCard from "./StyledFlipCard";
 import Auth from '../utils/auth';
+
 import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_DAY, UPDATE_DAY, DELETE_DAY } from '../utils/mutations';
 import { QUERY_ACTIVITIES } from '../utils/queries';
@@ -169,8 +174,48 @@ const DayForm = (props) => {
           
           
           
-                <StyledLabel>Date:</StyledLabel>
-                <input type="date" name="date" placeholder="" onChange={handleInputChange} value={userFormData.date}/>
+                
+                <FlexContainer direction="column">
+                <FlexChild>
+                <StyledLabel display="inline-block">Date:</StyledLabel>
+                <StyledInput display="inline-block" size="11" type="date" name="date" placeholder="" onChange={handleInputChange} value={userFormData.date}/>
+                </FlexChild>
+                
+                <FlexChild>
+        
+                <StyledLabel >How would you rate your day?</StyledLabel>
+                  <input type="radio"
+                      name="rating"
+                      value="1"
+                      onChange={handleInputChange}
+                      checked={userFormData.rating === '1' ? true : false}
+                    /> <FontAwesomeIcon icon={faFaceFrown} size="2xl" color='var(--dark-pink'/> 
+                    
+                    
+                    <input type="radio" 
+                      name="rating"
+                      value="2"
+                      onChange={handleInputChange}
+                      checked={userFormData.rating === '2' ? true : false}
+                    /><FontAwesomeIcon icon={faFaceMeh} size="2xl" color="var(--orange)"/> 
+
+                    <input type="radio"
+                      name="rating"
+                      value="3"
+                      onChange={handleInputChange}
+                      checked={userFormData.rating === '3' ? true : false}
+                    /><FontAwesomeIcon icon={faSmile} size="2xl" color='var(--pale-green)'/> 
+              </FlexChild>
+
+                
+
+              <FlexChild>
+                <StyledLabel >How much sleep did you get last night?</StyledLabel>
+                <StyledInput size= "11" type="text" onChange={handleInputChange} name="sleep" placeholder="" value={userFormData.sleep} ></StyledInput>
+                 <br />  
+                 </FlexChild>
+               </FlexContainer>
+                 
                  <StyledLabel>What did you do today? </StyledLabel>
                 {activitiesQuery.loading ? (
                   <div>Loading...</div>
@@ -179,16 +224,16 @@ const DayForm = (props) => {
                   <>
                     <FlexContainer>
                       <FlexChild>
-                      <StyledFlipCard category="Food" desc={food_description} activities={activities} key="Food" onClick={handleInputChange} selections={userFormData.foodActivities}></StyledFlipCard>
+                          <StyledFlipCard category="Food" desc={food_description} activities={activities} key="Food" onClick={handleInputChange} selections={userFormData.foodActivities}></StyledFlipCard>
                       </FlexChild>
                       <FlexChild>
-                      <StyledFlipCard category="Mind" desc={mind_description} activities={activities} key="Mind" onClick={handleInputChange} selections={userFormData.mindActivities}></StyledFlipCard>
+                          <StyledFlipCard category="Mind" desc={mind_description} activities={activities} key="Mind" onClick={handleInputChange} selections={userFormData.mindActivities}></StyledFlipCard>
                       </FlexChild>
                       <FlexChild>
-                      <StyledFlipCard category="Exercise" desc={exercise_description} activities={activities} key="Exercise" onClick={handleInputChange} selections={userFormData.exerciseActivities}></StyledFlipCard>
+                          <StyledFlipCard category="Exercise" desc={exercise_description} activities={activities} key="Exercise" onClick={handleInputChange} selections={userFormData.exerciseActivities}></StyledFlipCard>
                       </FlexChild>
                       <FlexChild>
-                      <StyledFlipCard category="Connection" desc={conn_description} activities={activities} key="Connection" onClick={handleInputChange} selections={userFormData.connActivities}></StyledFlipCard> 
+                          <StyledFlipCard category="Connection" desc={conn_description} activities={activities} key="Connection" onClick={handleInputChange} selections={userFormData.connActivities}></StyledFlipCard> 
                       </FlexChild>
                     
                     
@@ -202,31 +247,9 @@ const DayForm = (props) => {
                   </>
                      
                    )}
-                <div>
-                  <input type="radio"
-                      name="rating"
-                      value="1"
-                      onChange={handleInputChange}
-                      checked={userFormData.rating === '1' ? true : false}
-                    />Not Great
-                    <input type="radio"
-                      name="rating"
-                      value="2"
-                      onChange={handleInputChange}
-                      checked={userFormData.rating === '2' ? true : false}
-                    />Good
-                    <input type="radio"
-                      name="rating"
-                      value="3"
-                      onChange={handleInputChange}
-                      checked={userFormData.rating === '3' ? true : false}
-                    />Fantastic
-                </div>
-
                 
-                <StyledLabel >How much sleep did you get?</StyledLabel>
-                <StyledInput type="text" onChange={handleInputChange} name="sleep" placeholder="" value={userFormData.sleep} ></StyledInput>
-                                
+               
+
                 <StyledButton type="submit" disabled={false}>Submit</StyledButton>
                 {dayId ?
                  <StyledButton type="button" onClick={handleDeleteDay}>Delete</StyledButton>
