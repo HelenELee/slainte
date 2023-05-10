@@ -28,7 +28,9 @@ export default function Dashboard() {
   const { loading, data } = useQuery(QUERY_MAIN_CHART);
   const days = data?.me || [];
 
-  
+  if (!loading) {
+    console.log("DASHBOARD - tolalScore", days.totalScore);
+  }
 
   return (
     <div className="App">
@@ -45,21 +47,27 @@ export default function Dashboard() {
             <FlexContainer direction ="column">
                 <FlexContainer direction ="row">
                     <FlexChild> 
-                      <Suggestions /> 
+                      <Suggestions  data={days.totalScore}/> 
                     </FlexChild>
                     <FlexChild> 
                       <QuoteContainer />
                     </FlexChild>
                 </FlexContainer> 
-                <FlexContainer direction="row"> 
-                    <FlexChild> 
-                        <MainLineChart data={days.days}/>
-                    </FlexChild>
-                    <FlexChild> 
-                        <ChartCategories data={days.days} />
-                        {/* <Chart data={days.days}/> */}
-                    </FlexChild>
-                </FlexContainer>
+                
+            {
+              days.days.length > 0 &&
+              <FlexContainer direction="row"> 
+              <FlexChild> 
+                  <MainLineChart data={days.days}/>
+              </FlexChild>
+              <FlexChild> 
+                  <ChartCategories data={days.days} />
+                  {/* <Chart data={days.days}/> */}
+              </FlexChild>
+          </FlexContainer>
+            }
+                
+                        
             </FlexContainer>
              
               
