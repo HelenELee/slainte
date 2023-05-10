@@ -8,7 +8,7 @@ const ModalDiv = styled.div`
     left:0;
     width: 100%;
     height:100%;
-    background: rgba(0,0,0,0.6)
+    
     border-radius: 25%;
     z-index: 20;
     
@@ -22,7 +22,8 @@ const ContentDiv = styled.div`
     padding: 2rem;
     transform: translate(-50%, -50%);
     background: white;
-    border: solid 5px;
+    border: solid 2px;
+    border-radius: 1%;
 `
 
 export const StyledModal = (

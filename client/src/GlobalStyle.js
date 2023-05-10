@@ -15,6 +15,9 @@ const GlobalStyle = createGlobalStyle`
     --dusty-pink: #F5CAC3;
     --pale-green: #84A59D;
     --dark-pink: #F28482;
+    --pale-blue: #94D2BD;
+    --strong-blue: #219EBC;
+    --slate-grey: #14213D;
   
   }
   * {

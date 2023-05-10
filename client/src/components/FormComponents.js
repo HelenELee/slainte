@@ -7,17 +7,22 @@ export const StyledForm = styled.form`
 `
 
 export const StyledLabel = styled.label`
-  display: block;
+  
+  display: ${props => props.size ? props.display : "block"};
   margin-bottom: 5px;
+  margin-top: 5px;
   font-weight: bold;
   color: ${props => props.invalid ? 'red' : 'black'};
 `
 
 export const StyledInput = styled.input`
-  width: 95%;
+  display: ${props => props.size ? props.display : "block"};
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin-bottom: 5px;
+  size: ${props => props.size ? props.size : "95%"};
+  
 `
 
 export const StyledButton = styled.button`
@@ -30,8 +35,9 @@ export const StyledButton = styled.button`
   border-radius: 5px;
   cursor: pointer;
   &:disabled {
-    background-color: red;
+    background-color: var(--dark-pink);
     opacity: 0.5;
+    cursor: not-allowed;
   }
   &:enabled {
     opacity: 1.0;
