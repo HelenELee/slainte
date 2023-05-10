@@ -43,11 +43,14 @@ function FullCalendarApp() {
     }
     
   };
+  
+  // newData = mainQuery.data.me.days.map(o => ({"id": o._id, "title": "score: " + o.score.toString() + "/rating: " + o.rating, "start": formatDate(o.date), "end": formatDate(o.date)  })) 
 
     if (!mainQuery.loading){
         console.log("not loading anymore");
         if (mainQuery.data ) {
-          newData = mainQuery.data.me.days.map(o => ({"id": o._id, "title": "score: " + o.score.toString() + "/rating: " + o.rating, "start": formatDate(o.date), "end": formatDate(o.date)  })) 
+          newData = mainQuery.data.me.days.map(o => ({"id": o._id, "title": "score: " + o.score.toString() + "/rating: " + o.rating, "start": formatDate(o.date), "end": formatDate(o.date), color: (o.rating === "1" ? "red" : o.rating === "2" ? "var(--orange)": "var(--pale-green)")  })) 
+
        //console.log("newData", newData);
         newData = newData.sort(function compare(a, b) {
             var dateA = new Date(a.start);
