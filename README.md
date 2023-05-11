@@ -13,11 +13,11 @@
  - [Questions](#questions)
   
   ## Description
-  This is a tracking and motivational application specifically designed to track the activities a user does that will improve their mental and physical health. It’s a tool that will actually raise awareness of the connection between how we show up every day and how well we look after ourselves. By tracking your activities in 4 categories – food, exercise, mind, connection with others, the user will begin to see a trend which over time will encourage good choices for better health outcomes.
+  This is a tracking and motivational application specifically designed to track the activities a user does that will improve their mental and physical health. It’s a tool that will actually raise awareness of the connection between how we show up every day and how well we look after ourselves. By tracking activities in 4 categories – food, exercise, mind, connection with others, the user will begin to see a trend which over time will encourage good choices for better health outcomes.
   
   After setting up an account the user can CREATE an entry by completing a form daily. Data input by the user is fed into charts for easy visulation of the trends. Daily data can be READ in a Calendar format and from there the user can UPDATE and DELETE the data. The user is provided with suggestions for improvements based on their data and also inspirational quotes.
 
-  This is a full stack applicaton following the MERN framework. MongoDB and Mongoose are used for data storage. GraphQl, Apollo, Express and Node.js are used on the server side for routing GraphQL queries and mutations. Authentication is done using JSON Web Token. Styling is done using Styled-Components.
+  This is a full stack applicaton following the MERN framework. MongoDB and Mongoose are used for data storage. GraphQL, Apollo, Express and Node.js are used on the server side for routing GraphQL queries and mutations. Authentication is done using JSON Web Token. Styling is done using Styled-Components.
   
   The application is developed using the following technologies:
   - Javascript
@@ -97,7 +97,7 @@ All activities can be viewed in a Calendar format by selecting "All Activities" 
 
 When you are finished, click "Logout" to logout.
 
-To try out our working application please click the link below:
+To try out the working application please click the link below:
 [Slainte](https://guarded-everglades-34887.herokuapp.com/)
 
   ## License
