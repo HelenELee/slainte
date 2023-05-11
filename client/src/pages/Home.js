@@ -21,16 +21,16 @@ const MainTitle = styled.h1`
   font-size: 3rem;
 `;
 
-const Box = styled.span`
+const Box = styled.section`
   padding: 10px;
   margin: 10px;
-  width: 50%;
-  font-size: 1.5em;
-  font-family:  'Dancing Script', 'Roboto', 'Oxygen',
+  width: 80%;
+  
+  font-family:   'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
-  font-weight: 400;
-  font-size: 2rem;
+  font-weight: 300;
+  font-size: 1.5rem;
 `
 export default function App() {
  
@@ -50,11 +50,14 @@ export default function App() {
               <FlexContainer direction="column">
                 <FlexChild>
                     
-                      <MainTitle>Welcome to Slainte! where your health matters.</MainTitle>
-                      <Box>Everyone is super busy these days but its worth taking time every day to implement a few changes that will boost your health and mood!! 
-                     
-                      Invest in yourself and track what you do today to make a difference to how you feel tomorrow!
+                      <MainTitle>Welcome to Slainte where your health matters.</MainTitle>
+                      <Box>
+                      Everyone is super busy these days but its worth taking time every day to implement a few changes that will boost your health and mood!!
+                      <p>Research tells us that activities in the food, mind, exercise and connection categories can improve our mood and energy levels.</p>
+                      <p>Invest in yourself and track what you do today to make a difference to how you feel tomorrow!</p>
                       </Box>
+                     
+                      
                       
                     
                 </FlexChild>

@@ -12,6 +12,16 @@ const Title = styled.h1`
   color: var(--orange);
 `;
 
+const Quote = styled.span`
+  font-size: 1.5em;
+  color: var(--strong-blue);
+  font-family: 'Dancing Script', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+`;
+
 const QuoteContainer = () => {
   // Set state for the search result and the search query
   const [result, setResult] = useState([]);
@@ -52,12 +62,12 @@ if (isLoading) {
                     <Title>Get Inspired!</Title>
                 </FlexChild>
                 <FlexChild>
-                    <span>
-                      {result[index].text}
-                    </span> 
+                    <Quote>
+                      "{result[index].text}"
+                    </Quote> 
                 </FlexChild>
                 <FlexChild>
-                    <span>
+                    <span><br></br>
                       - {result[index].author}
                     </span>
                 </FlexChild>
