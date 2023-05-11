@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSmile, faFaceMeh, faFaceFrown} from '@fortawesome/free-solid-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core'
+
 
 import { redirect } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ import Auth from '../utils/auth';
 import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_DAY, UPDATE_DAY, DELETE_DAY } from '../utils/mutations';
 import { QUERY_ACTIVITIES } from '../utils/queries';
+import { addConfetti } from '../utils/confetti.js';
 
 const DayForm = (props) => {
   
@@ -61,6 +62,7 @@ const DayForm = (props) => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     let newArray;
+    
    // console.log(name, value);
     if (event.target.name.startsWith("category~")) {
       let catName = event.target.name.split("~")[1];
@@ -164,17 +166,14 @@ const DayForm = (props) => {
           
         }
          //window.location.assign('/calendar');
+         addConfetti(); //shower confetti
          return navigate('/calendar');
     };
 
     return (
         <>
         
-          <StyledForm onSubmit={handleFormSubmit}>
-          
-          
-          
-                
+          <StyledForm onSubmit={handleFormSubmit}>                
                 <FlexContainer direction="column">
                 <FlexChild>
                 <StyledLabel display="inline-block">Date:</StyledLabel>

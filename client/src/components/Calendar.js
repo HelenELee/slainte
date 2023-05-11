@@ -71,6 +71,8 @@ function FullCalendarApp() {
                         ) : (
                         mainQuery.data &&
                         <FullCalendar
+                                height="auto"
+                                width="auto"
                                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                                 initialView="dayGridMonth"
                                 

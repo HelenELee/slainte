@@ -1,5 +1,7 @@
 //import "./styles.css";
 import React from "react";
+import styled from 'styled-components';
+
 import {
   LineChart,
   Line,
@@ -11,7 +13,11 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: left;
+  color: var(--pale-green);
+`;
 
 const MainLineChart = ({ data }) => {
  
@@ -22,7 +28,11 @@ const MainLineChart = ({ data }) => {
   });
   console.log("DAYSSORTED", daysSorted);
   return (
+    <>
+    
+    <Title>Day Rating v's Activity Score and Sleep</Title>
     <ResponsiveContainer width="100%" height={400} debounce={300}>
+       
         <LineChart
             width={100}
             height={300}
@@ -47,7 +57,7 @@ const MainLineChart = ({ data }) => {
 
 
     </ResponsiveContainer>
-    
+    </>
   );
 }
 

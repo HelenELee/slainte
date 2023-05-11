@@ -1,9 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FlexContainer, FlexChild } from './FlexComponents';
 const api_url = "https://type.fit/api/quotes";
 let index = 0;
-//import API from '../utils/API_axios';
+
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: left;
+  color: var(--orange);
+`;
 
 const QuoteContainer = () => {
   // Set state for the search result and the search query
@@ -25,11 +32,7 @@ const QuoteContainer = () => {
   }, []);
 
   
-  // Destructure the result object to make the code more readable, assign them to empty strings to start
-//   const {
-//     Title = '',
-//     Author = ''
-//   } = result;
+
 if (isLoading) {
   index = 0;
 } else {
@@ -44,12 +47,25 @@ if (isLoading) {
             "Loading..." : 
             
             <div>
-              <span>
-              {result[index].text}
-              </span> 
-              <span>
-              {result[index].author}
-              </span>
+              <FlexContainer direction="column">
+                <FlexChild>
+                    <Title>Get Inspired!</Title>
+                </FlexChild>
+                <FlexChild>
+                    <span>
+                      {result[index].text}
+                    </span> 
+                </FlexChild>
+                <FlexChild>
+                    <span>
+                      - {result[index].author}
+                    </span>
+                </FlexChild>
+
+
+              </FlexContainer>
+              
+
             </div>)
            
         }

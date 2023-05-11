@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
     --red: #A62639;
     --pink: #DB324D;
     --dark-grey: #56494E;
-    --light-grey: #56494E;
+    --light-grey: #f4f4f4;
     --burgundy: #511C29;
     --white: white;
     --black:black;
@@ -40,7 +40,7 @@ const GlobalStyle = createGlobalStyle`
     display: grid;
     grid-template-rows: 1fr auto;
     /*flex-direction: column; */
-    color: var(--pink)
+    color: var(--slate-grey)
   }
  `
 

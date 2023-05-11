@@ -1,15 +1,32 @@
+import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import Auth from '../utils/auth';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
+import { FlexContainer, FlexChild } from './FlexComponents';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar} from '@fortawesome/free-solid-svg-icons';
+
+const UnorderedList = styled.ul`
+  list-style: none;
+  margin-left: auto;
+  li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+`
+
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: left;
+  color: var(--orange);
+`;
 
 const Suggestions = (props) => {
     
     const { loading, error, data, refetch } = useQuery(GET_ME);
     const userData = data?.me || [];
-    //setRender(true);
-    
-    console.log("RENDERING SUGGESTIONS", props.data);
 
     useEffect(() => {
        
@@ -43,10 +60,9 @@ const Suggestions = (props) => {
         return bestActivity;
     }
 
-    console.log("USERDATA" , userData);
     const populateSuggestions = () => {
         let suggestionArray = []
-        console.log(userData.totalScore, userData.totalDayCount);
+        
         if (userData.totalDayCount && userData.totalScore >= userData.totalDayCount) {
             suggestionArray.push("Great job! You seem to be averaging at least one activity per recorded day.")
         } else {
@@ -63,19 +79,26 @@ const Suggestions = (props) => {
         }
         return suggestionArray;
     }
-    // suggestions = populateSuggestions();
-    //console.log("SUGGESTIONS", suggestions);
+    
     return (
         <>
-        "Suggestions"
-        
-        <ul>
+        <FlexContainer direction="column">
+            <FlexChild>
+                <Title>Suggestions</Title>
+            </FlexChild>
+            <FlexChild>
+            <FontAwesomeIcon icon="fa-solid fa-star" />
+            <UnorderedList>
                  {
                     populateSuggestions().map((suggest) => (
-                    <li>{suggest}</li>
+                    <li><FontAwesomeIcon icon={faStar} color="var(--orange)"/>{suggest}</li>
                     ))
                 }
-            </ul>
+            </UnorderedList>
+            <br />
+            </FlexChild>
+        </FlexContainer>
+        
             
         </>
         

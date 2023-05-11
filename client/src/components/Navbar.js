@@ -12,7 +12,7 @@ import Logo from'../images/Logo.jpg';
 const Box = styled.div`
   display: flex;
   align-items:center;
-  border: solid 1;
+  
 `
 
 const Title = styled.h1`
@@ -106,6 +106,20 @@ const NavUnlisted = styled.ul`
   }
 `;
 
+const MainTitle = styled.h1`
+  font-size: 1.5em;
+  color: var(--orange);
+  
+  font-family: 'Dancing Script', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+`;
+
+const LinkStyled = styled(NavLink)`
+    text-decoration: none;
+`
 const types = ['Login', 'Sign Up'];
 
 const AppNavbar = () => {
@@ -119,9 +133,9 @@ const AppNavbar = () => {
       
           <Box>
             <Link to="/"><img src={Logo} alt="logo" /></Link>
-            <Link>Slainte!</Link>
-          </Box>
             
+          </Box>
+          <MainTitle>Slainte!</MainTitle>
             
             <UnorderedList>
               

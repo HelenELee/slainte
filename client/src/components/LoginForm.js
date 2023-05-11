@@ -1,4 +1,4 @@
-// see SignupForm.js for comments
+
 import React, { useState } from 'react';
 
 import { StyledForm, StyledInput, StyledButton, StyledAlert, StyledLabel } from './FormComponents';
@@ -41,11 +41,7 @@ const LoginForm = () => {
     }
 
 
-    // setUserFormData({
-    //   username: '',
-    //   email: '',
-    //   password: '',
-    // });
+    
   };
 
   return (

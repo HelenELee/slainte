@@ -9,6 +9,14 @@ import {
     ResponsiveContainer,
   } from "recharts";
   
+  import styled from 'styled-components';
+
+  const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: left;
+  color: var(--pale-green);
+`;
+
   export default function Chart({ data }) {
     let newArray = [...data];
     const daysSorted = newArray.sort(function(a,b){
@@ -16,6 +24,9 @@ import {
     });
 
     return (
+      <>
+        <Title>Activities per Category</Title>
+      
       <ResponsiveContainer width="100%" height={400} debounce={300}>
         <BarChart
           data={daysSorted}
@@ -37,6 +48,7 @@ import {
           <Bar dataKey="connCount" fill="var(--dark-pink)" />
         </BarChart>
       </ResponsiveContainer>
+      </>
     );
   }
   
