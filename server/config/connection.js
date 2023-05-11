@@ -1,3 +1,4 @@
+//connection setup mongoose and mongodb
 const mongoose = require('mongoose');
 //127.0.0.1:27017
 //localhost

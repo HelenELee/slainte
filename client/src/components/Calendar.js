@@ -1,5 +1,6 @@
 import React from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; //heroku does not like assign
+//FullCalendar module
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -7,10 +8,9 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { QUERY_MAIN_CHART } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
-//import { StyledModal } from "./StyledModal"
-//import DayForm from "./DayForm";
 
 const { enAULocale } = require('date-fns/locale/en-AU');
+//use date-fns for date formatting
 const { format } = require('date-fns');
 
 const formatDate = ((date) => {
@@ -23,35 +23,26 @@ let newData;
 
 function FullCalendarApp() {
     
-    //const [showModal, setShowModal] = useState(false);
-    
-    const navigate = useNavigate();
-    //const { loading, data } = useQuery(QUERY_MAIN_CHART);
+  const navigate = useNavigate();
   const mainQuery = useQuery(QUERY_MAIN_CHART);
    
- const handleClickEvent = async (e) => {
-    //const { name, value } = event.target;
-    //const getDay = useQuery(GET_DAY);
-    
-    console.log(e.event.id);
-    if (e.event.id) {
+  //if event clicked open event
+  const handleClickEvent = async (e) => {
       
-        //setShowModal(true);
-        console.log("OPENING DAY ", e.event.id);
-        //window.location.assign(`/add-day/${e.event.id}`);
-        navigate(`/add-day/${e.event.id}`);
-    }
-    
-  };
-  
-  // newData = mainQuery.data.me.days.map(o => ({"id": o._id, "title": "score: " + o.score.toString() + "/rating: " + o.rating, "start": formatDate(o.date), "end": formatDate(o.date)  })) 
+      //console.log(e.event.id);
+      //direct to event with the chosen id
+      if (e.event.id) {
+          navigate(`/add-day/${e.event.id}`);
+      }
+    };
 
+    //check if query is complete 
     if (!mainQuery.loading){
-        console.log("not loading anymore");
+       //format data so it can be used by calendar
         if (mainQuery.data ) {
           newData = mainQuery.data.me.days.map(o => ({"id": o._id, "title": "score: " + o.score.toString() + "/rating: " + o.rating, "start": formatDate(o.date), "end": formatDate(o.date), color: (o.rating === "1" ? "red" : o.rating === "2" ? "var(--orange)": "var(--pale-green)")  })) 
 
-       //console.log("newData", newData);
+       //sort data in ascending date order
         newData = newData.sort(function compare(a, b) {
             var dateA = new Date(a.start);
             var dateB = new Date(b.start);
@@ -83,7 +74,7 @@ function FullCalendarApp() {
                                 },
                                 }}
                                 events={newData}
-                                eventColor="var(--pale-green)"
+                                eventColor="var(--pale-green)" 
                                 nowIndicator="var(--dusty-pink)"
                                 dateClick={(e) => console.log(e.dateStr)}
                                 eventClick={(e) => {

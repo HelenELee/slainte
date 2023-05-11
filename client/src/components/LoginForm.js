@@ -13,6 +13,8 @@ const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
  
+  //setUserFormData({email: "", password: ""});
+  
   const isValidEmail = userFormData.email !== "" && validateEmail(userFormData.email);
   const isValidPassword = userFormData.password !== "" && checkPassword(userFormData.password);
   

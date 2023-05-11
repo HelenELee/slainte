@@ -79,17 +79,6 @@ daySchema
     return this.connActivities.length  + this.mindActivities.length + this.exerciseActivities.length + this.foodActivities.length;
   });
 
-// daySchema.post('save', function(next) {
-//   const err = new Error('something went wrong');
-//   console.log("PRESAVE");
-  
-//   const daysSorted = this.days.sort(function(a,b){
-//      return new Date(b.date) - new Date(a.date);
-//   });
-//   this.days = daysSorted;
-  
-//   this.notes = "note 1";
-//   next(err);
-// })
+
   
 module.exports = daySchema;

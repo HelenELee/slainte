@@ -11,19 +11,15 @@ import {
   
   export default function Chart({ data }) {
 
-//const result = data.map(o => ({ date: o.date }))
 
-// 
-let newArray = [...data];
-// newArray.sort(function(a,b){
-//      return new Date(a.date) - new Date(b.date);
-//    });
+    let newArray = [...data];
 
-const daysSorted = newArray.sort(function(a,b){
-  return new Date(a.date) - new Date(b.date);
-});
+    //sort data in ascending date order
+    const daysSorted = newArray.sort(function(a,b){
+      return new Date(a.date) - new Date(b.date);
+    });
 
-console.log("DATA PASSED TO CHART", newArray);
+    //colour code chart
     return (
       <ResponsiveContainer width="100%" height={400}>
         <BarChart

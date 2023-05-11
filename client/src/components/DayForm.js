@@ -1,30 +1,34 @@
+//main form for submitting an activity
 import React, { useState } from 'react';
+//use fontawesome for faces
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSmile, faFaceMeh, faFaceFrown} from '@fortawesome/free-solid-svg-icons';
-
-
-import { redirect } from "react-router-dom";
+//need useNavigate to redirect to another route - heroku does not like assign
 import { useNavigate } from "react-router-dom";
-//import { useParams } from 'react-router';
+//get descriptions that are displayed on front of each card
 import {food_description, mind_description, conn_description, exercise_description} from '../data/categories.js';
+//get form styling from FormComponent and flex 
 import { StyledForm, StyledInput, StyledButton, StyledLabel } from './FormComponents';
-import FlipCard from './FlipCard';
-//import { FlexContainer, FlexChild } from './FlexComponents';
 import { FlexContainer, FlexChild } from './FlexComponents';
+//actually contains layout for flip card
 import StyledFlipCard from './StyledFlipCard';
-//import StyledFlipCard from "./StyledFlipCard";
+//authentication
 import Auth from '../utils/auth';
-
+//setup for queries
 import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_DAY, UPDATE_DAY, DELETE_DAY } from '../utils/mutations';
 import { QUERY_ACTIVITIES } from '../utils/queries';
+//confetti for when you click submit
 import { addConfetti } from '../utils/confetti.js';
 
 const DayForm = (props) => {
-  
+  //setup for redirect to another route
   const navigate = useNavigate();
+
+  //check if paameter was passed - ie open existing event
   const dayId = (props.dayData ? props.dayData._id : undefined); 
 
+  //set state initially - either based on existing event passed in through props or blanks for new event
   const [userFormData, setUserFormData] = useState({ 
     date: (props.dayData ? props.dayData.date : ''), 
     mindActivities: (props.dayData ? props.dayData.mindActivities : []),  
@@ -36,6 +40,7 @@ const DayForm = (props) => {
     notes: ''
   });
 
+  //set up queries
   const [createDay ] = useMutation(CREATE_DAY);
   const [updateDay] = useMutation(UPDATE_DAY);
   const [deleteDay] = useMutation(DELETE_DAY);
@@ -44,10 +49,12 @@ const DayForm = (props) => {
   const activitiesQuery = useQuery(QUERY_ACTIVITIES);
   const activities = activitiesQuery.data?.activities || [];
  
+  //function to ensure all values in arrays are unique
   const onlyUnique = (value, index, array) =>{
     return array.indexOf(value) === index;
   }
-
+  //update array of activities - either checkbox checked - add to array
+  //not checked - then remove from array
   const updateArray = (checkValue, arrayValue, theValue) => {
     if (checkValue){
       //console.log("checked");
@@ -58,12 +65,12 @@ const DayForm = (props) => {
     }
   }
   
-
+  //when something clicked add to correct array and update state
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     let newArray;
     
-   // console.log(name, value);
+   // check which category
     if (event.target.name.startsWith("category~")) {
       let catName = event.target.name.split("~")[1];
       //console.log(value);
@@ -92,13 +99,15 @@ const DayForm = (props) => {
    
   };
 
+  //delete day
   const handleDeleteDay = async (event) => {
     event.preventDefault();
+    //check user logged in
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
         return false;
     }
-    //console.log("ABOUT TO CALL DELETEDAY");
+    
     try {
       const responseUpdate = await deleteDay({
         variables: {
@@ -113,9 +122,11 @@ const DayForm = (props) => {
       console.error(err);
     }
     //window.location.assign('/calendar');
+    //when day deleted redirect back to calendar
     return navigate('/calendar');
   }
 
+  //do update when submit
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         
@@ -129,8 +140,10 @@ const DayForm = (props) => {
           ...userFormData
         }
 
-
+        //check if existing day i.e event id exists
+        //either a create or an update
         if (!dayId) {
+          //create
           try {
                 const response = await createDay({
                   variables: {
@@ -146,12 +159,11 @@ const DayForm = (props) => {
           }
           
         } else {
+          //update
               try {
-                //console.log("newDay before updated", newDay);
-               // console.log("TRYING UPDATE", dayId);
+                
                 const responseUpdate = await updateDay({
                   variables: {
-                    //dayID: '6454fe966fe4b91da2866cf7',
                     dayID: dayId,
                     input: newDay
                   }
@@ -166,6 +178,7 @@ const DayForm = (props) => {
           
         }
          //window.location.assign('/calendar');
+         
          addConfetti(); //shower confetti
          return navigate('/calendar');
     };
@@ -181,7 +194,7 @@ const DayForm = (props) => {
                 </FlexChild>
                 
                 <FlexChild>
-        
+                {/* checkbox for rating - uses fontawesome for icons */}
                 <StyledLabel >How would you rate your day?</StyledLabel>
                   <input type="radio"
                       name="rating"
@@ -214,11 +227,12 @@ const DayForm = (props) => {
                  <br />  
                  </FlexChild>
                </FlexContainer>
-                 
+                 {/* Set of flip cards with activities */}
                  <StyledLabel>What did you do today? </StyledLabel>
                 {activitiesQuery.loading ? (
                   <div>Loading...</div>
                 ) : (
+                  // check you have activities to display in flip cards
                   activities &&
                   <>
                     <FlexContainer>
@@ -239,10 +253,7 @@ const DayForm = (props) => {
                     
                     </FlexContainer>
                     
-                      {/* <FlipCard category="Food" activities={activities} key="Food" onClick={handleInputChange} selections={userFormData.foodActivities}></FlipCard>
-                      <FlipCard category="Mind" activities={activities} key="Mind" onClick={handleInputChange} selections={userFormData.mindActivities}></FlipCard>
-                      <FlipCard category="Exercise" activities={activities} key="Exercise" onClick={handleInputChange} selections={userFormData.exerciseActivities}></FlipCard>
-                      <FlipCard category="Communication" activities={activities} key="Communication" onClick={handleInputChange} selections={userFormData.connActivities}></FlipCard> */}
+                      
                   </>
                      
                    )}
@@ -250,6 +261,7 @@ const DayForm = (props) => {
                
 
                 <StyledButton type="submit" disabled={false}>Submit</StyledButton>
+                {/* if existing event display detele button */}
                 {dayId ?
                  <StyledButton type="button" onClick={handleDeleteDay}>Delete</StyledButton>
                   : ""}

@@ -1,3 +1,4 @@
+//component for quotes section
 import React from 'react';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
@@ -5,7 +6,7 @@ import axios from 'axios';
 import { FlexContainer, FlexChild } from './FlexComponents';
 const api_url = "https://type.fit/api/quotes";
 let index = 0;
-
+//styles setup
 const Title = styled.h1`
   font-size: 1.5em;
   text-align: left;
@@ -27,28 +28,29 @@ const QuoteContainer = () => {
   const [result, setResult] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
  
-
+  //function to get data
   const getData = (query) =>
       axios.get(query)
       .then((res) => {
         setResult(res.data)
         setIsLoading(false)
       })
-      .then((res) => console.log(res))
+      //.then((res) => console.log(res))
       .catch((err) => console.log(err));
 
-   useEffect(() => {
+  //use useeffect actually get data  , done just on initial load  
+  useEffect(() => {
     getData(api_url);
   }, []);
 
   
-
+//get index so you can get a random quote from api each time
 if (isLoading) {
   index = 0;
 } else {
   index = Math.floor(Math.random() * result.length);
 }
-
+//use Flex components from flex components file
   return (
     <>
         {

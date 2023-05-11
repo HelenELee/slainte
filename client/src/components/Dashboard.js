@@ -1,15 +1,15 @@
-//import QuoteAPI from "../components/QuoteAPI"
+//main dashboard component that displays suggestions, quotes and charts
 import styled from "styled-components";
-import Chart from "./Chart";
 import ChartCategories from "./ChartCategories";
 import Suggestions from "./Suggestions";
-//import ListQuotes from "../components/ListQuotes";
 import QuoteContainer from "./AxiosAPI";
-import StyledFlipCard from "./StyledFlipCard";
 import MainLineChart from "./MainLineChart";
-//import React, { useEffect, useState } from "react";
+
+//query to get data for charts
 import { QUERY_MAIN_CHART } from '../utils/queries';
 import { useQuery } from '@apollo/client';
+
+//authentication
 import Auth from '../utils/auth';
 import { FlexContainer, FlexChild } from './FlexComponents';
 import mainImage from'../images/good-vibes.jpg';
@@ -19,19 +19,16 @@ const Wrapper = styled.section`
     margin: 10px;
 `
 
-//import mainImage from'../images/natalie-grainger-8uB5kFKWWkk-unsplash_resized.jpg';
-//import mainImage from'../images/ashley-whitlatch-MGKGuMP9nLY-unsplash_25.jpg';
-
 
 export default function Dashboard() {
- 
+  //use query and check for returned data
   const { loading, data } = useQuery(QUERY_MAIN_CHART);
   const days = data?.me || [];
 
-  if (!loading) {
-    console.log("DASHBOARD - tolalScore", days.totalScore);
-  }
-
+  // if (!loading) {
+  //   console.log("DASHBOARD - tolalScore", days.totalScore);
+  // }
+  //display suggestions and quotes but only display charts if days have been logged - check length of days array
   return (
     <div className="App">
       
@@ -62,7 +59,7 @@ export default function Dashboard() {
               </FlexChild>
               <FlexChild> 
                   <ChartCategories data={days.days} />
-                  {/* <Chart data={days.days}/> */}
+                  
               </FlexChild>
           </FlexContainer>
             }
@@ -72,15 +69,14 @@ export default function Dashboard() {
              
               
           </Wrapper>  
-          {/* <Chart data={days.days} /> */}
-          {/* <QuoteAPI /> */}            
+                    
           </>
           
 )}
         </>
       ) : (
         <>
-        <p>Home Page</p>
+        {/* <p>Home Page</p> */}
         <img src={mainImage} alt="fireSpot" width="100%" height="50%"/>
         </>
         

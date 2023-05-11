@@ -1,3 +1,4 @@
+//general styles eg colours
 import { createGlobalStyle } from 'styled-components';
 
 
