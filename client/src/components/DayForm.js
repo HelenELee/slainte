@@ -1,5 +1,8 @@
 //main form for submitting an activity
 import React, { useState } from 'react';
+//import package to handle alerts/confirms - used for delete
+import { confirmAlert } from 'react-confirm-alert'; 
+import '../react-confirm-alert.css'; // Import css
 //use fontawesome for faces
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSmile, faFaceMeh, faFaceFrown} from '@fortawesome/free-solid-svg-icons';
@@ -97,6 +100,24 @@ const DayForm = (props) => {
     }
     
    
+  };
+
+  const doDelete = (event) => {
+    
+    confirmAlert({
+      title: 'Confirm Deletion.',
+      message: 'Are you sure you want to delete this entry?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => handleDeleteDay(event)
+        },
+        {
+          label: 'No',
+          // onClick: () => alert('Click No')
+        }
+      ]
+    });
   };
 
   //delete day
@@ -263,7 +284,8 @@ const DayForm = (props) => {
                 <StyledButton type="submit" disabled={false}>Submit</StyledButton>
                 {/* if existing event display detele button */}
                 {dayId ?
-                 <StyledButton type="button" onClick={handleDeleteDay}>Delete</StyledButton>
+                //  <StyledButton type="button" onClick={handleDeleteDay}>Delete</StyledButton>
+                <StyledButton type="button" onClick={doDelete}>Delete</StyledButton>
                   : ""}
                 
                 
