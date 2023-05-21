@@ -40,7 +40,7 @@ function FullCalendarApp() {
     if (!mainQuery.loading){
        //format data so it can be used by calendar
         if (mainQuery.data ) {
-          newData = mainQuery.data.me.days.map(o => ({"id": o._id, "title": "score: " + o.score.toString() + "/rating: " + o.rating, "start": formatDate(o.date), "end": formatDate(o.date), color: (o.rating === "1" ? "red" : o.rating === "2" ? "var(--orange)": "var(--pale-green)")  })) 
+          newData = mainQuery.data.me.days.map(o => ({"id": o._id, "title": "score: " + o.score.toString() + "<br> / rating: " + o.rating, "start": formatDate(o.date), "end": formatDate(o.date), color: (o.rating === "1" ? "red" : o.rating === "2" ? "var(--orange)": "var(--pale-green)")  })) 
 
        //sort data in ascending date order
         newData = newData.sort(function compare(a, b) {
@@ -63,7 +63,7 @@ function FullCalendarApp() {
                         mainQuery.data &&
                         <FullCalendar
                                 height="auto"
-                                width="auto"
+                                // width="auto"
                                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                                 initialView="dayGridMonth"
                                 
@@ -73,7 +73,7 @@ function FullCalendarApp() {
                                     click: () => console.log('new event'),
                                 },
                                 }}
-                                events={newData}
+                                events={newData}                              
                                 eventColor="var(--pale-green)" 
                                 nowIndicator="var(--dusty-pink)"
                                 dateClick={(e) => console.log(e.dateStr)}
