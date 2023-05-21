@@ -5,7 +5,10 @@ import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { FlexContainer, FlexChild } from './FlexComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar} from '@fortawesome/free-solid-svg-icons';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+
+import { faSmile, faFaceMeh, faFaceFrown} from '@fortawesome/free-solid-svg-icons';
+
 
 const UnorderedList = styled.ul`
   list-style: none;
@@ -87,11 +90,12 @@ const Suggestions = (props) => {
                 <Title>Suggestions</Title>
             </FlexChild>
             <FlexChild>
-            <FontAwesomeIcon icon="fa-solid fa-star" />
+            {/* <FontAwesomeIcon icon="fa-solid fa-star" /> */}
+            
             <UnorderedList>
                  {
                     populateSuggestions().map((suggest) => (
-                    <li><FontAwesomeIcon icon={faStar} color="var(--orange)"/>{suggest}</li>
+                    <li key={suggest.substring(0, 5)}><FontAwesomeIcon icon={faStar} color="var(--orange)"/>{suggest}</li>
                     ))
                 }
             </UnorderedList>
