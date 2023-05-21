@@ -8,7 +8,7 @@ const CardInner = styled.div`
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 0.9s;
+  transition: transform 1.9s;
   transform-style: preserve-3d;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   
