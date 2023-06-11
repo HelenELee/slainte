@@ -6,12 +6,6 @@ const Activity = require('./Activity');
 // This is a subdocument schema, it won't become its own model but we'll use it as the schema for the Activity arrays
 const daySchema = new Schema(
   {
-    /*
-      dayId: {
-          type: Schema.Types.ObjectId,
-          default: () => new Types.ObjectId(),
-      },
-      */
       date: {
         type: Date,
         default: Date.now,
