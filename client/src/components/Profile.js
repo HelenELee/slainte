@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+
 //get form styling from FormComponent and flex 
-import { StyledForm, StyledInput, StyledButton, StyledLabel, StyledCheckBoxLabel } from './FormComponents';
+import { StyledForm, StyledInput, StyledButton, StyledLabel, StyledCheckBoxLabel, SubTitle } from './FormComponents';
 import { FlexContainer, FlexChild } from './FlexComponents';
 //import ToggleSwitch from "./ToggleSwitch";
 
@@ -10,9 +11,10 @@ import Auth from '../utils/auth';
 //need useNavigate to redirect to another route - heroku does not like assign
 import { useNavigate } from "react-router-dom";
 //setup for queries
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { UPDATE_PROFILE } from '../utils/mutations';
 //import { GET_PROFILE } from '../utils/queries';
+
 
 const Profile = (props) => {
     
@@ -97,21 +99,24 @@ const Profile = (props) => {
           } catch (err) {
             console.error(err);
           }
-          return navigate('/');
+          return navigate('/dashboard');
     }
 
     //console.log("profile - from props", props);
     return (
         <StyledForm onSubmit={handleFormSubmit}>
-            props = {(props.profileData.showProgressDial === false ? "false" : "true")}
+            {/* props = {(props.profileData.showProgressDial === false ? "false" : "true")} */}
             {/* value = {userFormData.showProgressDial} */}
             {/* {(props.profileData.showProgressDial)} */}
             <FlexContainer direction="column">
                 <FlexChild>
+                    <SubTitle>Goals</SubTitle>
                     <StyledLabel display="inline-block">Activities per week: </StyledLabel>
                     <StyledInput display="inline-block" size="11" type="text" name="weeklyTarget" placeholder="" value={userFormData.weeklyTarget} onChange={handleInputChange}/>
                     {(enteredTarget ?  "" : <p>❌ Please enter valid number.</p>)}
-                    <br /><input 
+                    <br />
+                    <SubTitle>Display</SubTitle>
+                    <input 
                     type="checkbox" 
                     id="showProgressDial" 
                     name="showProgressDial" 
@@ -132,6 +137,7 @@ const Profile = (props) => {
                         checked={value}
                         onChange={({ target }) => setCheckbox(!value)}
                         /><StyledLabel display="block">Show Progress Dial: </StyledLabel> */}
+                    <br></br>
                     <StyledButton type="submit" disabled={false}>Submit</StyledButton>
                 </FlexChild>
             </FlexContainer>
