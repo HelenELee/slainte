@@ -12,6 +12,9 @@ import { FlexContainer, FlexChild } from '../components/FlexComponents';
 
 const MainImg = styled.img`
   border-radius: 10%;
+  //float: 'left';
+  padding: 30px;
+  // margin-left: 10px;
 `
 
 const MainTitle = styled.h1`
@@ -46,9 +49,9 @@ export default function App() {
   return (
     <div className="App">
         <>
-          <FlexContainer direction="row" padding="10px">
+          <FlexContainer direction="row" directionSM="column" padding="10px">
             <FlexChild>
-            <MainImg src={mainImage} alt="good-vibes" width="80%" style={{ float: 'left', padding: '30px' }}/>
+            <MainImg src={mainImage} alt="good-vibes" width="80%" />
             </FlexChild>
             <FlexChild>
               <FlexContainer direction="column">
