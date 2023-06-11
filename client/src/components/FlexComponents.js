@@ -1,4 +1,4 @@
-//gneral components to use flex for display
+//general components to use flex for display
 import styled from "styled-components";
 
 export const FlexContainer = styled.div`
@@ -11,7 +11,7 @@ export const FlexContainer = styled.div`
 `
 
 export const FlexChild = styled.div`
-    flex: 1 1 20%;
+	flex: 1 1 20%;
 	
 `
 
