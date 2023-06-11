@@ -4,6 +4,7 @@ import ChartCategories from "./ChartCategories";
 import Suggestions from "./Suggestions";
 import QuoteContainer from "./AxiosAPI";
 import MainLineChart from "./MainLineChart";
+import ProgressDial from "./ProgressDial";
 
 //query to get data for charts
 import { QUERY_MAIN_CHART } from '../utils/queries';
@@ -38,7 +39,7 @@ export default function Dashboard() {
           <div>Loading...</div>
         ) : (
           days &&
-          <>
+          // <>
           <Wrapper>
           
             <FlexContainer direction ="column">
@@ -50,27 +51,30 @@ export default function Dashboard() {
                       <QuoteContainer />
                     </FlexChild>
                 </FlexContainer> 
-                
+              
             {
-              days.days.length > 0 &&
-              <FlexContainer direction="row"> 
-              <FlexChild> 
-                  <MainLineChart data={days.days}/>
-              </FlexChild>
-              <FlexChild> 
-                  <ChartCategories data={days.days} />
-                  
-              </FlexChild>
-          </FlexContainer>
+                  days.days.length > 0 &&
+                      <FlexContainer direction="row"> 
+                          <FlexChild> 
+                              <MainLineChart data={days.days}/>
+                          </FlexChild>
+                          <FlexChild> 
+                              <ChartCategories data={days.days} />
+                          </FlexChild>
+                          {days.profile.showProgressDial && 
+                            <FlexChild> 
+                              <ProgressDial weeklyTarget={days.profile.weeklyTarget} />
+                            </FlexChild>
+                          }
+                          
+                      </FlexContainer>
             }
                 
                         
             </FlexContainer>
-             
-              
           </Wrapper>  
                     
-          </>
+          // </>
           
 )}
         </>
