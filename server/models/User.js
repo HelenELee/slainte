@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 
 // import schema from Day.js
 const daySchema = require('./Day');
+const profileSchema = require('./Profile');
 
 const userSchema = new Schema(
   {
@@ -23,6 +24,7 @@ const userSchema = new Schema(
     },
     // set days to be an array of data that adheres to the daySchema
     days: [daySchema],
+    profile: profileSchema,
     
   },
   // set this to use virtual below
@@ -62,7 +64,7 @@ userSchema.virtual('totalSleep').get(function () {
  
   let initialScore = 0;
   let sum = this.days.reduce(function (accumulator, curValue) {
-      return accumulator + curValue.sleep
+      return accumulator + (curValue.sleep === "" ? 0: parseInt(curValue.sleep))
     }, initialScore);
     return sum;
 });
