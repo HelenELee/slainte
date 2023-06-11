@@ -24,6 +24,36 @@ export const ADD_USER = gql`
   }
 `;
 
+export const UPDATE_PROFILE = gql`
+ mutation updateProfile($input:Profile) {
+    updateProfile(input: $input) {
+      _id
+      username
+      email
+      days {
+          _id
+          date
+          mindCount
+          foodCount
+          exerciseCount
+          connCount
+          score
+          rating
+          sleep
+          notes
+          mindActivities
+          foodActivities
+          connActivities
+          exerciseActivities
+        }
+      profile {
+        weeklyTarget
+        showProgressDial
+      }
+    }
+  }
+`;
+
 export const CREATE_DAY = gql`
  mutation createDay($input:SaveDayInput) {
     createDay(input: $input) {

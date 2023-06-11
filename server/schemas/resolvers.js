@@ -26,6 +26,23 @@ const resolvers = {
            }
            throw new AuthenticationError('You need to be logged in!');
          },
+        getProfile: async (parent, args, context) => {
+          //data used for charts
+           if (context.user) {
+            
+            //return User.findOne({ _id: context.user._id }, 'profile');
+            //const userData = User.findOne({ _id: context.user._id }, {profile : true});
+            const userData = await User.findOne({ _id: context.user._id }, 'profile');
+            //console.log("GET PROFILE", userData);
+            const theProfile = {
+              weeklyTarget: userData.profile.weeklyTarget,
+              showProgressDial: userData.profile.showProgressDial,
+            }
+           // console.log("THE PROFILE", theProfile);
+            return theProfile;
+           }
+           throw new AuthenticationError('You need to be logged in!');
+         },
          getDay: async (parent, { dayID }, context) => {
           //get an individual day based on id
           if (context.user) {
@@ -37,6 +54,56 @@ const resolvers = {
            return theDay[0];
            
            
+          }
+          throw new AuthenticationError('You need to be logged in!');
+        },
+        getWeek: async (parent, args, context) => {
+          //get an individual day based on id
+          if (context.user) {
+            //console.log("GETWEEK!!!!");  
+            const userData = await User.findOne({ _id: context.user._id }, 'days profile');
+           
+            var prevMonday = new Date();
+            //var today = new Date();
+
+            //get last Monday - starts of week and set hours to midnight
+            prevMonday.setDate(prevMonday.getDate() - (prevMonday.getDay() + 6) % 7);
+            prevMonday.setHours(0,0,0,0);
+            //console.log("prevMonday", prevMonday);
+            //get tomorow - use in filter to only include days from MOnday to today
+            const today = new Date()
+            const tomorrow = new Date(today)
+            tomorrow.setDate(tomorrow.getDate() + 1)
+            tomorrow.setHours(0,0,0,0);
+           
+           //let theDays = userData.days.filter(item => new Date(item.date).getTime() >= new Date(prevMonday).getTime() && new Date(item.date).getTime() <= new Date().getTime());
+           let theDays = userData.days.filter(item => new Date(item.date).getTime() >= new Date(prevMonday).getTime() && new Date(item.date).getTime() < new Date(tomorrow).getTime());
+
+          // console.log("prevMonday", prevMonday);
+           //console.log("today", new Date());
+
+           //calculate all the scores
+           var weekScore = theDays.reduce(function (acc, obj) { return acc + obj.foodActivities.length + obj.mindActivities.length + obj.exerciseActivities.length + obj.connActivities.length; }, 0);
+           var weekSleep = theDays.reduce(function (acc, obj) { return acc + obj.sleep; }, 0);
+           var weekFood = theDays.reduce(function (acc, obj) { return acc + obj.foodActivities.length; }, 0);
+           var weekMind = theDays.reduce(function (acc, obj) { return acc + obj.mindActivities.length; }, 0);
+           var weekExercise = theDays.reduce(function (acc, obj) { return acc + obj.exerciseActivities.length; }, 0);
+           var weekConn = theDays.reduce(function (acc, obj) { return acc + obj.connActivities.length; }, 0);
+
+          // console.log(theDays);
+           //console.log(result);
+
+           const theWeek = {
+            weekStart: prevMonday.toLocaleString(),
+            weekScore: weekScore,
+            weekSleep: weekSleep,
+            weekFood: weekFood,
+            weekMind: weekMind,
+            weekExercise: weekExercise,
+            weekConn: weekConn,
+            weekTarget: userData.profile.weeklyTarget,
+           }
+           return theWeek;
           }
           throw new AuthenticationError('You need to be logged in!');
         },
@@ -60,7 +127,7 @@ const resolvers = {
         },
         addUser: async (parent, { username, email, password }) => {
          
-            const user = await User.create({ username, email, password });
+            const user = await User.create({ username, email, password, profile: {"WeeklyTarget": 0, "showProgressDial": false} });
             const token = signToken(user);
             return { token, user };
         },
@@ -113,7 +180,25 @@ const resolvers = {
         }
         throw new AuthenticationError('You need to be logged in!');
     },
-    }
+    updateProfile: async (parent, { input }, context) => {
+      //add day to users days array
+    if (context.user) {
+        // console.log("UPDATEPROFILE", input);
+        const updatedUser = await User.findOneAndUpdate(
+            {_id: context.user._id},
+            {profile: input},
+            {
+                new: true,
+                runValidators: true,
+            }
+        );
+               
+      return updatedUser;
+      }
+      // If user attempts to execute this mutation and isn't logged in, throw an error
+      throw new AuthenticationError('You need to be logged in!');
+    },
+  }
 }
 
 module.exports = resolvers;

@@ -25,6 +25,11 @@ const typeDefs = gql`
     notes: String
   }
 
+  type ProfileType {
+    weeklyTarget: Int
+    showProgressDial: Boolean
+  }
+
   type User {
     _id: ID
     username: String
@@ -38,7 +43,18 @@ const typeDefs = gql`
     totalConnCount: Int
     totalDayCount: Int
     days: [Day]
-    
+    profile: ProfileType 
+  }
+
+  type Week {
+    weekStart: String
+    weekScore: Int  
+    weekSleep: Int
+    weekFood: Int
+    weekMind: Int
+    weekExercise: Int
+    weekConn: Int  
+    weekTarget: Int
   }
 
   type Auth {
@@ -51,6 +67,9 @@ const typeDefs = gql`
     activities: [Activity]
     getChartData: [User]
     getDay(dayID: ID!): Day
+    getWeekX(weekStart: String, weekEnd: String): Day
+    getWeek: Week
+    getProfile: ProfileType
   }
 
   input SaveDayInput {
@@ -62,7 +81,11 @@ const typeDefs = gql`
     rating: String
     sleep: String
     notes: String
+  }
 
+  input Profile {
+    weeklyTarget: Int
+    showProgressDial: Boolean
   }
 
   type Mutation {
@@ -71,9 +94,25 @@ const typeDefs = gql`
     createDay(input: SaveDayInput): User
     updateDay(dayID: ID!, input: SaveDayInput): User
     deleteDay(dayID: ID!): User
+    updateProfile(input: Profile): User
   }
 
   
+
+  type WeekORIG {
+    _id: ID
+    username: String
+    email: String
+    weekScore: Int
+    weekSleep: Int
+    weekFoodCount: Int
+    weekMindCount: Int
+    weekExerciseCount: Int
+    weekConnCount: Int
+    weekDayCount: Int
+    days: [Day]
+    
+  }
 `;
 
 module.exports = typeDefs;

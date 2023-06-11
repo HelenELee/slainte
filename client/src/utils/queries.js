@@ -29,6 +29,19 @@ export const GET_ME = gql`
           connActivities
           exerciseActivities
         }
+      profile {
+          weeklyTarget
+          showProgressDial
+      }
+    }
+  }
+`;
+
+export const GET_PROFILE = gql`
+  query getProfile {
+    getProfile {
+        weeklyTarget  
+        showProgressDial          
     }
   }
 `;
@@ -62,6 +75,10 @@ export const QUERY_MAIN_CHART = gql`
           rating
           sleep         
         }
+      profile {
+          weeklyTarget
+          showProgressDial
+      }
     }
   }
 `;
@@ -85,6 +102,24 @@ export const GET_DAY = gql`
     }
   }
 `;
+
+
+
+export const GET_WEEK = gql`
+  query getWeek {
+    getWeek {
+            weekStart
+            weekScore
+            weekSleep
+            weekFood
+            weekMind
+            weekExercise
+            weekConn
+            weekTarget
+    }
+  }
+`;
+
 export const QUERY_MAIN_CHART1 = gql`
   query getChartData {
       days {
@@ -114,6 +149,24 @@ export const QUERY_MAIN_CHART2 = gql`
           rating
           sleep         
         }
+  }
+`;
+
+export const GET_WEEKXX = gql`
+  query getWeekXX($weekStart: String, $weekEnd: String) {
+    getWeekXX(weekStart: $weekStart, weekEnd: $weekEnd) {
+      days {
+          _id
+          date
+          mindCount
+          foodCount
+          exerciseCount
+          connCount
+          score
+          rating
+          sleep         
+        } 
+    }
   }
 `;
 
