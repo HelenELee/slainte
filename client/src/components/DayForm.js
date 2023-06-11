@@ -5,7 +5,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import '../react-confirm-alert.css'; // Import css
 //use fontawesome for faces
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSmile, faFaceMeh, faFaceFrown} from '@fortawesome/free-solid-svg-icons';
+import { faSmile, faFaceMeh, faFaceFrown, faHandsClapping } from '@fortawesome/free-solid-svg-icons';
 //need useNavigate to redirect to another route - heroku does not like assign
 import { useNavigate } from "react-router-dom";
 //get descriptions that are displayed on front of each card
