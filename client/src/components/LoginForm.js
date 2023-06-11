@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 
-import { StyledForm, StyledInput, StyledButton, StyledAlert, StyledLabel } from './FormComponents';
+import { StyledForm, StyledInput, StyledButton, StyledLabel } from './FormComponents';
 import { validateEmail, checkPassword } from '../utils/helpers';
 
 import { useMutation } from '@apollo/client';
@@ -22,7 +22,7 @@ const LoginForm = () => {
   const [enteredPassword, setEnteredPassword] = useState(false);
   const [enteredEmail, setEnteredEmail] = useState(false);
 
-  const [submitClicked, setSubmitClicked] = useState(false);
+ // const [submitClicked, setSubmitClicked] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -50,6 +50,7 @@ const LoginForm = () => {
     <>
     
       <StyledForm onSubmit={handleFormSubmit}>
+  
             <StyledLabel>Email:</StyledLabel>
             <StyledInput 
             type="text" 
@@ -59,7 +60,7 @@ const LoginForm = () => {
             name="email" 
             placeholder="Your email" 
             required
-            size="80%"
+            size="50%"
             />
             
             <StyledLabel >Password:</StyledLabel>
@@ -70,7 +71,7 @@ const LoginForm = () => {
             onBlur={() => setEnteredPassword(true)}
             name="password" 
             placeholder="Your password"
-            size="80%"
+            size="50%"
              />
             {enteredPassword && enteredEmail ? (isValidPassword && isValidEmail ? "" : <p>❌ Please enter valid details.</p>) : null}
             <br />

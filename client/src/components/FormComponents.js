@@ -5,11 +5,18 @@ export const StyledForm = styled.form`
   background-color: var(--light-grey);
   padding: 20px;
   border-radius: 5px;
+  border: solid 1;
 `
+export const StyledCheckBoxLabel = styled.label`
+  color: var(--slate-grey);
+  font-family: 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+`;
 
 export const StyledLabel = styled.label`
   
-  display: ${props => props.size ? props.display : "block"};
+  display: ${props => props.display ? props.display : "block"};
   margin-bottom: 5px;
   margin-top: 5px;
   font-weight: bold;
@@ -17,16 +24,18 @@ export const StyledLabel = styled.label`
 `
 
 export const StyledInput = styled.input`
-  display: ${props => props.size ? props.display : "block"};
+  display: ${props => props.display ? props.display : "block"};
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-bottom: 5px;
-  size: ${props => props.size ? props.size : "95%"};
+  // width: 50%;
+  size: ${props => props.size ? props.size : `100%`};
   
 `
 
 export const StyledButton = styled.button`
+  display: block;
   background-color: #4caf50;
   color: white;
   padding: 10px;

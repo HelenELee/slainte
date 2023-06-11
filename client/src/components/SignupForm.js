@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyledForm, StyledInput, StyledButton, StyledAlert, StyledLabel } from './FormComponents';
+import { StyledForm, StyledInput, StyledButton, StyledLabel } from './FormComponents';
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations'
@@ -22,13 +22,13 @@ const SignupForm = (props) => {
   const [isValidPassword, setIsValidPassword] = useState(false);
 
   const handleInputChange = (event) => {
-    console.log("********INPUT CHANGE", event.target.name);
+    //console.log("********INPUT CHANGE", event.target.name);
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
-    console.log("UserFormData", userFormData);
+   // console.log("UserFormData", userFormData);
     if (event.target.name === "email") {
       if (userFormData.email !== "" && validateEmail(userFormData.email)) {
-        console.log("got here!!!");
+       // console.log("got here!!!");
         setIsValidEmail(true);
       } else {
         setIsValidEmail(false);
@@ -49,16 +49,16 @@ const SignupForm = (props) => {
     if (userFormData.username !== "" && userFormData.email !== "" && userFormData.password !== "") {
       setEnteredDetails(true);
     }
-    console.log("VALID EMAIL", isValidEmail);
-    console.log("VALID PASSWORD", isValidPassword);
-    console.log("NAME", isValidName);
+    //console.log("VALID EMAIL", isValidEmail);
+    //console.log("VALID PASSWORD", isValidPassword);
+    //console.log("NAME", isValidName);
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();   
     
     try {
-      console.log("USER DATA", userFormData);
+      //console.log("USER DATA", userFormData);
       const { data } = await addUser({
         variables: { ...userFormData },
       });
@@ -89,6 +89,7 @@ const SignupForm = (props) => {
             onBlur={() => setIsValidName(true)}
             name="username" 
             placeholder="Your username" 
+            size="50%"
             required/>
           
             <StyledLabel>Email:</StyledLabel>
@@ -100,6 +101,7 @@ const SignupForm = (props) => {
             //onBlur={() => setEnteredEmail(true)}
             name="email" 
             placeholder="Your email" 
+            size="50%"
             required/>
             <StyledLabel >Password:</StyledLabel>
             <StyledInput 
@@ -108,6 +110,7 @@ const SignupForm = (props) => {
             onChange={handleInputChange} 
             //onBlur={() => setEnteredPassword(true)}
             name="password" 
+            size="50%"
             placeholder="Your password" />
             
             {enteredDetails && (enteredDetails && isValidPassword && isValidEmail && isValidName ? "" : <p>❌ Please enter valid details.</p>)}
