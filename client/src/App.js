@@ -13,6 +13,8 @@ import Home from './pages/Home';
 import GlobalStyle from './GlobalStyle';
 import ComingSoon from './components/ComingSoon';
 import Dashboard from './components/Dashboard';
+import ProgressDial from './components/ProgressDial';
+import ProfileContainer from './components/ProfileContainer';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -46,17 +48,14 @@ function App() {
       <Router>
         <Navbar></Navbar>
         <Routes>
-        <Route 
+            <Route 
                 path='/' 
                 element={<Home />} 
             />
-          {/* 
-            
             <Route 
-                path='/login-signup' 
-                element={<LoginForm />} 
+                path='/progress' 
+                element={<ProgressDial />} 
             />
-          */}
             <Route 
                 path='/login-signup' 
                 element={<LoginForm />} 
@@ -80,6 +79,10 @@ function App() {
             <Route 
                 path='/coming-soon' 
                 element={<ComingSoon />} 
+            />
+            <Route 
+                path='/profile' 
+                element={<ProfileContainer />} 
             />
             <Route 
                 path='/dashboard' 
