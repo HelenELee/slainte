@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import React, { useState, useEffect } from 'react';
-import Auth from '../utils/auth';
-import { useMutation, useQuery } from '@apollo/client';
+import React, { useEffect } from 'react';
+//import Auth from '../utils/auth';
+import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { FlexContainer, FlexChild } from './FlexComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
-import { faSmile, faFaceMeh, faFaceFrown} from '@fortawesome/free-solid-svg-icons';
+//import { faSmile, faFaceMeh, faFaceFrown } from '@fortawesome/free-solid-svg-icons';
 
 
 const UnorderedList = styled.ul`
@@ -16,6 +16,7 @@ const UnorderedList = styled.ul`
   li {
     display: inline-block;
     margin-right: 10px;
+    padding-bottom: 10px;
   }
   
 `
@@ -75,7 +76,7 @@ const Suggestions = (props) => {
             suggestionArray.push(`You have recorded a total of ${userData.totalScore} activities.`)
         }
         if (Math.round(userData.totalSleep/userData.totalDayCount) < 7 ) {
-            suggestionArray.push("You seem to be averaging less than 7 hours of sleep a night, which is the recommended amount for adults.")
+            suggestionArray.push("You seem to be averaging less than 7 hours of sleep a night. 7 is the recommended minimum amount for adults.")
         }
         if (userData.totalScore > 0) {
             suggestionArray.push(`You are doing very well in the ${getBestActivity()} category. Maybe include more activities in the other categories too.`)
