@@ -147,11 +147,11 @@ const ButtonGroup = styled.div`
 
 const Tab = styled.button`
   font-size: 20px;
-  padding: 10px 60px;
+  padding: 10px 20px;
   cursor: pointer;
   opacity: 0.6;
   background: white;
-  border: 0;
+  border: solid 0px;
   outline: 0;
   ${({ active }) =>
     active &&
