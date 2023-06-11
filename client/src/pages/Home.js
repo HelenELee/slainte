@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { QUERY_MAIN_CHART } from '../utils/queries';
-import { useQuery } from '@apollo/client';
+//import { QUERY_MAIN_CHART } from '../utils/queries';
+//import { useQuery } from '@apollo/client';
 
 import mainImage from'../images/good-vibes.jpg';
 //import mainImage from'../images/deniz_20.jpg';
@@ -9,6 +9,10 @@ import { FlexContainer, FlexChild } from '../components/FlexComponents';
 
 //import mainImage from'../images/natalie-grainger-8uB5kFKWWkk-unsplash_resized.jpg';
 //import mainImage from'../images/ashley-whitlatch-MGKGuMP9nLY-unsplash_25.jpg';
+
+const MainImg = styled.img`
+  border-radius: 10%;
+`
 
 const MainTitle = styled.h1`
   font-size: 1.5em;
@@ -34,8 +38,8 @@ const Box = styled.section`
 `
 export default function App() {
  
-  const { loading, data } = useQuery(QUERY_MAIN_CHART);
-  const days = data?.me || [];
+  // const { loading, data } = useQuery(QUERY_MAIN_CHART);
+  // const days = data?.me || [];
 
   
 
@@ -44,7 +48,7 @@ export default function App() {
         <>
           <FlexContainer direction="row" padding="10px">
             <FlexChild>
-            <img src={mainImage} alt="fireSpot" width="80%" style={{ float: 'left', padding: '30px' }}/>
+            <MainImg src={mainImage} alt="good-vibes" width="80%" style={{ float: 'left', padding: '30px' }}/>
             </FlexChild>
             <FlexChild>
               <FlexContainer direction="column">
