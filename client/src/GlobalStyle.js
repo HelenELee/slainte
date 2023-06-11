@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
     --pale-blue: #94D2BD;
     --strong-blue: #219EBC;
     --slate-grey: #14213D;
+    --mid-grey: #EDEDE9;
   
   }
   * {
