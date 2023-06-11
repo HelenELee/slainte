@@ -43,7 +43,7 @@ export default function Dashboard() {
           <Wrapper>
           
             <FlexContainer direction ="column">
-                <FlexContainer direction ="row">
+                <FlexContainer direction ="row" directionSM="column">
                     <FlexChild> 
                       <Suggestions  data={days.totalScore}/> 
                     </FlexChild>
@@ -54,22 +54,22 @@ export default function Dashboard() {
               
             {
                   days.days.length > 0 &&
-                      <FlexContainer direction="row"> 
+                      <FlexContainer direction="row" directionSM="column"> 
                           <FlexChild> 
                               <MainLineChart data={days.days}/>
                           </FlexChild>
                           <FlexChild> 
                               <ChartCategories data={days.days} />
                           </FlexChild>
-                          {days.profile.showProgressDial && 
-                            <FlexChild> 
-                              <ProgressDial weeklyTarget={days.profile.weeklyTarget} />
-                            </FlexChild>
-                          }
+                          
                           
                       </FlexContainer>
             }
-                
+             {days.profile.showProgressDial && 
+                            <FlexChild margin="auto"> 
+                              <ProgressDial weeklyTarget={days.profile.weeklyTarget} />
+                            </FlexChild>
+                          }   
                         
             </FlexContainer>
           </Wrapper>  
