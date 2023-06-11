@@ -55,7 +55,7 @@ export default function App() {
             </FlexChild>
             <FlexChild>
               <FlexContainer direction="column">
-                <FlexChild>
+                <FlexChild> 
                     
                       <MainTitle>Welcome to Slainte where your health matters.</MainTitle>
                       <Box>
