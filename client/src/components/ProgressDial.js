@@ -2,6 +2,8 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_WEEK } from '../utils/queries';
 import ReactSpeedometer from "react-d3-speedometer";
+import { StyledSection } from './FormComponents';
+
 //import GlobalStyle from './GlobalStyle';
 
 //set up styles
@@ -10,6 +12,7 @@ import styled from 'styled-components';
 const Title = styled.h1`
 font-size: 1.5em;
 text-align: left;
+margin-left: 5px;
 color: var(--pale-green);
 `;
 
@@ -30,14 +33,14 @@ const ProgressDial = (props) => {
   if (loading) {
     return <h2>LOADING...</h2>;
   }
-  return (<div>
+  return (<StyledSection>
      
     
       {/* {userData.weekScore} */}
       <Title>This Weeks Activities</Title>
-      
+        {/* <div style={{ margin: "auto" }}> */}
           <ReactSpeedometer
-              width={500}
+              width={300}
               needleHeightRatio={0.7}
               value={userData.weekScore}
               maxValue={props.weeklyTarget}
@@ -70,9 +73,9 @@ const ProgressDial = (props) => {
               needleColor={'black'}
               textColor={'black'}
             />
-            {`(${userData.weekScore} out of ${props.weeklyTarget})`}
-  
-</div>);
+            {/* {`(${userData.weekScore} out of ${props.weeklyTarget})`} */}
+            {/* </div> */}
+</StyledSection>);
 
 };
 
