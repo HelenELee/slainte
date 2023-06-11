@@ -42,7 +42,8 @@ const CardFront = styled.div`
 `;
 
 const CardBack = styled.div`
- // background-color: var(--dusty-pink);
+//  background-color: var(--dusty-pink);
+  background-color: var(--mid-grey);
  //border: 1 solid var(--dusty-pink);
   color: white;
   transform: rotateY(180deg);
