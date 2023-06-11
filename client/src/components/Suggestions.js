@@ -6,7 +6,7 @@ import { GET_ME } from '../utils/queries';
 import { FlexContainer, FlexChild } from './FlexComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-
+import { StyledSection } from './FormComponents';
 //import { faSmile, faFaceMeh, faFaceFrown } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -85,7 +85,7 @@ const Suggestions = (props) => {
     }
     
     return (
-        <>
+        <StyledSection>
         <FlexContainer direction="column">
             <FlexChild>
                 <Title>Suggestions</Title>
@@ -105,7 +105,7 @@ const Suggestions = (props) => {
         </FlexContainer>
         
             
-        </>
+        </StyledSection>
         
     )
 }

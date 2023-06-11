@@ -12,6 +12,7 @@ import {
   
   //set up styles
   import styled from 'styled-components';
+  import { StyledSection } from './FormComponents';
 
   const Title = styled.h1`
   font-size: 1.5em;
@@ -26,7 +27,7 @@ import {
     });
     //colour code categories
     return (
-      <>
+      <StyledSection>
         <Title>Activities per Category</Title>
       
         <ResponsiveContainer width="100%" height={400} debounce={300}>
@@ -50,7 +51,7 @@ import {
             <Bar dataKey="connCount" fill="var(--dark-pink)" />
           </BarChart>
         </ResponsiveContainer>
-      </>
+      </StyledSection>
     );
   }
   

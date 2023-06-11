@@ -86,3 +86,17 @@ export const Item = styled.div`
   margin-bottom: 10px;
 `;
 
+export const StyledSection=styled.section`
+  width: 100%;
+  border: solid 0px;
+  @media (max-width: 1000px) {
+    width: 80%;
+  }
+`;
+
+export const SubTitle = styled.h1`
+font-size: 1.5em;
+text-align: left;
+margin-left: 5px;
+color: var(--pale-green);
+`;

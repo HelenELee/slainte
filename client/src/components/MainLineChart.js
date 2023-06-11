@@ -1,6 +1,7 @@
 //import "./styles.css";
 import React from "react";
 import styled from 'styled-components';
+import { StyledSection } from './FormComponents';
 
 import {
   LineChart,
@@ -19,16 +20,24 @@ const Title = styled.h1`
   color: var(--pale-green);
 `;
 
+// const StyledSection=styled.section`
+//   width: 100%;
+//   border: solid 1px;
+//   @media (max-width: 1000px) {
+//     width: 60%;
+//   }
+// `;
+
 const MainLineChart = ({ data }) => {
  
   let newArray = [...data];
-  console.log("NEWARRAY", newArray);
+  //console.log("NEWARRAY", newArray);
   let daysSorted = newArray.sort(function(a,b){
     return new Date(a.date) - new Date(b.date);
   });
-  console.log("DAYSSORTED", daysSorted);
+ // console.log("DAYSSORTED", daysSorted);
   return (
-    <>
+    <StyledSection>
     
     <Title>Day Rating v's Activity Score and Sleep</Title>
     <ResponsiveContainer width="100%" height={400} debounce={300}>
@@ -57,7 +66,7 @@ const MainLineChart = ({ data }) => {
 
 
     </ResponsiveContainer>
-    </>
+    </StyledSection>
   );
 }
 

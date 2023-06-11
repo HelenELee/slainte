@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FlexContainer, FlexChild } from './FlexComponents';
+import { StyledSection } from './FormComponents';
 const api_url = "https://type.fit/api/quotes";
 let index = 0;
 //styles setup
@@ -52,7 +53,7 @@ if (isLoading) {
 }
 //use Flex components from flex components file
   return (
-    <>
+    <StyledSection>
         {
           
           (isLoading ? 
@@ -83,7 +84,7 @@ if (isLoading) {
         }
     
             
-    </>  
+    </StyledSection>  
   );
 };
 
