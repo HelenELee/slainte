@@ -40,7 +40,7 @@ function FullCalendarApp() {
     if (!mainQuery.loading){
        //format data so it can be used by calendar
         if (mainQuery.data ) {
-          newData = mainQuery.data.me.days.map(o => ({"id": o._id, "title": "score: " + o.score.toString() + "<br> / rating: " + o.rating, "start": formatDate(o.date), "end": formatDate(o.date), color: (o.rating === "1" ? "red" : o.rating === "2" ? "var(--orange)": "var(--pale-green)")  })) 
+          newData = mainQuery.data.me.days.map(o => ({"id": o._id, "title": "score: " + o.score.toString() + " / rating: " + o.rating, "start": formatDate(o.date), "end": formatDate(o.date), color: (o.rating === "1" ? "red" : o.rating === "2" ? "var(--orange)": "var(--pale-green)")  })) 
 
        //sort data in ascending date order
         newData = newData.sort(function compare(a, b) {
