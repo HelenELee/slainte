@@ -35,7 +35,7 @@ export const StyledInput = styled.input`
 `
 
 export const StyledButton = styled.button`
-  display: block;
+  display: ${props => props.displayType ? props.displayType : 'block'};
   background-color: #4caf50;
   color: white;
   padding: 10px;
