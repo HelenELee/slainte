@@ -4,8 +4,6 @@ import { GET_WEEK } from '../utils/queries';
 import ReactSpeedometer from "react-d3-speedometer";
 import { StyledSection } from './FormComponents';
 
-//import GlobalStyle from './GlobalStyle';
-
 //set up styles
 import styled from 'styled-components';
 
@@ -19,26 +17,24 @@ color: var(--pale-green);
 const ProgressDial = (props) => {
   
   var prevMonday = new Date();
-  var today = new Date();
+  //var today = new Date();
   
-  console.log("Today =" + today);
   prevMonday.setDate(prevMonday.getDate() - (prevMonday.getDay() + 6) % 7);
-  console.log("prevMonday = " + prevMonday);
+  
   // const { loading, error, data } = useQuery(GET_WEEK, {variables: { weekStart: prevMonday, weekEnd: today }});
   const { loading, error, data } = useQuery(GET_WEEK);
   const userData = data?.getWeek || [];
-  //onst rangeArray = [0, parseFloat(userData.weekTarget/3).toFixed(2), parseFloat((userData.weekTarget/3)*2).toFixed(2), userData.weekTarget];
+  
   const rangeArray = [0, parseFloat(props.weeklyTarget/3).toFixed(2), parseFloat((props.weeklyTarget/3)*2).toFixed(2), props.weeklyTarget];
 
   if (loading) {
     return <h2>LOADING...</h2>;
   }
-  return (<StyledSection>
-     
+  return (<StyledSection> 
     
       {/* {userData.weekScore} */}
       <Title>This Weeks Activities</Title>
-        {/* <div style={{ margin: "auto" }}> */}
+       
           <ReactSpeedometer
               width={300}
               needleHeightRatio={0.7}
@@ -47,7 +43,6 @@ const ProgressDial = (props) => {
              
               customSegmentStops={rangeArray}
               segmentColors={['var(--dusty-pink)', 'var(--orange)', 'var(--pale-green)']}
-              // currentValueText="Activities this week"
               currentValueText={"Activities this week"}
               customSegmentLabels={[
                 {
@@ -73,8 +68,7 @@ const ProgressDial = (props) => {
               needleColor={'black'}
               textColor={'black'}
             />
-            {/* {`(${userData.weekScore} out of ${props.weeklyTarget})`} */}
-            {/* </div> */}
+            
 </StyledSection>);
 
 };
