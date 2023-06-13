@@ -26,6 +26,7 @@ const MainTitle = styled.h1`
       sans-serif;
   font-weight: 700;
   font-size: 3rem;
+  margin-left:15px;
 `;
 
 const Box = styled.section`
