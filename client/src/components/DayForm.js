@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 //import package to handle alerts/confirms - used for delete
 import { confirmAlert } from 'react-confirm-alert'; 
+//use to validate date
+import { checkIsValidDate } from '../utils/helpers';
 import '../react-confirm-alert.css'; // Import css
 //use fontawesome for faces
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,12 +26,29 @@ import { QUERY_ACTIVITIES } from '../utils/queries';
 //confetti for when you click submit
 import { addConfetti } from '../utils/confetti.js';
 
+//set up styles
+import styled from 'styled-components';
+//used for error message
+const ErrorSpan = styled.span`
+font-size: 1.0em;
+color: var(--dark-pink);
+`;
+
 const DayForm = (props) => {
   //setup for redirect to another route
   const navigate = useNavigate();
 
   //check if paameter was passed - ie open existing event
   const dayId = (props.dayData ? props.dayData._id : undefined); 
+  //track if valid date, if dayId exists then a date has already been entered and 
+  //user is just doing and update. Date was already valid, only need to validate again if changed
+  const [isValidDate, setIsValidDate] = useState(() => {
+    if(typeof dayId === "undefined"){
+      return false;
+    } else {
+      return true;
+    }
+  });
 
   //set state initially - either based on existing event passed in through props or blanks for new event
   const [userFormData, setUserFormData] = useState({ 
@@ -60,10 +79,8 @@ const DayForm = (props) => {
   //not checked - then remove from array
   const updateArray = (checkValue, arrayValue, theValue) => {
     if (checkValue){
-      //console.log("checked");
       return arrayValue.concat(theValue).filter(onlyUnique);            
     } else {
-      //console.log("not checked");
       return arrayValue.filter((elem) => {return elem !== theValue}) 
     }
   }
@@ -73,10 +90,10 @@ const DayForm = (props) => {
     const { name, value } = event.target;
     let newArray;
     
-   // check which category
+   // check which category, update appropriate array
     if (event.target.name.startsWith("category~")) {
       let catName = event.target.name.split("~")[1];
-      //console.log(value);
+      
       switch(catName) {
         case "Food":       
           newArray = updateArray(event.target.checked, userFormData.foodActivities, value);
@@ -95,15 +112,24 @@ const DayForm = (props) => {
           setUserFormData({ ...userFormData, "connActivities": newArray})
          
       } 
+    } else if(event.target.name.startsWith("date")) {
+      //check not future date, disable submit button if date is not valid
+       if (checkIsValidDate(value)){
+         setIsValidDate(true);
+       } else {
+        setIsValidDate(false);
+       }
+
+       setUserFormData({ ...userFormData, [name]: value });
+      
     } else {
       setUserFormData({ ...userFormData, [name]: value });
     }
     
-   
   };
 
   const doDelete = (event) => {
-    
+    //pop up to ask if they are sure they want to delete
     confirmAlert({
       title: 'Confirm Deletion.',
       message: 'Are you sure you want to delete this entry?',
@@ -142,7 +168,7 @@ const DayForm = (props) => {
     } catch (err) {
       console.error(err);
     }
-    //window.location.assign('/calendar');
+    
     //when day deleted redirect back to calendar
     return navigate('/calendar');
   }
@@ -198,7 +224,6 @@ const DayForm = (props) => {
               }
           
         }
-         //window.location.assign('/calendar');
          
          addConfetti(); //shower confetti
          return navigate('/calendar');
@@ -211,7 +236,16 @@ const DayForm = (props) => {
                 <FlexContainer direction="column">
                 <FlexChild>
                 <StyledLabel display="inline-block">Date:</StyledLabel>
-                <StyledInput display="inline-block" size="11" type="date" name="date" placeholder="" onChange={handleInputChange} value={userFormData.date}/>
+                <StyledInput 
+                  display="inline-block" 
+                  size="11" 
+                  type="date" 
+                  name="date" 
+                  placeholder="" 
+                  onChange={handleInputChange} 
+                  // show error message if future date, nothing if blank or valid date
+                  value={userFormData.date}/>{(userFormData.date === "" ? <span></span> : isValidDate ? <span></span> : <ErrorSpan> * Date cannot be in the future!</ErrorSpan>)}
+                  
                 </FlexChild>
                 
                 <FlexChild>
@@ -269,9 +303,6 @@ const DayForm = (props) => {
                       <FlexChild>
                           <StyledFlipCard category="Connection" desc={conn_description} activities={activities} key="Connection" onClick={handleInputChange} selections={userFormData.connActivities}></StyledFlipCard> 
                       </FlexChild>
-                    
-                    
-                    
                     </FlexContainer>
                     
                       
@@ -281,11 +312,11 @@ const DayForm = (props) => {
                 
                
 
-                <StyledButton type="submit" disabled={false}>Submit</StyledButton>
+                <StyledButton type="submit" disabled={!isValidDate} displayType="inline">Submit</StyledButton>
                 {/* if existing event display detele button */}
                 {dayId ?
-                //  <StyledButton type="button" onClick={handleDeleteDay}>Delete</StyledButton>
-                <StyledButton type="button" onClick={doDelete}>Delete</StyledButton>
+                
+                <StyledButton type="button" onClick={doDelete} displayType="inline">Delete</StyledButton>
                   : ""}
                 
                 
