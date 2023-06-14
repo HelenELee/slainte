@@ -17,7 +17,7 @@ color: var(--pale-green);
 const ProgressDial = (props) => {
   
   var prevMonday = new Date();
-  //var today = new Date();
+
   
   prevMonday.setDate(prevMonday.getDate() - (prevMonday.getDay() + 6) % 7);
   
@@ -25,7 +25,18 @@ const ProgressDial = (props) => {
   const { loading, error, data } = useQuery(GET_WEEK);
   const userData = data?.getWeek || [];
   
-  const rangeArray = [0, parseFloat(props.weeklyTarget/3).toFixed(2), parseFloat((props.weeklyTarget/3)*2).toFixed(2), props.weeklyTarget];
+  let rangeArray = [];
+  if (!loading) {
+    if (props.weeklyTarget > 3) {
+      console.log("GREATER THAN 3");
+      rangeArray = [0, parseFloat(props.weeklyTarget/3).toFixed(2), parseFloat((props.weeklyTarget/3)*2).toFixed(2), props.weeklyTarget];
+    } else {
+      console.log("LES THAN 3");
+      rangeArray = [0, 0, 0, parseFloat(props.weeklyTarget)]
+    }
+  }
+  
+  
 
   if (loading) {
     return <h2>LOADING...</h2>;
@@ -38,9 +49,10 @@ const ProgressDial = (props) => {
           <ReactSpeedometer
               width={300}
               needleHeightRatio={0.7}
-              value={userData.weekScore}
+              value={userData.weekScore > props.weeklyTarget ? props.weeklyTarget : userData.weekScore }
               maxValue={props.weeklyTarget}
-             
+              minValue={0}
+              //maxValue={userData.weekScore > props.weeklyTarget ? userData.weekScore : props.weeklyTarget }
               customSegmentStops={rangeArray}
               segmentColors={['var(--dusty-pink)', 'var(--orange)', 'var(--pale-green)']}
               currentValueText={"Activities this week"}
