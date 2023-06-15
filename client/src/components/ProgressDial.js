@@ -4,6 +4,10 @@ import { GET_WEEK } from '../utils/queries';
 import ReactSpeedometer from "react-d3-speedometer";
 import { StyledSection } from './FormComponents';
 
+//use fontawesome for faces
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import { faSmile, faFaceMeh, faFaceFrown, faHandsClapping } from '@fortawesome/free-solid-svg-icons';
+
 //set up styles
 import styled from 'styled-components';
 
@@ -28,10 +32,10 @@ const ProgressDial = (props) => {
   let rangeArray = [];
   if (!loading) {
     if (props.weeklyTarget > 3) {
-      console.log("GREATER THAN 3");
+      //console.log("GREATER THAN 3");
       rangeArray = [0, parseFloat(props.weeklyTarget/3).toFixed(2), parseFloat((props.weeklyTarget/3)*2).toFixed(2), props.weeklyTarget];
     } else {
-      console.log("LES THAN 3");
+      //console.log("LES THAN 3");
       rangeArray = [0, 0, 0, parseFloat(props.weeklyTarget)]
     }
   }
@@ -80,6 +84,7 @@ const ProgressDial = (props) => {
               needleColor={'black'}
               textColor={'black'}
             />
+            {/* <FontAwesomeIcon icon={faHandsClapping} size="2xl" color='var(--dark-pink'/>  */}
             
 </StyledSection>);
 
