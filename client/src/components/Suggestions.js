@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React, { useEffect } from 'react';
 //import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
-import { GET_ME } from '../utils/queries';
+import { GET_ME, GET_WEEK } from '../utils/queries';
 import { FlexContainer, FlexChild } from './FlexComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
@@ -31,16 +31,22 @@ const Suggestions = (props) => {
     
     const { loading, error, data, refetch } = useQuery(GET_ME);
     const userData = data?.me || [];
+    const weekData = useQuery(GET_WEEK);
+    const weekValues = weekData.data?.getWeek || [];
 
     useEffect(() => {
        
         if(!loading){
             refetch();
         }
+
+        if(!weekData.loading){
+            weekData.refetch();
+        }
         
     },[] );
 
-    if (loading) {
+    if (loading || weekData.loading) {
     return <h2>LOADING...</h2>;
     }
     
@@ -60,20 +66,28 @@ const Suggestions = (props) => {
             bestActivityCount = userData.totalConnCount;
             bestActivity = "Connection";
         }
-        console.log("bestactivity", bestActivity);
+        //console.log("bestactivity", bestActivity);
         return bestActivity;
     }
 
     const populateSuggestions = () => {
         let suggestionArray = []
         
+       // let temp = weekValues.weekScore;
+      //  console.log("TEMP = " + temp);
+
         if (userData.totalDayCount && userData.totalScore >= userData.totalDayCount) {
             suggestionArray.push("Great job! You seem to be averaging at least one activity per recorded day.")
         } else {
             suggestionArray.push("Lets get started tracking your activities!")
         }
         if (userData.totalScore > 0) {
-            suggestionArray.push(`You have recorded a total of ${userData.totalScore} activities.`)
+            let temp = `You have recorded a total of ${userData.totalScore} activities. ${weekValues.weekScore} this week.`;
+            if (weekValues.weekScore < weekValues.weekTarget) {
+                temp += ` Keep going to reach your weekly target of ${weekValues.weekTarget}!`;
+            }
+            // suggestionArray.push(`You have recorded a total of ${userData.totalScore} activities. ${weekValues.weekScore} this week.`)
+            suggestionArray.push(temp);
         }
         if (Math.round(userData.totalSleep/userData.totalDayCount) < 7 ) {
             suggestionArray.push("You seem to be averaging less than 7 hours of sleep a night. 7 is the recommended minimum amount for adults.")
