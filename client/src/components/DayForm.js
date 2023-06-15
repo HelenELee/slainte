@@ -242,7 +242,8 @@ const DayForm = (props) => {
                   type="date" 
                   name="date" 
                   placeholder="" 
-                  onChange={handleInputChange} 
+                  onChange={handleInputChange}
+                  disabled={dayId ? true : false} 
                   // show error message if future date, nothing if blank or valid date
                   value={userFormData.date}/>{(userFormData.date === "" ? <span></span> : isValidDate ? <span></span> : <ErrorSpan> * Date cannot be in the future!</ErrorSpan>)}
                   
