@@ -8,15 +8,21 @@ const { authMiddleware } = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schemas');
 //setup apollo server for use with graphql
 const app = express();
+
+//create ApolloServer
+//set context - middleware that can verify token
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
 });
 
+//When hosting on another service (like Heroku), host may independently configure the process.env.PORT variable as it runs in that environment.
 const PORT = process.env.PORT || 3001;
 
+//a method inbuilt in express to recognize the incoming Request Object as strings or arrays
 app.use(express.urlencoded({ extended: true }));
+//a method inbuilt in express to recognize the incoming Request Object as a JSON Object
 app.use(express.json());
 
 // if we're in production, serve client/build as static assets
@@ -34,6 +40,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
   server.applyMiddleware({ app });
   
+  //create connection once to mongodb
   db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
