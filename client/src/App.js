@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink, } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-//import Home from './pages/Home';
+//import all components
 import LoginForm from './components/LoginForm.js';
 import DayForm from './components/DayForm';
 import FormContainer from './components/FormContainer';
@@ -33,18 +33,20 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
-
+//Create apollo client
 const client = new ApolloClient({
-  uri: '/graphql',
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  uri: '/graphql', //url of graphql server 
+  link: authLink.concat(httpLink), //links in the chain between apollo client and graphql server
+  cache: new InMemoryCache(), //cache results of queries
 });
 
 function App() {
   return (
+    // Wrapper to make Apollo client available throughout app
     <ApolloProvider client={client}>
       <>
-      <GlobalStyle />
+      {/* make GlobalStyles available thorughout app */}
+      <GlobalStyle /> 
       <Router>
         <Navbar></Navbar>
         <Routes>
