@@ -58,11 +58,11 @@ const SignupForm = (props) => {
     event.preventDefault();   
     
     try {
-      //console.log("USER DATA", userFormData);
+      
       const { data } = await addUser({
         variables: { ...userFormData },
       });
-      
+      //stores token in local storage & reloads
       Auth.login(data.addUser.token);
 
     } catch (e) {

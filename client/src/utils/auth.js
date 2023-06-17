@@ -1,5 +1,7 @@
 // use this to decode a token and get the user's information out of it
 import decode from 'jwt-decode';
+//token -  a string that contains some information that can be verified securely.
+//Header, payload, signature
 
 // create a new class to instantiate for a user
 class AuthService {
@@ -34,7 +36,7 @@ class AuthService {
 
   login(idToken) {
     // Saves user token to localStorage
-    console.log("LOGIN - " + idToken);
+    //console.log("LOGIN - " + idToken);
     localStorage.setItem('id_token', idToken);
     window.location.assign('/');
   }
