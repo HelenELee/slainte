@@ -1,9 +1,10 @@
 
+//main login form for app
 import React, { useState } from 'react';
 
 import { StyledForm, StyledInput, StyledButton, StyledLabel } from './FormComponents';
 import { validateEmail, checkPassword } from '../utils/helpers';
-
+//set up graphql mutation
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 
@@ -11,19 +12,16 @@ import Auth from '../utils/auth';
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
-  const [login, { error, data }] = useMutation(LOGIN_USER);
- 
-  //setUserFormData({email: "", password: ""});
+  const [login] = useMutation(LOGIN_USER);
   
-  const isValidEmail = userFormData.email !== "" && validateEmail(userFormData.email);
-  const isValidPassword = userFormData.password !== "" && checkPassword(userFormData.password);
+  let isValidEmail = userFormData.email !== "" && validateEmail(userFormData.email);
+  let isValidPassword = userFormData.password !== "" && checkPassword(userFormData.password);
   
-
   const [enteredPassword, setEnteredPassword] = useState(false);
   const [enteredEmail, setEnteredEmail] = useState(false);
+  const [error, setError]=useState();
 
- // const [submitClicked, setSubmitClicked] = useState(false);
-
+  //store input in state value
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
@@ -40,6 +38,7 @@ const LoginForm = () => {
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
+      setError('❌ Invalid Username or Password')
     }
 
 
@@ -74,6 +73,7 @@ const LoginForm = () => {
             size="50%"
              />
             {enteredPassword && enteredEmail ? (isValidPassword && isValidEmail ? "" : <p>❌ Please enter valid details.</p>) : null}
+            {error?<p>{error}</p>:null}          
             <br />
             <StyledButton type="submit" disabled={!userFormData.email || !userFormData.password}>Login</StyledButton>
       
