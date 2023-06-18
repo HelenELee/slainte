@@ -104,6 +104,7 @@ color: var(--pale-green);
 
 //used for error message
 export const ErrorSpan = styled.span`
-font-size: 1.0em;
+font-size: ${props => props.fontSize ? props.fontSize : '1.0em'};
+//font-size: 2.0em;
 color: var(--dark-pink);
 `;
