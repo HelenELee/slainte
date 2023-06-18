@@ -201,8 +201,8 @@ const AppNavbar = () => {
                               <NavElements displayYN={showNavbar}>
                                   <NavLinkStyled to="/" onClick={handleShowNavbar} >Home</NavLinkStyled>
                                   <NavLinkStyled to="/dashboard" onClick={handleShowNavbar} >Dashboard</NavLinkStyled>
-                                  <NavLinkStyled to="/add-day" onClick={handleShowNavbar} >Add Activity</NavLinkStyled>
-                                  <NavLinkStyled to="/calendar" onClick={handleShowNavbar} >All Activities</NavLinkStyled>
+                                  <NavLinkStyled to="/add-day" onClick={handleShowNavbar} >Add Day</NavLinkStyled>
+                                  <NavLinkStyled to="/calendar" onClick={handleShowNavbar} >Daily Log</NavLinkStyled>
                                   <NavLinkStyled to="/profile" onClick={() => setShowNavbar(false)}>Profile</NavLinkStyled>
                                   <NavLinkLogout to="" onClick={Auth.logout} className="logout">Logout</NavLinkLogout>
                               </NavElements>
