@@ -8,6 +8,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { QUERY_MAIN_CHART } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
+import Home from '../pages/Home';
 
 const { enAULocale } = require('date-fns/locale/en-AU');
 //use date-fns for date formatting
@@ -29,7 +30,6 @@ function FullCalendarApp() {
   //if event clicked open event
   const handleClickEvent = async (e) => {
       
-      //console.log(e.event.id);
       //direct to event with the chosen id
       if (e.event.id) {
           navigate(`/add-day/${e.event.id}`);
@@ -83,7 +83,7 @@ function FullCalendarApp() {
                         />
                 )}
                     </>
-                ) : ("<Home />")}
+                ) : (<Home />)}
 
       
             

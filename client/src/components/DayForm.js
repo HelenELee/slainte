@@ -17,6 +17,8 @@ import { StyledForm, StyledInput, StyledButton, StyledLabel } from './FormCompon
 import { FlexContainer, FlexChild } from './FlexComponents';
 //actually contains layout for flip card
 import StyledFlipCard from './StyledFlipCard';
+//for use if not logged in
+import Home from '../pages/Home';
 //authentication
 import Auth from '../utils/auth';
 //setup for queries
@@ -231,7 +233,7 @@ const DayForm = (props) => {
 
     return (
         <>
-        
+         {Auth.loggedIn() ? (
           <StyledForm onSubmit={handleFormSubmit}>                
                 <FlexContainer direction="column">
                 <FlexChild>
@@ -323,7 +325,13 @@ const DayForm = (props) => {
                 
             </StyledForm>
           
+          ) : (
+            <>
+            {/* Home Page - not logged in */}
+            <Home />
+            </>
             
+          )}
             
         </>
       );

@@ -5,6 +5,7 @@ import Suggestions from "./Suggestions";
 import QuoteContainer from "./AxiosAPI";
 import MainLineChart from "./MainLineChart";
 import ProgressDial from "./ProgressDial";
+import Home from '../pages/Home';
 
 //query to get data for charts
 import { QUERY_MAIN_CHART } from '../utils/queries';
@@ -26,9 +27,6 @@ export default function Dashboard() {
   const { loading, data } = useQuery(QUERY_MAIN_CHART);
   const days = data?.me || [];
 
-  // if (!loading) {
-  //   console.log("DASHBOARD - tolalScore", days.totalScore);
-  // }
   //display suggestions and quotes but only display charts if days have been logged - check length of days array
   return (
     <div className="App">
@@ -65,6 +63,7 @@ export default function Dashboard() {
                           
                       </FlexContainer>
             }
+            {/* only show Progress dial if set to "show" in profile */}
              {days.profile.showProgressDial && 
                             <FlexChild margin="auto"> 
                               <ProgressDial weeklyTarget={days.profile.weeklyTarget} />
@@ -80,8 +79,8 @@ export default function Dashboard() {
         </>
       ) : (
         <>
-        {/* <p>Home Page</p> */}
-        <img src={mainImage} alt="fireSpot" width="100%" height="50%"/>
+        {/* Home Page - not logged in */}
+        <Home />
         </>
         
       )}
