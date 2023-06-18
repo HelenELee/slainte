@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 import React, { useEffect } from 'react';
-//import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { GET_ME, GET_WEEK } from '../utils/queries';
 import { FlexContainer, FlexChild } from './FlexComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { StyledSection } from './FormComponents';
-//import { faSmile, faFaceMeh, faFaceFrown } from '@fortawesome/free-solid-svg-icons';
 
 
 const UnorderedList = styled.ul`
@@ -49,32 +47,42 @@ const Suggestions = (props) => {
     if (loading || weekData.loading) {
     return <h2>LOADING...</h2>;
     }
-    
+    //work out which activity has highest count
     const getBestActivity = () => {
-        //console.log("Inside getBestActivity");
+        
         let bestActivityCount = userData.totalFoodCount;
-        let bestActivity = "Food";
-        if (userData.totalExerciseCount > bestActivityCount) {
-            bestActivityCount = userData.totalExerciseCount;
-            bestActivity = "Exercise";
+        let bestActivity = ["Food"];
+        if (userData.totalExerciseCount >= bestActivityCount) {
+            if (userData.totalExerciseCount > bestActivityCount) {
+                bestActivityCount = userData.totalExerciseCount;
+                bestActivity = ["Exercise"];
+            } else {
+                bestActivity.push("Exercise");
+            }
         }
-        if (userData.totalMindCount > bestActivityCount) {
-            bestActivityCount = userData.totalMindCount;
-            bestActivity = "Mind";
+        if (userData.totalMindCount >= bestActivityCount) {
+            if (userData.totalMindCount > bestActivityCount) {
+                bestActivityCount = userData.totalMindCount;
+                bestActivity = ["Mind"];
+            } else {
+                bestActivity.push("Mind")
+            }
         }
-        if (userData.totalConnCount > bestActivityCount) {
-            bestActivityCount = userData.totalConnCount;
-            bestActivity = "Connection";
+        if (userData.totalConnCount >= bestActivityCount) {
+            if (userData.totalConnCount > bestActivityCount) {
+                bestActivityCount = userData.totalConnCount;
+                bestActivity = ["Connection"];
+            } else {
+                bestActivity.push("Connection");
+            }
         }
-        //console.log("bestactivity", bestActivity);
-        return bestActivity;
+        
+        return bestActivity.toString();
     }
 
+    //create array of "suggestions" based on data
     const populateSuggestions = () => {
         let suggestionArray = []
-        
-       // let temp = weekValues.weekScore;
-      //  console.log("TEMP = " + temp);
 
         if (userData.totalDayCount && userData.totalScore >= userData.totalDayCount) {
             suggestionArray.push("Great job! You seem to be averaging at least one activity per recorded day.")
@@ -86,14 +94,13 @@ const Suggestions = (props) => {
             if (weekValues.weekScore < weekValues.weekTarget) {
                 temp += ` Keep going to reach your weekly target of ${weekValues.weekTarget}!`;
             }
-            // suggestionArray.push(`You have recorded a total of ${userData.totalScore} activities. ${weekValues.weekScore} this week.`)
             suggestionArray.push(temp);
         }
         if (Math.round(userData.totalSleep/userData.totalDayCount) < 7 ) {
             suggestionArray.push("You seem to be averaging less than 7 hours of sleep a night. 7 is the recommended minimum amount for adults.")
         }
         if (userData.totalScore > 0) {
-            suggestionArray.push(`You are doing very well in the ${getBestActivity()} category. Maybe include more activities in the other categories too.`)
+            suggestionArray.push(`You are doing very well with ${getBestActivity()}. Maybe include more activities in the other categories too.`)
         }
         return suggestionArray;
     }
@@ -105,8 +112,7 @@ const Suggestions = (props) => {
                 <Title>Suggestions</Title>
             </FlexChild>
             <FlexChild>
-            {/* <FontAwesomeIcon icon="fa-solid fa-star" /> */}
-            
+                        
             <UnorderedList>
                  {
                     populateSuggestions().map((suggest) => (
