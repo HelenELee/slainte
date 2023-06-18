@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 //get descriptions that are displayed on front of each card
 import {food_description, mind_description, conn_description, exercise_description} from '../data/categories.js';
 //get form styling from FormComponent and flex 
-import { StyledForm, StyledInput, StyledButton, StyledLabel } from './FormComponents';
+import { StyledForm, StyledInput, StyledButton, StyledLabel, ErrorSpan } from './FormComponents';
 import { FlexContainer, FlexChild } from './FlexComponents';
 //actually contains layout for flip card
 import StyledFlipCard from './StyledFlipCard';
@@ -31,7 +31,7 @@ import { addConfetti } from '../utils/confetti.js';
 //set up styles
 import styled from 'styled-components';
 //used for error message
-const ErrorSpan = styled.span`
+const ErrorSpanxx = styled.span`
 font-size: 1.0em;
 color: var(--dark-pink);
 `;
@@ -247,7 +247,7 @@ const DayForm = (props) => {
                   onChange={handleInputChange}
                   disabled={dayId ? true : false} 
                   // show error message if future date, nothing if blank or valid date
-                  value={userFormData.date}/>{(userFormData.date === "" ? <span></span> : isValidDate ? <span></span> : <ErrorSpan> * Date cannot be in the future!</ErrorSpan>)}
+                  value={userFormData.date}/>{(userFormData.date === "" ? <ErrorSpan  fontSize="2.0em"> *</ErrorSpan> : isValidDate ? <span></span> : <ErrorSpan> * Date cannot be in the future!</ErrorSpan>)}
                   
                 </FlexChild>
                 
