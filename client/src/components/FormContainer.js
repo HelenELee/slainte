@@ -4,7 +4,6 @@ import React from 'react';
 import { useParams } from 'react-router';
 import DayForm from './DayForm';
 
-import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { GET_DAY } from '../utils/queries';
 
@@ -14,15 +13,13 @@ const FormContainer = (props) => {
   const { dayId } = useParams();  
 
   //only call query if you have a day id - get details of that day
-  
-  const { loading, error, data } = useQuery(GET_DAY, {variables: { dayID: dayId }});
-
+  const { loading, data } = useQuery(GET_DAY, {variables: { dayID: dayId }});
   const userData = data?.getDay || [];
 
-if (loading) {
-  return <h2>LOADING...</h2>;
-}
-return (<DayForm dayData={userData} />);
+  if (loading) {
+    return <h2>LOADING...</h2>;
+  }
+  return (<DayForm dayData={userData} />);
 
 };
 

@@ -1,8 +1,11 @@
+//used in DayForm - cards for each category
+//back and front cards on top of each other (absolute position)
+//on hover -> transform and back of card is set so not visible when flipped
 import { FlexChild, FlexContainer } from './FlexComponents';
 import FlipCard from './FlipCard';
 import styled, { css } from "styled-components";
-//import "./styles.css";
 
+//various parts of the flip card
 const CardInner = styled.div`
   position: relative;
   width: 100%;
@@ -11,7 +14,6 @@ const CardInner = styled.div`
   transition: transform 1.9s;
   transform-style: preserve-3d;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  
 `;
 
 const Card = styled.div`
@@ -24,13 +26,13 @@ const Card = styled.div`
     transform: rotateY(180deg);
   }
 `;
-
+//absolute positioning of back/front of cards so they are on top of each other
 const absoluteStyle = css`
   position: absolute;
   width: 100%;
   height: 100%;
   -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  backface-visibility: hidden; //back of card not visible when flipped
 `;
 
 const CardFront = styled.div`
@@ -42,11 +44,9 @@ const CardFront = styled.div`
 `;
 
 const CardBack = styled.div`
-//  background-color: var(--dusty-pink);
   background-color: var(--mid-grey);
- //border: 1 solid var(--dusty-pink);
   color: white;
-  transform: rotateY(180deg);
+  transform: rotateY(180deg); //start with it flipped 180
   ${absoluteStyle}
   // padding:30px;
 `;
@@ -89,9 +89,6 @@ const StyledFlipCard = (props) => {
                 {/* </CardInner> */}
                 
               </FlexChild>
-            
-           
-            
             </FlexContainer>
            
           </CardFront>

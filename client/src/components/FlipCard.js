@@ -1,7 +1,6 @@
-//not used!
+//used in StyledFlipCard
 import React from 'react';
 import styled from 'styled-components'
-
 
 const Wrapper = styled.section`
     height: 100px;
@@ -9,15 +8,12 @@ const Wrapper = styled.section`
     margin: 0;
     width: auto;
     border-radius: 25%;
-   // border: 1px solid #ccc;
     border-radius: 5px;
   `
 const CardSelect = styled.div`
-  
   padding:10;
   margin: 0;
   border-radius: 25%;
- // border: 1px solid #ccc;
   border-radius: 5px;
   color: black;
   text-align: left;
@@ -41,22 +37,19 @@ const StyledCheckBoxLabel = styled.label`
 const FlipCard = (props) => {
   const currentActivities = props.activities.filter((act) => {return act.category === props.category});
   const selections = props.selections;
-  //console.log("SELECTIONS", props.category + " / " + selections);
 
     return (
         <>
         <Wrapper key={"wrapper_"+props.category}>
         <Title>{props.category}</Title>
-        
-
-        
         <CardSelect key={"card_"+props.category}>
           {
+            // check if you have activities to display
             currentActivities.length > 0 ? (
               currentActivities.map((act) => {
+                // check if option was previously selected
                 let isChecked = selections.includes(act.title) ? true : false;
-                //let isChecked = selections.includes(act.title) ? 'defaultChecked' : '';
-              //  console.log("ISCHECKED for " + act.title , isChecked);
+                
                 return (<>
                     <input 
                     type="checkbox" 
@@ -73,9 +66,7 @@ const FlipCard = (props) => {
                      </StyledCheckBoxLabel><br></br>
                     
                      </>)
-            })
-              
-              
+                  })  
             ) : ("")
           }
             

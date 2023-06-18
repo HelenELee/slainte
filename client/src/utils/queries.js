@@ -120,7 +120,7 @@ export const GET_WEEK = gql`
   }
 `;
 
-export const QUERY_MAIN_CHART1 = gql`
+export const QUERY_MAIN_CHART1_OLD = gql`
   query getChartData {
       days {
           _id
@@ -136,7 +136,7 @@ export const QUERY_MAIN_CHART1 = gql`
   }
 `;
 
-export const QUERY_MAIN_CHART2 = gql`
+export const QUERY_MAIN_CHART2_OLD = gql`
   query getChartData {
       days {
           _id

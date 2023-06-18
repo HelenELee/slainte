@@ -1,9 +1,9 @@
+//form to get/update Profile details
 import React, { useState } from 'react';
 
 //get form styling from FormComponent and flex 
 import { StyledForm, StyledInput, StyledButton, StyledLabel, StyledCheckBoxLabel, SubTitle } from './FormComponents';
 import { FlexContainer, FlexChild } from './FlexComponents';
-//import ToggleSwitch from "./ToggleSwitch";
 
 import { isNumber } from '../utils/helpers';
 //authentication
@@ -13,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 //setup for queries
 import { useMutation } from '@apollo/client';
 import { UPDATE_PROFILE } from '../utils/mutations';
-//import { GET_PROFILE } from '../utils/queries';
 
 
 const Profile = (props) => {
@@ -29,16 +28,11 @@ const Profile = (props) => {
         weeklyTarget: (props.profileData.weeklyTarget ? props.profileData.weeklyTarget : 0), 
         showProgressDial: (props.profileData.showProgressDial ? props.profileData.showProgressDial : ''), 
      });
-     //console.log("userFormData.showProgressDial", userFormData.showProgressDial);
-     //const [value, setCheckbox] = useState(true);
-
-    //const showProgressDialOrig = props.profileData.showProgressDial
-   // let isChecked = (props.profileData.showProgressDial === false ? false : true);
-    //when something clicked add to correct array and update state
+     
+    
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-       // console.log("handleInputChange name/value" + name, value);
-        //console.log("value", value);
+       //handle inputs differently
         if (name === "weeklyTarget") {
             if (isNumber(userFormData.weeklyTarget) || value === "") {
                 if (value !== ""){
@@ -54,20 +48,12 @@ const Profile = (props) => {
             }
             
         } else if (name === "showProgressDial") {
-            // if (value === "true") {
-            //     setUserFormData({ ...userFormData, "showProgressDial": true });
-            // } else {
-            //     setUserFormData({ ...userFormData, "showProgressDial": false });
-            // }
             setUserFormData({ ...userFormData, "showProgressDial": !userFormData.showProgressDial });
-            //console.log("now - ", userFormData.showProgressDial);
-            //console.log(userFormData);
         } else {
            setUserFormData({ ...userFormData, [name]: value });
-           //console.log(userFormData);
+           
         }
         
-        //console.log("handleInputChange - end ", userFormData);
     }
 
 
@@ -80,11 +66,11 @@ const Profile = (props) => {
         if (!token) {
             return false;
         }
-
+        //setup profile object to pass to updateProfile function below
         const profile = {
             ...userFormData
         }
-        //console.log("submitting", profile);
+       
         try {
                 
             const responseUpdate = await updateProfile({
@@ -99,15 +85,14 @@ const Profile = (props) => {
           } catch (err) {
             console.error(err);
           }
+          //success - redirect to dashboard
           return navigate('/dashboard');
     }
 
-    //console.log("profile - from props", props);
+    
     return (
         <StyledForm onSubmit={handleFormSubmit}>
-            {/* props = {(props.profileData.showProgressDial === false ? "false" : "true")} */}
-            {/* value = {userFormData.showProgressDial} */}
-            {/* {(props.profileData.showProgressDial)} */}
+           
             <FlexContainer direction="column">
                 <FlexChild>
                     <SubTitle>Goals</SubTitle>
@@ -120,23 +105,15 @@ const Profile = (props) => {
                     type="checkbox" 
                     id="showProgressDial" 
                     name="showProgressDial" 
-                    // value={userFormData.showProgressDial} 
                     key="showProgressDial" 
                     onChange={handleInputChange} 
-                    // checked={(userFormData.showProgressDial === false ? false : true)}
                     checked={userFormData.showProgressDial}
                      />
                      <StyledCheckBoxLabel 
                      key="label_showProgressDial" 
                      htmlFor="showProgresDial">Show Progress Dial
                      </StyledCheckBoxLabel>
-                    {/* <ToggleSwitch
-                        title="toogle switch xs"
-                        size="xs"
-                        value={value}
-                        checked={value}
-                        onChange={({ target }) => setCheckbox(!value)}
-                        /><StyledLabel display="block">Show Progress Dial: </StyledLabel> */}
+                    
                     <br></br>
                     <StyledButton type="submit" disabled={false}>Submit</StyledButton>
                 </FlexChild>

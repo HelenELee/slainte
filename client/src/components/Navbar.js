@@ -1,3 +1,4 @@
+//main navigation toolbar - also contains modal for login/signup forms
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -7,7 +8,7 @@ import LoginForm from './LoginForm';
 import Auth from '../utils/auth';
 import { StyledModal } from "./StyledModal"
 import Logo from'../images/Logo.jpg';
-
+//used for menu hamburger icon and close on login/signup forms
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faClose } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,7 +19,6 @@ const CloseButton = styled.span`
     cursor: pointer;
   }
 `
-
 const Box = styled.div`
   display: flex;
   flex-direction: row;
@@ -26,11 +26,6 @@ const Box = styled.div`
   // border: solid 1px;
 `
 
-// const Title = styled.h1`
-//   font-size: 1.5em;
-//   //text-align: left;
-  
-// `;
 const Wrapper = styled.section`
   height: 200;
   padding:10;
@@ -184,16 +179,13 @@ const AppNavbar = () => {
 
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
-    //alert(showNavbar);
   }
 
   return (
     <>
       <Wrapper>
-      
           <Box>
             <Link to="/"><img src={Logo} alt="logo" /></Link>
-            
           </Box>
           <MainTitle>Slainte!</MainTitle>
             
@@ -201,12 +193,12 @@ const AppNavbar = () => {
               
                   {Auth.loggedIn() ? (
                           <>
-                            {/* <NavUnlisted> */}
+                            
                               <MenuIcon onClick={handleShowNavbar}>
                                 <FontAwesomeIcon icon={faBars} size="2xl" color="var(--orange)"/>
                               </MenuIcon>
+                              {/* changes flex-direction to column based on media query - navigation hidden for smaller screen - only appears when icon clicked */}
                               <NavElements displayYN={showNavbar}>
-                                  {/* <NavLinkStyled to="/progress" onClick={handleShowNavbar} >TEST</NavLinkStyled> */}
                                   <NavLinkStyled to="/" onClick={handleShowNavbar} >Home</NavLinkStyled>
                                   <NavLinkStyled to="/dashboard" onClick={handleShowNavbar} >Dashboard</NavLinkStyled>
                                   <NavLinkStyled to="/add-day" onClick={handleShowNavbar} >Add Activity</NavLinkStyled>
@@ -214,7 +206,7 @@ const AppNavbar = () => {
                                   <NavLinkStyled to="/profile" onClick={() => setShowNavbar(false)}>Profile</NavLinkStyled>
                                   <NavLinkLogout to="" onClick={Auth.logout} className="logout">Logout</NavLinkLogout>
                               </NavElements>
-                              {/* </NavUnlisted> */}
+                              
                           </>
                               
                         ) : (<NavLinkStyled to="#" onClick={() => setShowModal(true)}>Login/Sign Up</NavLinkStyled>)

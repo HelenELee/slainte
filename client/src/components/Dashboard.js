@@ -14,14 +14,12 @@ import { useQuery } from '@apollo/client';
 //authentication
 import Auth from '../utils/auth';
 import { FlexContainer, FlexChild } from './FlexComponents';
-import mainImage from'../images/good-vibes.jpg';
 
+//styled-component
 const Wrapper = styled.section`
     padding: 10px;
     margin: 10px;
 `
-
-
 export default function Dashboard() {
   //use query and check for returned data
   const { loading, data } = useQuery(QUERY_MAIN_CHART);
@@ -30,14 +28,13 @@ export default function Dashboard() {
   //display suggestions and quotes but only display charts if days have been logged - check length of days array
   return (
     <div className="App">
-      
+      {/* check user is logged in */}
        {Auth.loggedIn() ? (
         <>
         {loading ? (
           <div>Loading...</div>
         ) : (
           days &&
-          // <>
           <Wrapper>
           
             <FlexContainer direction ="column">
@@ -50,7 +47,7 @@ export default function Dashboard() {
                     </FlexChild>
                 </FlexContainer> 
               
-            {
+              {
                   days.days.length > 0 &&
                       <FlexContainer direction="row" directionSM="column"> 
                           <FlexChild> 
@@ -62,7 +59,7 @@ export default function Dashboard() {
                           
                           
                       </FlexContainer>
-            }
+              }
             {/* only show Progress dial if set to "show" in profile */}
              {days.profile.showProgressDial && 
                             <FlexChild margin="auto"> 
@@ -72,10 +69,8 @@ export default function Dashboard() {
                         
             </FlexContainer>
           </Wrapper>  
-                    
-          // </>
           
-)}
+      )}
         </>
       ) : (
         <>

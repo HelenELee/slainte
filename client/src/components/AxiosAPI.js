@@ -55,7 +55,7 @@ if (isLoading) {
   return (
     <StyledSection>
         {
-          
+          // only display quote when loading is commplete
           (isLoading ? 
             "Loading..." : 
             

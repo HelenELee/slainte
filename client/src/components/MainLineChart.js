@@ -1,4 +1,4 @@
-//import "./styles.css";
+//main chart that tracks score, rating and sleep - recharts
 import React from "react";
 import styled from 'styled-components';
 import { StyledSection } from './FormComponents';
@@ -20,22 +20,14 @@ const Title = styled.h1`
   color: var(--pale-green);
 `;
 
-// const StyledSection=styled.section`
-//   width: 100%;
-//   border: solid 1px;
-//   @media (max-width: 1000px) {
-//     width: 60%;
-//   }
-// `;
-
 const MainLineChart = ({ data }) => {
- 
+ //data comes from grapgql query  and contains "days"
   let newArray = [...data];
-  //console.log("NEWARRAY", newArray);
+
   let daysSorted = newArray.sort(function(a,b){
     return new Date(a.date) - new Date(b.date);
   });
- // console.log("DAYSSORTED", daysSorted);
+ 
   return (
     <StyledSection>
     

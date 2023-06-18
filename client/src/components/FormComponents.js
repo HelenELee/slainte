@@ -27,6 +27,7 @@ export const StyledInput = styled.input`
   display: ${props => props.display ? props.display : "block"};
   padding: 10px;
   border: 1px solid #ccc;
+  //border: ${props => props.validInput && props.validInput === false ? '1px solid #ccc' : '1px solid red'};
   border-radius: 5px;
   margin-bottom: 5px;
   // width: 50%;
@@ -99,4 +100,10 @@ font-size: 1.5em;
 text-align: left;
 margin-left: 5px;
 color: var(--pale-green);
+`;
+
+//used for error message
+export const ErrorSpan = styled.span`
+font-size: 1.0em;
+color: var(--dark-pink);
 `;
