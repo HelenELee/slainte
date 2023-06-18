@@ -10,10 +10,8 @@ const daySchema = new Schema(
         type: Date,
         default: Date.now,
         //convert date to specified format
-        //get: ((date) => format(date, "PPPp", { locale: enAULocale }))
         get: ((date) => format(date, "yyyy-MM-dd", { locale: enAULocale })),
-        //set: ((date) => format(date, "yyyy-MM-dd", { locale: enAULocale }))
-        //dd/LL/yyyy
+        
       },
       foodActivities: [String],
       mindActivities: [String],

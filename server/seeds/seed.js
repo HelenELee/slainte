@@ -1,3 +1,4 @@
+//populate the database with activities from activities.json
 const db = require('../config/connection');
 const  { Activity } = require('../models');
 const  activitySeeds = require('./activities.json');

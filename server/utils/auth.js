@@ -9,15 +9,14 @@ module.exports = {
     // allows token to be sent via req.body, req.query, or headers
     let token = req.body.token || req.query.token || req.headers.authorization;
 
-    // ["Bearer", "<tokenvalue>"]
     if (req.headers.authorization) {
       token = token.split(' ').pop().trim();
     }
-
+    //no token found
     if (!token) {
       return req;
     }
-
+    //check token is valid/not expired
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
@@ -29,7 +28,7 @@ module.exports = {
   },
   signToken: function ({ username, email, _id }) {
     const payload = { username, email, _id };
-
+    //create signed token
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
 };

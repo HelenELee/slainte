@@ -1,3 +1,4 @@
+//define the types of all inputs and outputs for graphql
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`

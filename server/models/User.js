@@ -24,6 +24,7 @@ const userSchema = new Schema(
     },
     // set days to be an array of data that adheres to the daySchema
     days: [daySchema],
+    //profile adheres to profileSchema
     profile: profileSchema,
     
   },
@@ -50,9 +51,9 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 //virtuals that can be used in queries
-// when we query a user, we'll also get another field called `totalScore'
+// when we query a user, we'll also get another field called `totalScore' etc
 userSchema.virtual('totalScore').get(function () {
-  //console.log("TOTALSCORE");
+  
   let initialScore = 0;
   let sum = this.days.reduce(function (accumulator, curValue) {
       return accumulator + curValue.score
@@ -107,19 +108,6 @@ userSchema.virtual('totalDayCount').get(function () {
   let sum = (this.days ? this.days.length: 0);
   return sum;
 });
-
-// userSchema.post('save', function(next) {
-//   const err = new Error('something went wrong');
-  
-//   console.log("POST SAVE BEFORE", this.days)
-//   const daysSorted = this.days.sort(function(a,b){
-//      return new Date(a.date) - new Date(b.date);
-//   });
-//   this.days = daysSorted;
-  
-//   console.log("AFTER", this.days)
-//   next(err);
-// })
 
 const User = model('User', userSchema);
 
