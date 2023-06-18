@@ -73,7 +73,8 @@ function FullCalendarApp() {
                                     click: () => console.log('new event'),
                                 },
                                 }}
-                                events={newData}                              
+                                events={newData}  
+                                editable={true}                            
                                 eventColor="var(--pale-green)" 
                                 nowIndicator="var(--dusty-pink)"
                                 dateClick={(e) => console.log(e.dateStr)}
