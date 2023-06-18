@@ -1,39 +1,47 @@
-import React, { useState } from 'react';
-import { StyledForm, StyledInput, StyledButton, StyledLabel } from './FormComponents';
+import React, { useState, useEffect } from 'react';
+import { StyledForm, StyledInput, StyledButton, StyledLabel, ErrorSpan } from './FormComponents';
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations'
 import { validateEmail, checkPassword } from '../utils/helpers';
 
 const SignupForm = (props) => {
+
+  useEffect(() => {
+   // console.log("use effect");
+  //  clear previous details
+    setUserFormData({
+      username: '',
+      email: '',
+      password: '',
+    });
+    
+    
+  }, [] );
+
   // set initial form state
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
 
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+  const [addUser] = useMutation(ADD_USER);
 
-  
-  //const isValidPassword = userFormData.password !== "" && checkPassword(userFormData.password);
-
-  //const [enteredPassword, setEnteredPassword] = useState(false);
-  // [enteredEmail, setEnteredEmail] = useState(false);
+  //state variables used for validation
   const [enteredDetails, setEnteredDetails] = useState(false);
   const [isValidName, setIsValidName] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [isValidPassword, setIsValidPassword] = useState(false);
 
   const handleInputChange = (event) => {
-    //console.log("********INPUT CHANGE", event.target.name);
+    
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
-   // console.log("UserFormData", userFormData);
+    //do various validation
     if (event.target.name === "email") {
       if (userFormData.email !== "" && validateEmail(userFormData.email)) {
-       // console.log("got here!!!");
         setIsValidEmail(true);
       } else {
         setIsValidEmail(false);
       }
-      //const isValidEmail = userFormData.email !== "" && validateEmail(userFormData.email);
+      
     } else if (event.target.name === "password") {
       if (userFormData.password !== "" && checkPassword(userFormData.password)) {
         setIsValidPassword(true);
@@ -41,24 +49,26 @@ const SignupForm = (props) => {
         setIsValidPassword(false);
       }
     } else {
+      
       if (userFormData.username !== "") {
         setIsValidName(true);
+      } else {
+        
+        setIsValidName(false);
       }
     }
 
     if (userFormData.username !== "" && userFormData.email !== "" && userFormData.password !== "") {
       setEnteredDetails(true);
     }
-    //console.log("VALID EMAIL", isValidEmail);
-    //console.log("VALID PASSWORD", isValidPassword);
-    //console.log("NAME", isValidName);
+    
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();   
     
     try {
-      
+      //use mutation to create new user
       const { data } = await addUser({
         variables: { ...userFormData },
       });
@@ -102,7 +112,9 @@ const SignupForm = (props) => {
             name="email" 
             placeholder="Your email" 
             size="50%"
+            validInput={isValidEmail}
             required/>
+            {(enteredDetails & !isValidEmail ?  <span>❌ Please enter a valid email.</span> : "")}
             <StyledLabel >Password:</StyledLabel>
             <StyledInput 
             type="password" 
@@ -112,8 +124,9 @@ const SignupForm = (props) => {
             name="password" 
             size="50%"
             placeholder="Your password" />
-            
-            {enteredDetails && (enteredDetails && isValidPassword && isValidEmail && isValidName ? "" : <p>❌ Please enter valid details.</p>)}
+            {(enteredDetails & !isValidPassword ?  <span>❌ Please enter a valid password.</span> : "")}
+
+            {/* {enteredDetails && (enteredDetails && isValidPassword && isValidEmail && isValidName ? "" : <p>❌ Please enter valid details.</p>)} */}
             <StyledButton 
             type="submit" 
             disabled={!isValidName || !isValidPassword || !isValidEmail}
