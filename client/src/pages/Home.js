@@ -1,14 +1,11 @@
 import styled from "styled-components";
-
-//import { QUERY_MAIN_CHART } from '../utils/queries';
-//import { useQuery } from '@apollo/client';
-
 import mainImage from'../images/good-vibes.jpg';
-//import mainImage from'../images/deniz_20.jpg';
 import { FlexContainer, FlexChild } from '../components/FlexComponents';
 
-//import mainImage from'../images/natalie-grainger-8uB5kFKWWkk-unsplash_resized.jpg';
-//import mainImage from'../images/ashley-whitlatch-MGKGuMP9nLY-unsplash_25.jpg';
+const FootNote = styled.span`
+  font-size: 0.75em;
+  color: var(--orange);
+`
 
 const MainImg = styled.img`
   border-radius: 10%;
@@ -63,6 +60,7 @@ export default function App() {
                       Everyone is super busy these days but its worth taking time every day to implement a few changes that will boost your health and mood!!
                       <p>Research tells us that activities in the food, mind, exercise and connection categories can improve our mood and energy levels.</p>
                       <p>Invest in yourself and track what you do today to make a difference to how you feel tomorrow!</p>
+                      <FootNote>Slainte, meaning 'Good Health' is an ancient Irish expression that derives from the word Slan, meaning safe.</FootNote>
                       </Box>
                      
                       
