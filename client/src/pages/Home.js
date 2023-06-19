@@ -60,7 +60,7 @@ export default function App() {
                       Everyone is super busy these days but its worth taking time every day to implement a few changes that will boost your health and mood!!
                       <p>Research tells us that activities in the food, mind, exercise and connection categories can improve our mood and energy levels.</p>
                       <p>Invest in yourself and track what you do today to make a difference to how you feel tomorrow!</p>
-                      <FootNote>Slainte, meaning 'Good Health' is an ancient Irish expression that derives from the word Slan, meaning safe.</FootNote>
+                      <FootNote>Slainte (slawn-che), meaning 'Good Health' is an ancient Irish expression that derives from the word Slan, meaning safe.</FootNote>
                       </Box>
                      
                       
