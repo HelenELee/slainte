@@ -10,6 +10,9 @@ import { LOGIN_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [login] = useMutation(LOGIN_USER);
@@ -20,6 +23,7 @@ const LoginForm = () => {
   const [enteredPassword, setEnteredPassword] = useState(false);
   const [enteredEmail, setEnteredEmail] = useState(false);
   const [error, setError]=useState();
+  const [passwordType, setPasswordType] = useState("password");
 
   //store input in state value
   const handleInputChange = (event) => {
@@ -40,10 +44,17 @@ const LoginForm = () => {
       console.error(e);
       setError('❌ Invalid Username or Password')
     }
-
-
     
   };
+
+  const togglePassword =()=>{
+    if(passwordType==="password")
+    {
+     setPasswordType("text")
+     return;
+    }
+    setPasswordType("password")
+  }
 
   return (
     <>
@@ -64,14 +75,15 @@ const LoginForm = () => {
             
             <StyledLabel >Password:</StyledLabel>
             <StyledInput 
-            type="password" 
+            display="inline-block"
+            type={passwordType}
             value={userFormData.password} 
             onChange={handleInputChange} 
             onBlur={() => setEnteredPassword(true)}
             name="password" 
             placeholder="Your password"
             size="50%"
-             />
+             /> <span className="" onClick={togglePassword}>{ passwordType==="password"? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} /> }</span>
             {enteredPassword && enteredEmail ? (isValidPassword && isValidEmail ? "" : <p>❌ Please enter valid details.</p>) : null}
             {error?<p>{error}</p>:null}          
             <br />
