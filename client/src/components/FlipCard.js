@@ -59,6 +59,7 @@ const FlipCard = (props) => {
                     key={act._id} 
                     onChange={props.onClick} 
                     checked={isChecked}
+                    title={act.description}
                      />
                      <StyledCheckBoxLabel 
                      key={"label_"+act._id} 

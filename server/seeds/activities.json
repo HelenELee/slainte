@@ -2,61 +2,125 @@
     {
       "category": "Mind",
       "title": "Meditation",
-      "description": "meditation is..."
-      
+      "description": "Meditation can give you a sense of calm, peace and balance that can benefit both your emotional well-being and your overall health. How does meditation affect behavior?      It can strengthen areas of your brain responsible for memory, learning, attention and self-awareness. The practice can also help calm down your sympathetic nervous system. " 
     },
     {
         "category": "Mind",
         "title": "Journaling",
-        "description": "journaling is..."
+        "description": "Journaling helps control your symptoms and improve your mood by: Helping you prioritize problems, fears, and concerns. Tracking any symptoms day-to-day so that you can recognize triggers and learn ways to better control them."
+        
+      },
+      {
+        "category": "Mind",
+        "title": "Gratitude Practice",
+        "description": "Expressing gratitude can positively change your brain. It boosts dopamine and serotonin, the neurotransmitters in the brain that improve your mood immediately, giving you those positive feelings of pleasure, happiness, and well-being."
+        
+      },
+      {
+        "category": "Mind",
+        "title": "Time in Nature",
+        "description": "Studies have shown that time in nature is an antidote for stress: It can lower blood pressure and stress hormone levels, reduce nervous system arousal, enhance immune system function, increase self-esteem, reduce anxiety, and improve mood."
+        
+      },
+      {
+        "category": "Mind",
+        "title": "Breath Practice",
+        "description": "Slow, steady breathing activates the calming part of our nervous system, and slows our heart rate, reducing feelings of anxiety and stress"
         
       },
       {
         "category": "Food",
-        "title": "Eat Bluberries",
-        "description": ""
+        "title": "Berries",
+        "description": "Mixed berries like strawberries, blueberries, raspberries and blackberries contain valuable antioxidants that are vital for mental health. Studies have shown that antioxidants from foods like berries can help prevent and reduce depression symptoms. Antioxidants have also been associated with helping anxiety and other mental health issues. Since berries are high in antioxidants, they're must-have foods in a mental health diet."
+        
+      },
+      {
+        "category": "Food",
+        "title": "Nuts and Seeds",
+        "description": "Various types of nuts are great sources of omega-3 fatty acids. To name a few, cashews, walnuts and chia seeds have high concentrations of omega-3s. These nutrients are known for helping ease depression symptoms and supporting brain function. Many nuts also contain high doses of magnesium, which helps get oxygen to the brain. Other nuts, like almonds, contain phenylalanine, which helps the brain produce neurotransmitters like norepinephrine that can improve mood. Phenylalanine is also believed to help reduce Parkinson's Disease symptoms."
         
       },
       {
         "category": "Food",
         "title": "Oily Fish",
-        "description": ""
+        "description": "Omega-3s are linked to reducing depression symptoms and other mental disorders and can boost memory and learning in the brain. Salmon also provides natural vitamin D, which is linked to lower depression rates. Mackerel, tuna and herring are also great fatty fish to include in a diet"
         
       },
       {
         "category": "Food",
         "title": "Dark Chocolate",
-        "description": ""
-        
+        "description": "contains high levels of an antioxidant called flavonoids. Dark chocolate and flavonoids can positively affect mood, memory, attention and the ability to fight cognitive decline as your patients age.        The darker the chocolate, the more cocoa, which means more antioxidants. To be most beneficial, dark chocolate should contain 85% cocoa or more. "
       },
       {
         "category": "Food",
         "title": "Fermented Food",
-        "description": ""
+        "description": "Fermented foods like yogurt, kefir, sauerkraut, and kombucha can balance the bacteria in your gut, which produces 'feel-good' brain chemicals like serotonin and gamma-aminobutyric acid (GABA)."
+        
+      },
+      {
+        "category": "Food",
+        "title": "Bananas",
+        "description": "Eating bananas can help in enhancing your mood. This is because bananas affect tryptophan - an amino acid which helps in production of serotonin. Tryptophan also helps in improving sleep and regulates intake of food. Potassium-rich bananas also contain good amount of Vitamin B-6 and fibre."
+        
+      },
+      {
+        "category": "Food",
+        "title": "Leafy Greens",
+        "description": "Leafy greens like spinach and kale supply lots of folate to help the brain deter depression, reduce the risk of dementia and fight off insomnia, which is often associated with other mental disorders. Dark leafy greens are also high in omega-3s, magnesium and other nutrients, making them a well-rounded brain food."
+        
+      },
+      {
+        "category": "Food",
+        "title": "Avocado",
+        "description": "Avocados are an extremely brain-healthy food. Avocados contain high amounts of healthy fats that aid in brain function. They also contain high amounts of lutein, which has been linked to having positive brain impacts. Avocados also pack lots of folate and vitamin K, helping to improve mood, memory and concentration. These foods are also rich in other nutrients like vitamin Bs, magnesium, vitamin C and more, all of which contribute to brain health."
+        
+      },
+      {
+        "category": "Food",
+        "title": "Chicken",
+        "description": "Chicken contains tryptophan which assists in serotonin production. The brain uses serotonin to help manage mood, maintain memory and fight mental disorders like depression. Chicken also contains other valuable nutrients for the brain, like vitamin B and magnesium."
         
       },
       {
         "category": "Exercise",
         "title": "Yoga",
-        "description": ""
+        "description": "Yoga has been shown to lower stress hormones in our bodies while simultaneously increasing beneficial brain chemicals like endorphins and GABA (gamma-aminobutyric acid). These feel-good chemicals help decrease anxiety and improve mood."
         
       },
       {
         "category": "Exercise",
-        "title": "Jogging",
-        "description": ""
+        "title": "Jogging or Running",
+        "description": "Running can control stress and boost the body's ability to deal with existing mental tension. Exercise also increases concentrations of norepinephrine, a chemical that helps moderate the brain's response to stress."
         
       },
       {
         "category": "Exercise",
         "title": "Weight Training",
-        "description": ""
+        "description": "The benefits of lifting weights are not just physical - you can also receive a serious boost to your mood and self-esteem. Training with weights releases endorphins, hormones that relieve stress, fight depression and make you feel happy overall."
         
       },
       {
         "category": "Exercise",
-        "title": "Zumba",
-        "description": ""
+        "title": "Dancing",
+        "description": " When we dance our brain releases endorphins, hormones which can trigger neurotransmitters that create a feeling of comfort, relaxation, fun and power. Music and dance do not only activate the sensory and motor circuits of our brain, but also the pleasure centers."
+        
+      },
+      {
+        "category": "Exercise",
+        "title": "Walking",
+        "description": "Regular walking enhances the natural release of endorphins which stimulate relaxation and improve your mood. These chemicals work by interacting with receptors in your brain to reduce the perceptions of pain and give feelings of wellbeing."
+        
+      },
+      {
+        "category": "Exercise",
+        "title": "Cycling",
+        "description": "Exercise like cycling can lower the levels of your body’s stress hormone, cortisol. Cycling can release our ‘feel-good’ hormones known as endorphins. These hormones help to relax your mind and make you feel happier."
+        
+      },
+      {
+        "category": "Exercise",
+        "title": "Swimming",
+        "description": "Research shows that swimming consistently helps reduce signs of anxiety by helping you manage the stress response. The release of endorphins, serotonin, and dopamine also helps you feel more at ease."
         
       },
       {
@@ -67,19 +131,31 @@
       },
       {
         "category": "Connection",
-        "title": "Coffee with friends",
+        "title": "Family meal together",
         "description": ""
         
       },
       {
         "category": "Connection",
-        "title": "Helping others",
+        "title": "Help a friend or stranger",
         "description": ""
         
       },
       {
         "category": "Connection",
-        "title": "Family meal",
+        "title": "Volunteer",
+        "description": ""
+        
+      },
+      {
+        "category": "Connection",
+        "title": "Attend a club event",
+        "description": ""
+        
+      },
+      {
+        "category": "Connection",
+        "title": "Join in group activity",
         "description": ""
         
       }
